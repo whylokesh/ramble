@@ -313,7 +313,7 @@ const Mapjsx = () => {
       <Typography
                   variant="lead"
                   color="white"
-                  className=" text-sm md:text-sm lg:text-xl lg:w-[41rem] md:[32rem] w-0 lg:h-auto md:h-auto h-0 overflow-x-hidden lg:visible md:visible invisible"
+            className="text-sm md:text-sm lg:text-base lg:w-[41rem] md:[32rem] w-0 lg:h-auto md:h-auto h-0 overflow-x-hidden lg:visible md:visible invisible"
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Exercitationem excepturi recusandae voluptatibus deserunt

@@ -49,7 +49,7 @@ const Testimonialscard = () => {
                 />
               </Button>
           </CardHeader>
-          <CardBody className="px-3 py-0 text-small md:text-sm lg:text-base text-white">
+              <CardBody className="px-3 py-0 text-xs md:text-sm lg:text-base text-white">
             <p>
               Frontend developer and UI/UX enthusiast. Join me on this coding
               adventure!
@@ -255,10 +255,10 @@ const Testimonialscard = () => {
                 src="https://images.pexels.com/photos/4519122/pexels-photo-4519122.jpeg?auto=compress&cs=tinysrgb&w=600"
               />
               <div className="flex flex-col gap-1 items-start justify-center">
-                <h4 className="text-lg font-bold leading-none  bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent">
+                <h4 className="text-lg font-bold leading-none  bg-gradient-to-r from-[#F5A524] to-[#FF705B]  bg-clip-text text-transparent">
                   Zoey Lang
                 </h4>
-                <h5 className="text-small font-bold tracking-tight bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent">
+                <h5 className="text-small font-bold tracking-tight bg-gradient-to-r from-[#F5A524] to-[#FF705B]  bg-clip-text text-transparent">
                   @zoeylang
                 </h5>
               </div>

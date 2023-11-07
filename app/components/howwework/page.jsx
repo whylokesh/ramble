@@ -8,6 +8,7 @@ import {
   TimelineBody,
   Typography,
 } from "@material-tailwind/react";
+import { Text } from "@nextui-org/react";
 import { Button, Card, CardBody } from "@nextui-org/react";
 import React from "react";
 import { Stepper, Step } from "@material-tailwind/react";
@@ -78,13 +79,14 @@ const TimelineWithIcon = () => {
       >
         <CardBody className="flex flex-col justify-center items-center overflow-y-hidden">
           <Typography
+          
             variant="h3"
             color="blue-gray"
-            className="mb-2 md:text-[1.75rem] lg:mt-0 md:mt-0 mt-12  text-[1.7rem] lg:text-[3rem] bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent "
+            className="mb-2 lg:mt-0 md:mt-0 mt-12  text-3xl md:text-4xl lg:text-6xl bg-gradient-to-r from-[#F5A524] to-[#FF705B]  bg-clip-text text-transparent "
           >
             How We Work ?
           </Typography>
-          <Typography className="lg:text-[1.4rem]  p-4 md:text-base font-bold text-sm mt-2 text-white">
+          <Typography className="p-4 text-base md:text-lg lg:text-xl font-bold mt-2 text-white">
             Exactly we Provide is in Front Of Yours Try Out and Enjoy Our Work
           </Typography>
         </CardBody>
