@@ -4,7 +4,7 @@ import {Card, CardBody, CardFooter, Image} from "@nextui-org/react";
 const WusCard =() => {
 
   return (
-    <div className="lg:px-[6rem] md:px-[6rem] px-0">
+    <div className=" px-0">
      <div className=" lg:gap-20 md:gap-20 gap-9 flex lg:px-[6rem] md:px-16 px-12 flex-wrap w-full">
         <Card shadow="sm" isPressable onPress={() => console.log("item pressed")} className="lg:w-[20%] md:w-auto w-[30rem]">
           <CardBody className="overflow-visible p-0">

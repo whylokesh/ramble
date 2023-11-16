@@ -1,0 +1,7 @@
+.filtericon:hover{
+    
+    color: orange;
+    transition: .2s ease-in;
+    cursor: pointer;
+      }
+    

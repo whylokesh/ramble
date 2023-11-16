@@ -5,6 +5,10 @@
 .navbar header {
     max-width: none;
   }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
   
 
 /* heading------------------------- text-3xl md:text-4xl lg:text-6xl */

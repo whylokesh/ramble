@@ -15,11 +15,12 @@ const Mapjsx = () => {
   };
   return (
     <>
-    <div class="p-12 flex flex-wrap justify-between items-center overflow-x-hidden">
+    <div class="px-6   flex flex-wrap justify-between items-center overflow-x-hidden">
       <svg
         baseprofile="tiny"
         fill="#F5A524"
-        className="lg:w-[50rem] md:w-auto w-auto "
+        className="lg:w-3/5 md:w-auto w-auto lg:h-auto md:h-auto h-[21rem]"
+        height="700"
         stroke="black"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -309,11 +310,11 @@ const Mapjsx = () => {
           ></circle>
         </g>
       </svg>
-      <div className="w-[50rem]">
+      <div className="w-2/5">
       <Typography
                   variant="lead"
                   color="white"
-            className="text-sm md:text-sm lg:text-base lg:w-[41rem] md:[32rem] w-0 lg:h-auto md:h-auto h-0 overflow-x-hidden lg:visible md:visible invisible"
+            className="text-sm md:text-sm lg:text-base  lg:h-auto md:h-auto h-0 overflow-x-hidden lg:visible md:visible invisible"
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Exercitationem excepturi recusandae voluptatibus deserunt
@@ -327,7 +328,7 @@ const Mapjsx = () => {
                 <Typography
                   variant="lead"
                   color="white"
-                  className=" mt-8 text-sm md:text-sm lg:text-3xl font-bold w-[41rem] bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent"
+                  className=" mt-8 text-sm md:text-sm lg:text-3xl font-bold  bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent"
                 >Click On Your state to See Our Services</Typography>
                 </div>
     </div>

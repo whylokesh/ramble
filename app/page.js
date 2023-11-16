@@ -27,7 +27,7 @@ const page = () => {
       <WorkWus />
       <Blogmain />
       <Contact />
-     
+     <FooterWithSocialLinks />
     </div>
   );
 };

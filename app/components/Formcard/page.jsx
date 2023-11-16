@@ -12,7 +12,7 @@ import {
   export function SimpleRegistrationForm() {
     return (
         <div className="lg:px-[6rem] md:px-[6rem] px-12">
-          <div className="lg:w-1/2 md:w-2/3 mx-auto">
+          <div className="lg:w-1/2 md:w-2/3 mx-auto ">
             <div className="flex flex-wrap -m-2">
               <div className="p-2 w-1/2">
                 <div className="relative">
@@ -28,12 +28,12 @@ import {
                 </div>
               </div>
               <div className="p-2 w-full">
-                <div className="relative">
+                <div className="relative flex">
                  
                   <Textarea
                     id="message"
                     name="message"
-                    className="w-full py-1 px-3 lg:h-[15rem] md:h-[15rem] h-auto leading-6 "
+                    className="w-full py-1 px-3 lg:h-[15rem] md:h-[15rem] h-auto leading-6 flex-wrap"
                     style={{height: "15rem", color: "white"}}
                     label="Message"
                   ></Textarea>

@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import {
   Card,
@@ -17,7 +18,7 @@ const Testimonialscard = () => {
     <>
     <div className="lg:px-[6rem] md:px-12 px-6 overflow-x-hidden">
         <div className="lg:p-[3rem] md:p-12 p-0">
-      <div className="lg:p-0 md:p-12 p-6 flex justify-between items-center flex-wrap ">
+      <div className="lg:p-0 md:p-12 p-6 flex justify-between items-center flex-wrap  scrollbar-hide">
         <Card className="lg:w-[27%] md:w-auto w-auto lg:mt-0 md:mt-0 ">
           <CardHeader className="justify-between">
             <div className="flex gap-5">

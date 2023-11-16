@@ -14,11 +14,11 @@ const WorkWus = () => {
       shadow="sm"
     >
       <CardBody className="flex flex-col justify-center items-center">
-       
-        <Typography
+      <Typography
+          
           variant="h3"
           color="blue-gray"
-          className="mb-4  lg:mt-0 md:mt-0 mt-7 text-2xl md:text-2xl lg:text-[3rem] bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent "
+          className="mb-2 lg:mt-0 md:mt-0 mt-12  text-3xl md:text-4xl lg:text-6xl bg-gradient-to-r from-[#F5A524] to-[#FF705B]  bg-clip-text text-transparent "
         >
           Work With Us
         </Typography>

@@ -16,9 +16,10 @@ const Mapmain = () => {
       >
         <CardBody className="flex flex-col justify-center items-center overflow-y-hidden">
         <Typography
+          
             variant="h3"
             color="blue-gray"
-            className="mb-2 md:text-[1.75rem] lg:px-[6rem] md:px-[6rem] px-14 lg:mt-0 md:mt-0 mt-12  text-[1.7rem] lg:text-[3rem] bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent "
+            className="mb-6 lg:mt-0 md:mt-0 mt-12  text-3xl md:text-4xl lg:text-5xl bg-gradient-to-r from-[#F5A524] to-[#FF705B]  bg-clip-text text-transparent "
           >
             We are All Over And Everywhere
           </Typography>

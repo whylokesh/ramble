@@ -7,7 +7,7 @@ const Genres =()=> {
 
   return (
     <>
-      <div className="flex flex-wrap justify-between lg:px-12 md:px-6 px-4 lg:mt-0 md:mt-0 mt-7 overflow-x-hidden">
+      <div className="flex flex-wrap justify-between  lg:px-20 md:px-6 px-4 lg:mt-0 md:mt-0 mt-7 overflow-x-hidden">
         <Card isFooterBlurred className="lg:w-[45%] md:w-[45%] w-full h-[300px]">
           <CardHeader className="absolute z-10 top-1 flex-col items-start">
             <p className="text-tiny text-white/60 uppercase font-bold">Your day your way</p>
@@ -61,7 +61,7 @@ const Genres =()=> {
           </CardFooter>
         </Card>
       </div>
-      <div className="flex flex-wrap justify-between lg:px-12 md:px-6 px-4 mt-10">
+      <div className="flex flex-wrap justify-between lg:px-20 md:px-6 px-4 mt-10">
         <Card isFooterBlurred className="lg:w-[45%] md:w-[45%] w-full h-[300px]">
           <CardHeader className="absolute z-10 top-1 flex-col items-start">
             <p className="text-tiny text-white/60 uppercase font-bold">Your day your way</p>

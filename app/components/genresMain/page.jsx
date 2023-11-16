@@ -4,6 +4,31 @@ import Genres from "../generesCard/page";
 import { CardBody, CardFooter, Typography } from "@material-tailwind/react";
 import { Button, Card } from "@nextui-org/react";
 const GenresMain = () => {
+  
+  const [deviceSize, setDeviceSize] = React.useState('sm');
+
+  React.useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 640) {
+        setDeviceSize('sm');
+      } else if (window.innerWidth >= 640 && window.innerWidth < 1024) {
+        setDeviceSize('md');
+      } else {
+        setDeviceSize('lg');
+      }
+    }
+
+    // Add the event listener
+    window.addEventListener('resize', handleResize);
+
+    // Call it once to set the initial size
+    handleResize();
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <div className="lg:p-[6rem] md:p-[3rem] p-8 mb-0 overflow-x-hidden">
             <Card
@@ -30,7 +55,7 @@ const GenresMain = () => {
     <Genres />
     <div className="pt-0 flex justify-center items-center">
         <a href="#" className="inline-block">
-          <Button size="lg" variant="ghost" color="warning" className="m-auto gap-2 p-7 lg:text-lg md:text-mds text-sm mt-12 text-white">
+          <Button size={deviceSize} variant="ghost" color="warning" className="m-auto gap-2 p-7 lg:text-lg md:text-mds text-sm mt-12 text-white">
             Explore More
             <svg
               xmlns="http://www.w3.org/2000/svg"

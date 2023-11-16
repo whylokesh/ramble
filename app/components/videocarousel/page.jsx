@@ -14,7 +14,7 @@ import { Input } from "@nextui-org/react";
 const CarouselWithContent = () => {
   return (
     <>
-      <div className="rounded-xl overflow-x-hidden">
+      <div className=" overflow-x-hidden">
         <div className="relative lg:h-[45rem] md:h-[28rem] h-15 w-full">
           <img
             src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"

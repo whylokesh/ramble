@@ -1,12 +1,11 @@
 "use client";
 import React from "react";
-import "../globals.css";
 import {
   Navbar,
   NavbarBrand,
   NavbarItem,
-
-
+  Link,
+  Input,
   DropdownItem,
   DropdownTrigger,
   Dropdown,
@@ -18,10 +17,19 @@ import {
   NavbarContent,
   NavbarMenuItem,
   NavbarMenu,
- 
+  Button,
 } from "@nextui-org/react";
-
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link} from "@nextui-org/react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  Checkbox,
+} from "@nextui-org/react";
+import {animals} from "./data";
+import {Select, SelectItem} from "@nextui-org/react";
 const AcmeLogo = () => (
   <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
     <path
@@ -67,9 +75,12 @@ const SearchIcon = ({
   </svg>
 );
 
-export default function Nav() {
+export default function NavbarG() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [isOpenFirstModal, setOpenFirstModal] = React.useState(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const openFirstModal = () => setOpenFirstModal(true);
+  const closeFirstModal = () => setOpenFirstModal(false);
   const menuItems = [
     "Profile",
     "Dashboard",
@@ -104,8 +115,9 @@ export default function Nav() {
             </p>
           </NavbarBrand>
         </NavbarContent>
-        <NavbarContent >
+        <NavbarContent>
           <Input
+           onClick={openFirstModal}
             classNames={{
               base: "md:w-full lg:w-full h-10 w-48",
               mainWrapper: "h-full",
@@ -116,7 +128,46 @@ export default function Nav() {
             placeholder="Type to search..."
             startContent={<SearchIcon size={18} />}
             type="search"
-          />
+          > </Input>
+          <Modal 
+           isOpen={isOpenFirstModal} onOpenChange={closeFirstModal}
+          placement="top-center"
+          backdrop="blur"
+          className="lg:mt-0 md:mt-0 mt-6"
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">Search By Location</ModalHeader>
+                <ModalBody>
+                  <Input
+                    autoFocus
+                   
+                    label="Location"
+                    placeholder="Search by Location"
+                    variant="bordered"
+                  />
+                  <Select 
+            variant="bordered"
+            label="Select By City" 
+             
+          >
+            {animals.map((animal) => (
+              <SelectItem key={animal.value} value={animal.value}>
+                {animal.label}
+              </SelectItem>
+            ))}
+          </Select>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="primary" onPress={onClose}>
+                    Search
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
         </NavbarContent>
 
         <NavbarContent
@@ -202,36 +253,6 @@ export default function Nav() {
       </Modal>
             </Link>
           </NavbarItem>
-          {/* <Dropdown placement="bottom-end" className="avatar">
-            <DropdownTrigger>
-              <Avatar
-                isBordered
-                as="button"
-                className="transition-transform"
-                color="secondary"
-                name="Jason Hughes"
-                size="sm"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              />
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">zoey@example.com</p>
-              </DropdownItem>
-              <DropdownItem key="settings">My Settings</DropdownItem>
-              <DropdownItem key="team_settings">Team Settings</DropdownItem>
-              <DropdownItem key="analytics">Analytics</DropdownItem>
-              <DropdownItem key="system">System</DropdownItem>
-              <DropdownItem key="configurations">Configurations</DropdownItem>
-              <DropdownItem key="help_and_feedback">
-                Help & Feedback
-              </DropdownItem>
-              <DropdownItem key="logout" color="danger">
-                Log Out
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown> */}
         </NavbarContent>
         <NavbarMenu>
           {menuItems.map((item, index) => (

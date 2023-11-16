@@ -184,14 +184,14 @@ const TimelineWithIcon = () => {
         </Stepper>
         <div className="mt-32 flex justify-between items-center flex-wrap">
           <Image
-           className="w-full h-full lg:m-0 md:m-auto m-auto"
+           className="w-4/5 h-full lg:m-0 md:m-auto m-auto"
             alt="NextUI hero Image"
             src={imageSrc}
           />
              <Typography
                   variant="lead"
                   color="white"
-                  className="mb-12 text-sm md:text-sm lg:text-xl lg:mt-0 md:mt-10 mt-8 lg:w-[30rem] md:w-[29rem] overflow-y-hidden lg:h-auto md:h-auto h-0 lg:visible md:visible invisible"
+                  className="mb-12 text-sm md:text-sm lg:text-xl lg:mt-0 md:mt-10 mt-8 lg:w-2/5 md:w-[29rem] overflow-y-hidden w-0 lg:h-auto md:h-auto h-0 lg:visible md:visible invisible"
                 >
                  {stepTexts[activeStep]}
                 </Typography>
