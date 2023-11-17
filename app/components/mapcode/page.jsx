@@ -24,7 +24,7 @@ const Mapjsx = () => {
         stroke="black"
         stroke-linecap="round"
         stroke-linejoin="round"
-        stroke-width=".5"
+        strokeWidth=".5"
         version="1.2"
         viewbox="0 0 1000 1136"
         xmlns="http://www.w3.org/2000/svg"

@@ -11,6 +11,7 @@ import {
   Dropdown,
   DropdownMenu,
   Avatar,
+  Divider,
 } from "@nextui-org/react";
 import {
   NavbarMenuToggle,
@@ -28,8 +29,8 @@ import {
   useDisclosure,
   Checkbox,
 } from "@nextui-org/react";
-import {animals} from "./data";
-import {Select, SelectItem} from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
+import { Card, CardBody } from "@nextui-org/react";
 const AcmeLogo = () => (
   <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
     <path
@@ -74,6 +75,21 @@ const SearchIcon = ({
     />
   </svg>
 );
+const animals = [
+  "Lion",
+  "Tiger",
+  "Elephant",
+  "Giraffe",
+  "Zebra",
+  "Monkey",
+  "Penguin",
+];
+const ArrowIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+  </svg>
+);
+
 
 export default function NavbarG() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -81,6 +97,7 @@ export default function NavbarG() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const openFirstModal = () => setOpenFirstModal(true);
   const closeFirstModal = () => setOpenFirstModal(false);
+  const [searchQuery, setSearchQuery] = React.useState("");
   const menuItems = [
     "Profile",
     "Dashboard",
@@ -117,7 +134,7 @@ export default function NavbarG() {
         </NavbarContent>
         <NavbarContent>
           <Input
-           onClick={openFirstModal}
+            onClick={openFirstModal}
             classNames={{
               base: "md:w-full lg:w-full h-10 w-48",
               mainWrapper: "h-full",
@@ -128,46 +145,61 @@ export default function NavbarG() {
             placeholder="Type to search..."
             startContent={<SearchIcon size={18} />}
             type="search"
-          > </Input>
-          <Modal 
-           isOpen={isOpenFirstModal} onOpenChange={closeFirstModal}
-          placement="top-center"
-          backdrop="blur"
-          className="lg:mt-0 md:mt-0 mt-6"
-        >
-          <ModalContent>
-            {(onClose) => (
-              <>
-                <ModalHeader className="flex flex-col gap-1">Search By Location</ModalHeader>
-                <ModalBody>
-                  <Input
-                    autoFocus
-                   
-                    label="Location"
-                    placeholder="Search by Location"
-                    variant="bordered"
-                  />
-                  <Select 
-            variant="bordered"
-            label="Select By City" 
-             
           >
-            {animals.map((animal) => (
-              <SelectItem key={animal.value} value={animal.value}>
-                {animal.label}
-              </SelectItem>
-            ))}
-          </Select>
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="primary" onPress={onClose}>
-                    Search
-                  </Button>
-                </ModalFooter>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
+            {" "}
+          </Input>
+          <Modal
+            isOpen={isOpenFirstModal}
+            onOpenChange={closeFirstModal}
+            placement="top-center"
+            backdrop="blur"
+            className="lg:mt-0 md:mt-0 mt-6"
+          >
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1">
+                    {" "}
+                    <Input
+                      autoFocus
+                      label="Location"
+                      placeholder="Search by Location"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      variant="bordered"
+                      className="p-2"
+                    />
+                  </ModalHeader>
+                  <Divider />
+                  <ModalBody>
+                    {searchQuery.trim() === "" ? (
+                      <p>No results found.</p>
+                    ) : (
+                      animals
+                        .filter((animal) =>
+                          animal
+                            .toLowerCase()
+                            .includes(searchQuery.toLowerCase())
+                        )
+                        .map((filteredAnimal, index) => (
+                          <Card key={index}>
+                            <CardBody className=" hover:bg-gradient-to-tr from-[#F5A524] to-[#FF705B] transition-transform-background cursor-pointer" >
+                              <p >{filteredAnimal}</p>
+                            </CardBody>
+                          </Card>
+                          
+                        ))
+                    )}
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="primary" onPress={onClose}>
+                      Search
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
         </NavbarContent>
 
         <NavbarContent
@@ -186,7 +218,7 @@ export default function NavbarG() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 class="w-6 h-6 text-orange-800"
               >
@@ -200,57 +232,58 @@ export default function NavbarG() {
           </NavbarItem>
           <NavbarItem>
             <Link color="foreground" href="#">
-              <Button color="warning" variant="flat" onClick={onOpen}> 
+              <Button color="warning" variant="flat" onClick={onOpen}>
                 Login
               </Button>
-              <Modal 
-        isOpen={isOpen} 
-        onOpenChange={onOpenChange}
-        placement="top-center"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
-              <ModalBody>
-                <Input
-                  autoFocus
-                  label="Email"
-                  placeholder="Enter your email"
-                  variant="bordered"
-                />
-                <Input
-                 
-                  label="Password"
-                  placeholder="Enter your password"
-                  type="password"
-                  variant="bordered"
-                />
-                <div className="flex py-2 px-1 justify-between">
-                  <Checkbox
-                    classNames={{
-                      label: "text-small",
-                    }}
-                  >
-                    Remember me
-                  </Checkbox>
-                  <Link color="primary" href="#" size="sm">
-                    Forgot password?
-                  </Link>
-                </div>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Sign in
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+              <Modal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                placement="top-center"
+              >
+                <ModalContent>
+                  {(onClose) => (
+                    <>
+                      <ModalHeader className="flex flex-col gap-1">
+                        Log in
+                      </ModalHeader>
+                      <ModalBody>
+                        <Input
+                          autoFocus
+                          label="Email"
+                          placeholder="Enter your email"
+                          variant="bordered"
+                        />
+                        <Input
+                          label="Password"
+                          placeholder="Enter your password"
+                          type="password"
+                          variant="bordered"
+                        />
+                        <div className="flex py-2 px-1 justify-between">
+                          <Checkbox
+                            classNames={{
+                              label: "text-small",
+                            }}
+                          >
+                            Remember me
+                          </Checkbox>
+                          <Link color="primary" href="#" size="sm">
+                            Forgot password?
+                          </Link>
+                        </div>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button color="danger" variant="flat" onPress={onClose}>
+                          Close
+                        </Button>
+                        <Button color="primary" onPress={onClose}>
+                          Sign in
+                        </Button>
+                      </ModalFooter>
+                    </>
+                  )}
+                </ModalContent>
+              </Modal>
             </Link>
           </NavbarItem>
         </NavbarContent>
