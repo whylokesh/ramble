@@ -5,8 +5,6 @@ import {
   Navbar,
   NavbarBrand,
   NavbarItem,
-
-
   DropdownItem,
   DropdownTrigger,
   Dropdown,
@@ -18,10 +16,21 @@ import {
   NavbarContent,
   NavbarMenuItem,
   NavbarMenu,
- 
 } from "@nextui-org/react";
 
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link} from "@nextui-org/react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  Checkbox,
+  Input,
+  Link,
+} from "@nextui-org/react";
+import { useRouter } from 'next/navigation'
 const AcmeLogo = () => (
   <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
     <path
@@ -67,9 +76,155 @@ const SearchIcon = ({
   </svg>
 );
 
+const RegistrationModal = ({ isOpen, onClose }) => {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [fullName, setFullName] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+
+  const handleRegister = async () => {
+    try {
+      const response = await fetch("http://localhost:3009/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          fullName,
+          phoneNumber,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Registration successful, you can handle the success scenario here
+        console.log("User registered successfully");
+
+        onClose(); // Close the modal on successful registration
+      } else {
+        // Handle registration failure
+        console.error("Registration failed:", data);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  };
+  
+
+  return (
+    <Modal isOpen={isOpen} onOpenChange={onClose} placement="top-center">
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader className="flex flex-col gap-1">Register</ModalHeader>
+            <ModalBody>
+              <Input
+                autoFocus
+                label="Email"
+                placeholder="Enter your email"
+                variant="bordered"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Input
+                label="Password"
+                placeholder="Enter your password"
+                type="password"
+                variant="bordered"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Input
+                autoFocus
+                label="Full Name"
+                placeholder="Enter your Name"
+                variant="bordered"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+              <Input
+                label="Phone"
+                placeholder="Enter your Phone Number"
+                type="number"
+                variant="bordered"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button color="danger" variant="flat" onPress={onClose}>
+                Close
+              </Button>
+              <Button color="primary" onPress={handleRegister}>
+                Sign up
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
+  );
+};
+
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  // const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [isOpenFirstModal, setOpenFirstModal] = React.useState(false);
+  const [isOpenSecondModal, setOpenSecondModal] = React.useState(false);
+
+  const openFirstModal = () => setOpenFirstModal(true);
+  const closeFirstModal = () => setOpenFirstModal(false);
+
+  const openSecondModal = () => setOpenSecondModal(true);
+  const closeSecondModal = () => setOpenSecondModal(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [isAdmin, setIsAdmin] = React.useState(false);
+  const route = useRouter();
+
+  const Admin =()=>{
+    route.push('/AdminPanel')
+  }
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:3009/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Login successful, handle success scenario
+        
+      setIsLoggedIn(true); // Set login status to true
+      setIsAdmin(data.data.admin); 
+    localStorage.setItem("token",data.data.token)
+        console.log("User logged in successfully");
+        // onClose(); // Close the modal on successful login
+      } else {
+        // Handle login failure
+        console.error("Login failed:", data);
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
+  
+
   const menuItems = [
     "Profile",
     "Dashboard",
@@ -82,6 +237,12 @@ export default function Nav() {
     "Help & Feedback",
     "Log Out",
   ];
+
+
+const handleProfileClick = () => {
+  console.log("Hello");
+  // Add any additional logic you want to execute when the "Profile" link is clicked
+};
   return (
     <div className="navbar px-7">
       <Navbar
@@ -104,7 +265,7 @@ export default function Nav() {
             </p>
           </NavbarBrand>
         </NavbarContent>
-        <NavbarContent >
+        <NavbarContent>
           <Input
             classNames={{
               base: "md:w-full lg:w-full h-10 w-48",
@@ -123,7 +284,16 @@ export default function Nav() {
           as="div"
           className="items-center hidden md:flex lg:flex gap-12"
           justify="end"
-        >
+          >
+          <NavbarItem>
+          {isAdmin && isLoggedIn && (
+            <Link color="foreground" href="#">
+               <Button color="warning" variant="flat" onClick={Admin}>
+                Admin
+              </Button>
+            </Link>
+          )}
+        </NavbarItem>
           <NavbarItem>
             <Link color="foreground" href="#">
               About us
@@ -133,7 +303,7 @@ export default function Nav() {
             <Link href="#" aria-current="page" color="secondary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                fill="black"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
@@ -148,60 +318,101 @@ export default function Nav() {
             </Link>
           </NavbarItem>
           <NavbarItem>
+          {isLoggedIn ? (
+    // Render the SVG when logged in
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="black"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-6 h-6"
+      
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+      />
+    </svg>
+  ) : (
             <Link color="foreground" href="#">
-              <Button color="warning" variant="flat" onClick={onOpen}> 
+              <Button color="warning" variant="flat" onClick={openFirstModal}>
                 Login
               </Button>
-              <Modal 
-        isOpen={isOpen} 
-        onOpenChange={onOpenChange}
-        placement="top-center"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
-              <ModalBody>
-                <Input
-                  autoFocus
-                  label="Email"
-                  placeholder="Enter your email"
-                  variant="bordered"
+              <Modal
+                isOpen={isOpenFirstModal}
+                onOpenChange={closeFirstModal}
+                placement="top-center"
+              >
+                <ModalContent>
+                  {(onClose) => (
+                    <>
+                      <ModalHeader className="flex flex-col gap-1">
+                        Log in
+                      </ModalHeader>
+                      <ModalBody>
+                        <Input
+                          autoFocus
+                          label="Email"
+                          placeholder="Enter your email"
+                          value={email}
+                          variant="bordered"
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <Input
+                          label="Password"
+                          placeholder="Enter your password"
+                          type="password"
+                          variant="bordered"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <div className="flex py-2 px-1 justify-between">
+                          <Link color="primary" href="#" size="sm">
+                            Forgot password?
+                          </Link>
+                          <Link
+                            color="primary"
+                            href="#"
+                            size="sm"
+                            onClick={openSecondModal}
+                            onPress={closeFirstModal}
+                          >
+                            Haven't Registered Yet?
+                          </Link>
+                        </div>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button color="danger" variant="flat" onPress={onClose}>
+                          Close
+                        </Button>
+                        <Button
+                          color="primary"
+                          onPress={onClose}
+                          onClick={handleLogin}
+                        >
+                          Sign in
+                        </Button>
+                      </ModalFooter>
+                    </>
+                  )}
+                </ModalContent>
+              </Modal>
+              <Modal
+                isOpen={isOpenSecondModal}
+                onOpenChange={closeSecondModal}
+                placement="top-center"
+              >
+                <RegistrationModal
+                  isOpen={isOpenSecondModal}
+                  onClose={closeSecondModal}
                 />
-                <Input
-                 
-                  label="Password"
-                  placeholder="Enter your password"
-                  type="password"
-                  variant="bordered"
-                />
-                <div className="flex py-2 px-1 justify-between">
-                  <Checkbox
-                    classNames={{
-                      label: "text-small",
-                    }}
-                  >
-                    Remember me
-                  </Checkbox>
-                  <Link color="primary" href="#" size="sm">
-                    Forgot password?
-                  </Link>
-                </div>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Sign in
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+              </Modal>
             </Link>
+             )}
           </NavbarItem>
+        
           {/* <Dropdown placement="bottom-end" className="avatar">
             <DropdownTrigger>
               <Avatar
@@ -234,8 +445,14 @@ export default function Nav() {
           </Dropdown> */}
         </NavbarContent>
         <NavbarMenu>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            {item === "Profile" ? (
+              <button onClick={handleProfileClick}>
+                {/* You can customize the button's appearance if needed */}
+                <span>{item}</span>
+              </button>
+            ) : (
               <Link
                 className="w-full"
                 color={
@@ -250,9 +467,10 @@ export default function Nav() {
               >
                 {item}
               </Link>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
+            )}
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
       </Navbar>
     </div>
   );
