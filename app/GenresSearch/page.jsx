@@ -7,10 +7,11 @@ import GenresCard from "./GenresComponents/cards/page";
 import AboutCard from "./GenresComponents/AboutUsCard/page";
 import BlogmainSection from "./GenresComponents/BlogSectionMain/page";
 import { FooterWithSocialLinks } from "../components/footer/page";
+import Nav from "../navbar/page";
 const GenresMain = () => {
   return (
     <div>
-      <NavbarG />
+      <Nav />
       <GeneresCardScrolling />
       <Filters />
       <GenresCard />

@@ -12,7 +12,7 @@ const page = () => {
         <NavbarAdmin/>
         <DataCard />
         <CircularData />
-        {/* <EcommerceCard /> */}
+        
         <FooterWithSocialLinks />
     </div>
   )

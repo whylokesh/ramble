@@ -11,11 +11,15 @@ import {
   ListItemSuffix,
   Chip,
 } from "@material-tailwind/react";
- 
+import { useRouter } from 'next/navigation'
 export function DrawerWithNavigation() {
     const [open, setOpen] = React.useState(true);
   const closeDrawer = () => setOpen(false);
  
+  const route = useRouter();
+  const dashboard =()=>{
+    route.push("/AdminPanel")
+  }
   return (
     <React.Fragment>
    
@@ -42,7 +46,7 @@ export function DrawerWithNavigation() {
           </IconButton>
         </div>
         <List>
-          <ListItem className="text-white">
+          <ListItem className="text-white" onClick={dashboard}>
             <ListItemPrefix>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +63,9 @@ export function DrawerWithNavigation() {
             </ListItemPrefix>
             Dashboard
           </ListItem>
-          <ListItem className="text-white">
+          <ListItem className="text-white" onClick={()=>{
+            route.push("/categoryAdd")
+          }}>
             <ListItemPrefix>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +90,9 @@ export function DrawerWithNavigation() {
               />
             </ListItemSuffix>
           </ListItem>
-          <ListItem className="text-white">
+          <ListItem className="text-white" onClick={()=>{
+            route.push("/Services")
+          }}>
             <ListItemPrefix>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +124,7 @@ export function DrawerWithNavigation() {
                 />
               </svg>
             </ListItemPrefix>
-            Locations
+            Log Out
           </ListItem>
         
         </List>

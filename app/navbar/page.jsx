@@ -308,6 +308,9 @@ const handleProfileClick = () => {
                 strokeWidth="1.5"
                 stroke="currentColor"
                 class="w-6 h-6 text-orange-800"
+                onClick={()=>{
+                  route.push("/Cart")
+                }}
               >
                 <path
                   stroke-linecap="round"

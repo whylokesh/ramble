@@ -4,11 +4,12 @@ import NavbarG from "./ProductMainComponents/NavabrProduct/page";
 import HorizontalCard from "./ProductMainComponents/MainCardDisplay/page";
 import AboutServiceCard from "./ProductMainComponents/Aboutservice/page";
 import { FooterWithSocialLinks } from "./ProductMainComponents/productFooter/page";
+import Nav from "../navbar/page";
 
 const page = () => {
   return (
     <div>
-      <NavbarG />
+      <Nav /> 
       <HorizontalCard />
       <AboutServiceCard />
       <FooterWithSocialLinks />
