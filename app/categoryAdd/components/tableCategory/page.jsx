@@ -63,7 +63,7 @@ export const SearchIcon = (props) => (
     </svg>
   );
 
-export default function TableCategory() {
+export default function   TableCategory() {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));

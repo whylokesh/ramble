@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 .navbar header {
-    max-width: none;
-  }
+  max-width: none;
+}
 
-  *::-webkit-scrollbar {
-    display: none;
-  }
-  
+*::-webkit-scrollbar {
+  display: none;
+}
+
+
 
 /* heading------------------------- text-3xl md:text-4xl lg:text-6xl */
 /* sub heading ---------------------   text-base md:text-lg lg:text-xl */
