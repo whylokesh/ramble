@@ -69,6 +69,8 @@ export default function   TableCategory() {
   const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));
   const [statusFilter, setStatusFilter] = React.useState("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [categoryTitle, setCategoryTitle] = React.useState("");
+  const [categoryDescription, setCategoryDescription] = React.useState("");
   const [sortDescriptor, setSortDescriptor] = React.useState({
     column: "age",
     direction: "ascending",
@@ -94,10 +96,44 @@ export default function   TableCategory() {
     }
   };
 
-  const handleUpload = () => {
-    // You can perform the upload logic here, such as using FormData and sending it to a server.
+  const handleAddCategory = async () => {
+    try {
+      // Perform the API call to add a new category
+      const authToken = localStorage.getItem("token");
+      const formData = new FormData();
+      formData.append("name", categoryTitle);
+      formData.append("description", categoryDescription);
+      formData.append("image", image);
 
-    // For demonstration purposes, just log the image URL.
+      const response = await fetch("http://localhost:3009/admin/add-category", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: authToken,
+        },
+      });
+      console
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Handle success scenario, you can close the modal or perform additional actions
+        console.log("Category added successfully:", data);
+
+        // Close the modal
+        closeFirstModal();
+      } else {
+        // Handle failure scenario
+        console.error("Failed to add category:", data);
+      }
+    } catch (error) {
+      // Handle any errors that occurred during the API call
+      console.error("Error adding category:", error);
+    }
+  };
+
+  const handleUpload = () => {
+
     console.log('Image URL:', imageUrl);
   };
 
@@ -390,7 +426,7 @@ export default function   TableCategory() {
             <>
               <ModalHeader className="flex flex-col gap-1">Add Category</ModalHeader>
               <ModalBody>
-              <Input type="email" label="Title" />
+            
               <input
         type="file"
         accept="image/*"
@@ -409,17 +445,21 @@ export default function   TableCategory() {
           <button onClick={handleUpload} className="m-auto flex justify-center items-center">Upload</button>
         </div>
       )}
-      <Textarea  variant="faded"
+        <Input type="email" label="Title"   value={categoryTitle}
+                  onChange={(e) => setCategoryTitle(e.target.value)}/>
+      <Textarea  
       label="Description"
       placeholder="Enter your description"
-      description="Enter a concise description of your project." ></Textarea>
+      description="Enter a concise description of your project."
+      value={categoryDescription}
+      onChange={(e) => setCategoryDescription(e.target.value)} ></Textarea>
 
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="primary" onPress={handleAddCategory}>
                   Action
                 </Button>
               </ModalFooter>

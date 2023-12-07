@@ -18,6 +18,7 @@ import {
   NavbarMenu,
 } from "@nextui-org/react";
 
+
 import {
   Modal,
   ModalContent,
@@ -186,6 +187,9 @@ export default function Nav() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isAdmin, setIsAdmin] = React.useState(false);
+  const [searchTerm, setSearchTerm] = React.useState("");
+const [searchResults, setSearchResults] = React.useState([]);
+const [isSearching, setIsSearching] = React.useState(false); 
   const route = useRouter();
 
   const Admin =()=>{
@@ -223,6 +227,35 @@ export default function Nav() {
       console.error("Error during login:", error);
     }
   };
+
+  React.useEffect(() => {
+    const fetchSearchResults = async () => {
+      try {
+        setIsSearching(true);
+        const response = await fetch(
+          `http://localhost:3009/search/particular-service?searchTerm=${searchTerm}`
+        );
+        const data = await response.json();
+  
+        if (data.success) {
+          setSearchResults(data.data.services);
+        } else {
+          console.error("Search failed:", data);
+        }
+      } catch (error) {
+        console.error("Error during search:", error);
+      } finally {
+        setIsSearching(false);
+      }
+    };
+  
+    // Trigger the API call only if the search term is not empty
+    if (searchTerm.trim() !== "") {
+      fetchSearchResults();
+    } else {
+      setSearchResults([]); // Clear the results if the search term is empty
+    }
+  }, [searchTerm]);
   
 
   const menuItems = [
@@ -243,6 +276,29 @@ const handleProfileClick = () => {
   console.log("Hello");
   // Add any additional logic you want to execute when the "Profile" link is clicked
 };
+
+
+React.useEffect(() => {
+  // Check for the presence of the token during page load
+  const storedToken = localStorage.getItem("token");
+
+  if (storedToken) {
+    // If the token is present, consider the user as logged in
+    setIsLoggedIn(true);
+
+    // Optionally, you can make an API call to get user details, including admin status
+    // and set the isAdmin state accordingly.
+
+    // For now, let's assume the user is an admin.
+    setIsAdmin(true);
+  }
+}, []);
+
+const handleLogout =()=>{
+  setIsLoggedIn(false);
+  localStorage.removeItem("token")
+}
+
   return (
     <div className="navbar px-7">
       <Navbar
@@ -266,18 +322,37 @@ const handleProfileClick = () => {
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent>
-          <Input
-            classNames={{
-              base: "md:w-full lg:w-full h-10 w-48",
-              mainWrapper: "h-full",
-              input: "text-small",
-              inputWrapper:
-                "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-            }}
-            placeholder="Type to search..."
-            startContent={<SearchIcon size={18} />}
-            type="search"
-          />
+        <Input
+  classNames={{
+    base: "md:w-full lg:w-full h-10 w-48",
+    mainWrapper: "h-full",
+    input: "text-small",
+    inputWrapper:
+      "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+  }}
+  placeholder="Type to search..."
+  startContent={<SearchIcon size={18} />}
+  type="search"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+/>
+
+{searchResults.length > 0 && (
+    <Dropdown placement="bottom-start" className="absolute mt-8 lg:w-[28rem] md:[10rem] w-full overflow-x-hidden flex-wrap">
+  
+      <DropdownMenu>
+        {searchResults.map((result) => (
+          <DropdownItem key={result.id}>
+            <div className="flex justify-between">
+            <p className="font-bold">{result.name}</p>
+            <p>{result.location}</p>
+            </div>
+            {/* Add more information as needed */}
+          </DropdownItem>
+        ))}
+      </DropdownMenu>
+    </Dropdown>
+  )}
         </NavbarContent>
 
         <NavbarContent
@@ -329,8 +404,8 @@ const handleProfileClick = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6"
-      
+      className="w-6 h-6 "
+      onClick={handleLogout}
     >
       <path
         strokeLinecap="round"
@@ -475,6 +550,7 @@ const handleProfileClick = () => {
         ))}
       </NavbarMenu>
       </Navbar>
+
     </div>
   );
 }
