@@ -17,7 +17,7 @@ import {
   NavbarMenuItem,
   NavbarMenu,
 } from "@nextui-org/react";
-
+import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 
 import {
   Modal,
@@ -32,6 +32,68 @@ import {
   Link,
 } from "@nextui-org/react";
 import { useRouter } from 'next/navigation'
+
+const animals = [
+  {
+    label: "Cat",
+    value: "cat",
+    description: "The second most popular pet in the world",
+  },
+  {
+    label: "Dog",
+    value: "dog",
+    description: "The most popular pet in the world",
+  },
+  {
+    label: "Elephant",
+    value: "elephant",
+    description: "The largest land animal",
+  },
+  { label: "Lion", value: "lion", description: "The king of the jungle" },
+  { label: "Tiger", value: "tiger", description: "The largest cat species" },
+  {
+    label: "Giraffe",
+    value: "giraffe",
+    description: "The tallest land animal",
+  },
+  {
+    label: "Dolphin",
+    value: "dolphin",
+    description: "A widely distributed and diverse group of aquatic mammals",
+  },
+  {
+    label: "Penguin",
+    value: "penguin",
+    description: "A group of aquatic flightless birds",
+  },
+  {
+    label: "Zebra",
+    value: "zebra",
+    description: "A several species of African equids",
+  },
+  {
+    label: "Shark",
+    value: "shark",
+    description:
+      "A group of elasmobranch fish characterized by a cartilaginous skeleton",
+  },
+  {
+    label: "Whale",
+    value: "whale",
+    description: "Diverse group of fully aquatic placental marine mammals",
+  },
+  {
+    label: "Otter",
+    value: "otter",
+    description: "A carnivorous mammal in the subfamily Lutrinae",
+  },
+  {
+    label: "Crocodile",
+    value: "crocodile",
+    description: "A large semiaquatic reptile",
+  },
+];
+
 const AcmeLogo = () => (
   <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
     <path
@@ -113,7 +175,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
       console.error("Error during registration:", error);
     }
   };
-  
+
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onClose} placement="top-center">
@@ -188,11 +250,11 @@ export default function Nav() {
   const [password, setPassword] = React.useState("");
   const [isAdmin, setIsAdmin] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState("");
-const [searchResults, setSearchResults] = React.useState([]);
-const [isSearching, setIsSearching] = React.useState(false); 
+  const [searchResults, setSearchResults] = React.useState([]);
+  const [isSearching, setIsSearching] = React.useState(false);
   const route = useRouter();
 
-  const Admin =()=>{
+  const Admin = () => {
     route.push('/AdminPanel')
   }
 
@@ -213,10 +275,10 @@ const [isSearching, setIsSearching] = React.useState(false);
 
       if (data.success) {
         // Login successful, handle success scenario
-        
-      setIsLoggedIn(true); // Set login status to true
-      setIsAdmin(data.data.admin); 
-    localStorage.setItem("token",data.data.token)
+
+        setIsLoggedIn(true); // Set login status to true
+        setIsAdmin(data.data.admin);
+        localStorage.setItem("token", data.data.token)
         console.log("User logged in successfully");
         // onClose(); // Close the modal on successful login
       } else {
@@ -236,7 +298,7 @@ const [isSearching, setIsSearching] = React.useState(false);
           `http://localhost:3009/search/particular-service?searchTerm=${searchTerm}`
         );
         const data = await response.json();
-  
+
         if (data.success) {
           setSearchResults(data.data.services);
         } else {
@@ -248,7 +310,7 @@ const [isSearching, setIsSearching] = React.useState(false);
         setIsSearching(false);
       }
     };
-  
+
     // Trigger the API call only if the search term is not empty
     if (searchTerm.trim() !== "") {
       fetchSearchResults();
@@ -256,7 +318,7 @@ const [isSearching, setIsSearching] = React.useState(false);
       setSearchResults([]); // Clear the results if the search term is empty
     }
   }, [searchTerm]);
-  
+
 
   const menuItems = [
     "Profile",
@@ -272,32 +334,32 @@ const [isSearching, setIsSearching] = React.useState(false);
   ];
 
 
-const handleProfileClick = () => {
-  console.log("Hello");
-  // Add any additional logic you want to execute when the "Profile" link is clicked
-};
+  const handleProfileClick = () => {
+    console.log("Hello");
+    // Add any additional logic you want to execute when the "Profile" link is clicked
+  };
 
 
-React.useEffect(() => {
-  // Check for the presence of the token during page load
-  const storedToken = localStorage.getItem("token");
+  React.useEffect(() => {
+    // Check for the presence of the token during page load
+    const storedToken = localStorage.getItem("token");
 
-  if (storedToken) {
-    // If the token is present, consider the user as logged in
-    setIsLoggedIn(true);
+    if (storedToken) {
+      // If the token is present, consider the user as logged in
+      setIsLoggedIn(true);
 
-    // Optionally, you can make an API call to get user details, including admin status
-    // and set the isAdmin state accordingly.
+      // Optionally, you can make an API call to get user details, including admin status
+      // and set the isAdmin state accordingly.
 
-    // For now, let's assume the user is an admin.
-    setIsAdmin(true);
+      // For now, let's assume the user is an admin.
+      setIsAdmin(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("token")
   }
-}, []);
-
-const handleLogout =()=>{
-  setIsLoggedIn(false);
-  localStorage.removeItem("token")
-}
 
   return (
     <div className="navbar px-7">
@@ -322,7 +384,20 @@ const handleLogout =()=>{
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent>
-        <Input
+
+          <Autocomplete
+            variant="flat"
+            labelPlacement="outside"
+            defaultItems={animals}
+            placeholder="Search..."
+            // startContent={<SearchIcon size={22} />}
+            className="max-w-sm max-h-10 md:w-full lg:w-full h-10 w-48"
+            selectorIcon={<SearchIcon size={17} />}
+            disableSelectorIconRotation
+          >
+            {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+          </Autocomplete>
+          {/* <Input
   classNames={{
     base: "md:w-full lg:w-full h-10 w-48",
     mainWrapper: "h-full",
@@ -335,40 +410,40 @@ const handleLogout =()=>{
   type="search"
   value={searchTerm}
   onChange={(e) => setSearchTerm(e.target.value)}
-/>
+/> */}
 
-{searchResults.length > 0 && (
-    <Dropdown placement="bottom-start" className="absolute mt-8 lg:w-[28rem] md:[10rem] w-full overflow-x-hidden flex-wrap">
-  
-      <DropdownMenu>
-        {searchResults.map((result) => (
-          <DropdownItem key={result.id}>
-            <div className="flex justify-between">
-            <p className="font-bold">{result.name}</p>
-            <p>{result.location}</p>
-            </div>
-            {/* Add more information as needed */}
-          </DropdownItem>
-        ))}
-      </DropdownMenu>
-    </Dropdown>
-  )}
+          {/* {searchResults.length > 0 && (
+            <Dropdown placement="bottom-start" className="absolute mt-8 lg:w-[28rem] md:[10rem] w-full overflow-x-hidden flex-wrap">
+
+              <DropdownMenu>
+                {searchResults.map((result) => (
+                  <DropdownItem key={result.id}>
+                    <div className="flex justify-between">
+                      <p className="font-bold">{result.name}</p>
+                      <p>{result.location}</p>
+                    </div>
+
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          )} */}
         </NavbarContent>
 
         <NavbarContent
           as="div"
           className="items-center hidden md:flex lg:flex gap-12"
           justify="end"
-          >
+        >
           <NavbarItem>
-          {isAdmin && isLoggedIn && (
-            <Link color="foreground" href="#">
-               <Button color="warning" variant="flat" onClick={Admin}>
-                Admin
-              </Button>
-            </Link>
-          )}
-        </NavbarItem>
+            {isAdmin && isLoggedIn && (
+              <Link color="foreground" href="#">
+                <Button color="warning" variant="flat" onClick={Admin}>
+                  Admin
+                </Button>
+              </Link>
+            )}
+          </NavbarItem>
           <NavbarItem>
             <Link color="foreground" href="#">
               About us
@@ -383,7 +458,7 @@ const handleLogout =()=>{
                 strokeWidth="1.5"
                 stroke="currentColor"
                 class="w-6 h-6 text-orange-800"
-                onClick={()=>{
+                onClick={() => {
                   route.push("/Cart")
                 }}
               >
@@ -396,101 +471,101 @@ const handleLogout =()=>{
             </Link>
           </NavbarItem>
           <NavbarItem>
-          {isLoggedIn ? (
-    // Render the SVG when logged in
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="black"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-6 h-6 "
-      onClick={handleLogout}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-      />
-    </svg>
-  ) : (
-            <Link color="foreground" href="#">
-              <Button color="warning" variant="flat" onClick={openFirstModal}>
-                Login
-              </Button>
-              <Modal
-                isOpen={isOpenFirstModal}
-                onOpenChange={closeFirstModal}
-                placement="top-center"
+            {isLoggedIn ? (
+              // Render the SVG when logged in
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="black"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 "
+                onClick={handleLogout}
               >
-                <ModalContent>
-                  {(onClose) => (
-                    <>
-                      <ModalHeader className="flex flex-col gap-1">
-                        Log in
-                      </ModalHeader>
-                      <ModalBody>
-                        <Input
-                          autoFocus
-                          label="Email"
-                          placeholder="Enter your email"
-                          value={email}
-                          variant="bordered"
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <Input
-                          label="Password"
-                          placeholder="Enter your password"
-                          type="password"
-                          variant="bordered"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <div className="flex py-2 px-1 justify-between">
-                          <Link color="primary" href="#" size="sm">
-                            Forgot password?
-                          </Link>
-                          <Link
-                            color="primary"
-                            href="#"
-                            size="sm"
-                            onClick={openSecondModal}
-                            onPress={closeFirstModal}
-                          >
-                            Haven't Registered Yet?
-                          </Link>
-                        </div>
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button color="danger" variant="flat" onPress={onClose}>
-                          Close
-                        </Button>
-                        <Button
-                          color="primary"
-                          onPress={onClose}
-                          onClick={handleLogin}
-                        >
-                          Sign in
-                        </Button>
-                      </ModalFooter>
-                    </>
-                  )}
-                </ModalContent>
-              </Modal>
-              <Modal
-                isOpen={isOpenSecondModal}
-                onOpenChange={closeSecondModal}
-                placement="top-center"
-              >
-                <RegistrationModal
-                  isOpen={isOpenSecondModal}
-                  onClose={closeSecondModal}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
                 />
-              </Modal>
-            </Link>
-             )}
+              </svg>
+            ) : (
+              <Link color="foreground" href="#">
+                <Button color="warning" variant="flat" onClick={openFirstModal}>
+                  Login
+                </Button>
+                <Modal
+                  isOpen={isOpenFirstModal}
+                  onOpenChange={closeFirstModal}
+                  placement="top-center"
+                >
+                  <ModalContent>
+                    {(onClose) => (
+                      <>
+                        <ModalHeader className="flex flex-col gap-1">
+                          Log in
+                        </ModalHeader>
+                        <ModalBody>
+                          <Input
+                            autoFocus
+                            label="Email"
+                            placeholder="Enter your email"
+                            value={email}
+                            variant="bordered"
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                          <Input
+                            label="Password"
+                            placeholder="Enter your password"
+                            type="password"
+                            variant="bordered"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                          <div className="flex py-2 px-1 justify-between">
+                            <Link color="primary" href="#" size="sm">
+                              Forgot password?
+                            </Link>
+                            <Link
+                              color="primary"
+                              href="#"
+                              size="sm"
+                              onClick={openSecondModal}
+                              onPress={closeFirstModal}
+                            >
+                              Haven't Registered Yet?
+                            </Link>
+                          </div>
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button color="danger" variant="flat" onPress={onClose}>
+                            Close
+                          </Button>
+                          <Button
+                            color="primary"
+                            onPress={onClose}
+                            onClick={handleLogin}
+                          >
+                            Sign in
+                          </Button>
+                        </ModalFooter>
+                      </>
+                    )}
+                  </ModalContent>
+                </Modal>
+                <Modal
+                  isOpen={isOpenSecondModal}
+                  onOpenChange={closeSecondModal}
+                  placement="top-center"
+                >
+                  <RegistrationModal
+                    isOpen={isOpenSecondModal}
+                    onClose={closeSecondModal}
+                  />
+                </Modal>
+              </Link>
+            )}
           </NavbarItem>
-        
+
           {/* <Dropdown placement="bottom-end" className="avatar">
             <DropdownTrigger>
               <Avatar
@@ -523,32 +598,32 @@ const handleLogout =()=>{
           </Dropdown> */}
         </NavbarContent>
         <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            {item === "Profile" ? (
-              <button onClick={handleProfileClick}>
-                {/* You can customize the button's appearance if needed */}
-                <span>{item}</span>
-              </button>
-            ) : (
-              <Link
-                className="w-full"
-                color={
-                  index === 2
-                    ? "warning"
-                    : index === menuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
-                {item}
-              </Link>
-            )}
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item}-${index}`}>
+              {item === "Profile" ? (
+                <button onClick={handleProfileClick}>
+                  {/* You can customize the button's appearance if needed */}
+                  <span>{item}</span>
+                </button>
+              ) : (
+                <Link
+                  className="w-full"
+                  color={
+                    index === 2
+                      ? "warning"
+                      : index === menuItems.length - 1
+                        ? "danger"
+                        : "foreground"
+                  }
+                  href="#"
+                  size="lg"
+                >
+                  {item}
+                </Link>
+              )}
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
       </Navbar>
 
     </div>
