@@ -361,6 +361,18 @@ export default function Nav() {
     localStorage.removeItem("token")
   }
 
+  const [value, setValue] = React.useState('');
+  const [selectedKey, setSelectedKey] = React.useState(null);
+
+  const onSelectionChange = (id) => {
+    setSelectedKey(id);
+  };
+
+  const onInputChange = (value) => {
+    setValue(value)
+    setSearchTerm(value)
+  };
+
   return (
     <div className="navbar px-7">
       <Navbar
@@ -388,46 +400,53 @@ export default function Nav() {
           <Autocomplete
             variant="flat"
             labelPlacement="outside"
-            defaultItems={animals}
+            defaultItems={searchResults}
             placeholder="Search..."
             // startContent={<SearchIcon size={22} />}
             className="max-w-sm max-h-10 md:w-full lg:w-full h-10 w-48"
             selectorIcon={<SearchIcon size={17} />}
             disableSelectorIconRotation
+            allowsCustomValue
+            onSelectionChange={onSelectionChange}
+            onInputChange={onInputChange}
+            // onChange={(e) => setSearchTerm(value)}
           >
-            {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+            {(item) => <AutocompleteItem key={item.name}>{item.name}</AutocompleteItem>}
           </Autocomplete>
-          {/* <Input
-  classNames={{
-    base: "md:w-full lg:w-full h-10 w-48",
-    mainWrapper: "h-full",
-    input: "text-small",
-    inputWrapper:
-      "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-  }}
-  placeholder="Type to search..."
-  startContent={<SearchIcon size={18} />}
-  type="search"
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-/> */}
+          {/* <p>Current input text: {value}</p> */}
+{/*           
+            <Input
+              classNames={{
+                base: "md:w-full lg:w-full h-10 w-48",
+                mainWrapper: "h-full",
+                input: "text-small",
+                inputWrapper:
+                  "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+              }}
+              placeholder="Type to search..."
+              startContent={<SearchIcon size={18} />}
+              type="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
 
-          {/* {searchResults.length > 0 && (
-            <Dropdown placement="bottom-start" className="absolute mt-8 lg:w-[28rem] md:[10rem] w-full overflow-x-hidden flex-wrap">
+            {searchResults.length > 0 && (
+              <Dropdown placement="bottom-start" className="mt-2 lg:w-full w-full ">
 
-              <DropdownMenu>
-                {searchResults.map((result) => (
-                  <DropdownItem key={result.id}>
-                    <div className="flex justify-between">
-                      <p className="font-bold">{result.name}</p>
-                      <p>{result.location}</p>
-                    </div>
+                <DropdownMenu>
+                  {searchResults.map((result) => (
+                    <DropdownItem key={result.id}>
+                      <div className="flex justify-between">
+                        <p className="font-bold">{result.name}</p>
+                        <p>{result.location}</p>
+                      </div>
 
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-          )} */}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            )}
+           */}
         </NavbarContent>
 
         <NavbarContent
