@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Carousel, Typography } from "@material-tailwind/react";
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody,Image } from "@nextui-org/react";
 import {
   Select,
   SelectSection,
@@ -12,6 +12,52 @@ import {
 import { Input } from "@nextui-org/react";
 
 const CarouselWithContent = () => {
+  const [categories, setCategories] = React.useState([]);
+  const [selectedCategory, setSelectedCategory] = React.useState(null);
+  const [states, setStates] = React.useState([]);
+  const [selectedStates, setSelectedStates] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:3009/categories");
+        const data = await response.json();
+
+        if (data.success) {
+          setCategories(data.data);
+         
+        } else {
+          console.error("Failed to fetch categories:", data);
+        }
+      } catch (error) {
+        console.error("Error during category fetch:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  React.useEffect(() => {
+    const fetchStates = async () => {
+      try {
+        const response = await fetch("http://localhost:3009/states");
+        const data = await response.json();
+
+        if (data.success) {
+          setStates(data.data);
+         
+        } else {
+          console.error("Failed to fetch categories:", data);
+        }
+      } catch (error) {
+        console.error("Error during category fetch:", error);
+      }
+    };
+
+    fetchStates();
+  }, []);
+
+
   return (
     <>
       <div className=" overflow-x-hidden">
@@ -57,129 +103,63 @@ const CarouselWithContent = () => {
                   shadow="sm"
                 >
                   <div className="flex lg:w-full md:w-[40rem] w-auto items-center justify-between lg:flex-wrap flex-nowrap md:flex-nowrap gap-2 ">
-                    <Input
+                    {/* <Input
                       type="email"
                       color="warning"
                       label="Search By Name"
                       placeholder="Search your location"
                       defaultValue="Jaipur"
                       className="max-w-[16rem] text-xs "
-                    />
+                    /> */}
                     <Select
-                      className="max-w-xs text-xs "
-                      color="warning"
-                      variant="bordered"
-                      label="Select country"
-                    >
-                      <SelectItem
-                        key="argentina"
-                        startContent={
-                          <Avatar
-                            alt="Argentina"
-                            className="w-6 h-6"
-                            src="https://flagcdn.com/ar.svg"
-                          />
-                        }
-                      >
-                        Argentina
-                      </SelectItem>
-                      <SelectItem
-                        key="venezuela"
-                        startContent={
-                          <Avatar
-                            alt="Venezuela"
-                            className="w-6 h-6"
-                            src="https://flagcdn.com/ve.svg"
-                          />
-                        }
-                      >
-                        Venezuela
-                      </SelectItem>
-                      <SelectItem
-                        key="brazil"
-                        startContent={
-                          <Avatar
-                            alt="Brazil"
-                            className="w-6 h-6"
-                            src="https://flagcdn.com/br.svg"
-                          />
-                        }
-                      >
-                        Brazil
-                      </SelectItem>
-                      <SelectItem
-                        key="switzerland"
-                        startContent={
-                          <Avatar
-                            alt="Switzerland"
-                            className="w-6 h-6"
-                            src="https://flagcdn.com/ch.svg"
-                          />
-                        }
-                      >
-                        Switzerland
-                      </SelectItem>
-                      <SelectItem
-                        key="germany"
-                        startContent={
-                          <Avatar
-                            alt="Germany"
-                            className="w-6 h-6"
-                            src="https://flagcdn.com/de.svg"
-                          />
-                        }
-                      >
-                        Germany
-                      </SelectItem>
-                      <SelectItem
-                        key="spain"
-                        startContent={
-                          <Avatar
-                            alt="Spain"
-                            className="w-6 h-6"
-                            src="https://flagcdn.com/es.svg"
-                          />
-                        }
-                      >
-                        Spain
-                      </SelectItem>
-                      <SelectItem
-                        key="france"
-                        startContent={
-                          <Avatar
-                            alt="France"
-                            className="w-6 h-6"
-                            src="https://flagcdn.com/fr.svg"
-                          />
-                        }
-                      >
-                        France
-                      </SelectItem>
-                      <SelectItem
-                        key="italy"
-                        startContent={
-                          <Avatar
-                            alt="Italy"
-                            className="w-6 h-6"
-                            src="https://flagcdn.com/it.svg"
-                          />
-                        }
-                      >
-                        Italy
-                      </SelectItem>
-                      <SelectItem
-                        key="mexico"
-                        startContent={
-                          <Avatar
-                            alt="Mexico"
-                            className="w-6 h-6"
-                            src="https://flagcdn.com/mx.svg"
-                          />
-                        }
-                      >
-                        Mexico
-                      </SelectItem>
-                    </Select>
+        className="max-w-xs text-xs"
+        color="warning"
+      
+        label="Select Category"
+        value={selectedCategory}
+        onChange={(value) => setSelectedCategory(value)}
+        
+      >
+        {categories.map((category) => (
+          <SelectItem
+            key={category.id}
+            
+            value={category.name}
+          >
+            <div className="flex items-center gap-2">
+              <Image
+                alt={category.name}
+                className="w-6 h-6"
+                src={`http://localhost:3009${category.image_url}`}
+                
+              
+              />
+              <span>{category.name}</span>
+            </div>
+          </SelectItem>
+        ))}
+      </Select>
+      <Select
+        className="max-w-xs text-xs"
+        color="warning"
+      variant="bordered"
+        label="Select Category"
+        value={selectedStates}
+        onChange={(value) => setSelectedStates(value)}
+        
+      >
+        {states.map((state) => (
+          <SelectItem
+            key={state.id}
+            
+            value={state.name}
+          >
+            <div className="flex items-center gap-2">
+              <span>{state.name}</span>
+            </div>
+          </SelectItem>
+        ))}
+      </Select>
                     <Button
                       color="warning"
                       size="lg"
