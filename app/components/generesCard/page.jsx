@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
-import {Card, CardHeader, CardFooter, Image, Button, Slider} from "@nextui-org/react";
-
-const Genres =()=> {
+import { Card, CardHeader, CardFooter, Image, Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
+const Genres = () => {
   const [liked, setLiked] = React.useState(false);
   const [categories, setCategories] = React.useState([]);
+  const [selectedCategory, setSelectedCategory] = React.useState(null);
+  const [selectedStates, setSelectedStates] = React.useState(null);
+  const router = useRouter();
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +27,12 @@ const Genres =()=> {
 
     fetchData();
   }, []);
+
+  const handleViewClick = (categoryId, stateId) => {
+    setSelectedCategory(categoryId);
+    setSelectedStates(stateId);
+    router.push(`/GenresSearch?categoryId=${categoryId}&stateId=`);
+  };
 
   return (
     <>
@@ -60,8 +69,8 @@ const Genres =()=> {
                   <p className="text-tiny text-white/60">{category.description}</p>
                 </div>
               </div>
-              <Button radius="full" size="sm">
-                Get App
+              <Button radius="full" size="sm" onClick={() => handleViewClick(category.id, category.state_id)}>
+                View
               </Button>
             </CardFooter>
           </Card>
@@ -69,6 +78,6 @@ const Genres =()=> {
       </div>
     </>
   );
-}
+};
 
 export default Genres;

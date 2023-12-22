@@ -54,7 +54,7 @@ const GenresMain = () => {
     </Card>
     <Genres />
     <div className="pt-0 flex justify-center items-center">
-        <a href="#" className="inline-block">
+       
           <Button size={deviceSize} variant="ghost" color="warning" className="m-auto gap-2 p-7 lg:text-lg md:text-mds text-sm mt-12 text-white">
             Explore More
             <svg
@@ -72,8 +72,7 @@ const GenresMain = () => {
               />
             </svg>
           </Button>
-        </a>
-        
+      
       </div>
        
     </div>

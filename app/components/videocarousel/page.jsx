@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Carousel, Typography } from "@material-tailwind/react";
-import { Card, CardBody,Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@nextui-org/react";
 import {
   Select,
   SelectSection,
@@ -10,6 +10,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 const CarouselWithContent = () => {
   const [categories, setCategories] = React.useState([]);
@@ -25,7 +26,6 @@ const CarouselWithContent = () => {
 
         if (data.success) {
           setCategories(data.data);
-         
         } else {
           console.error("Failed to fetch categories:", data);
         }
@@ -45,7 +45,6 @@ const CarouselWithContent = () => {
 
         if (data.success) {
           setStates(data.data);
-         
         } else {
           console.error("Failed to fetch categories:", data);
         }
@@ -57,6 +56,7 @@ const CarouselWithContent = () => {
     fetchStates();
   }, []);
 
+  const route = useRouter();
 
   return (
     <>
@@ -112,59 +112,86 @@ const CarouselWithContent = () => {
                       className="max-w-[16rem] text-xs "
                     /> */}
                     <Select
-        className="max-w-xs text-xs"
-        color="warning"
-      
-        label="Select Category"
-        value={selectedCategory}
-        onChange={(value) => setSelectedCategory(value)}
-        
-      >
-        {categories.map((category) => (
-          <SelectItem
-            key={category.id}
-            
-            value={category.name}
-          >
-            <div className="flex items-center gap-2">
-              <Image
-                alt={category.name}
-                className="w-6 h-6"
-                src={`http://localhost:3009${category.image_url}`}
-                
-              
-              />
-              <span>{category.name}</span>
-            </div>
-          </SelectItem>
-        ))}
-      </Select>
-      <Select
-        className="max-w-xs text-xs"
-        color="warning"
-      variant="bordered"
-        label="Select Category"
-        value={selectedStates}
-        onChange={(value) => setSelectedStates(value)}
-        
-      >
-        {states.map((state) => (
-          <SelectItem
-            key={state.id}
-            
-            value={state.name}
-          >
-            <div className="flex items-center gap-2">
-              <span>{state.name}</span>
-            </div>
-          </SelectItem>
-        ))}
-      </Select>
+                      className="max-w-xs text-xs"
+                      items={categories}
+                      color="warning"
+                      label="Select Category"
+                      value={selectedCategory}
+                      onChange={(value) =>
+                        setSelectedCategory(value.target.value)
+                      }
+                    >
+                      {(user) => (
+                        <SelectItem key={user.id} textValue={user.name}>
+                          <div className="flex gap-2 items-center">
+                         
+                            <Avatar alt={user.name} className="flex-shrink-0" size="sm" src={`http://localhost:3009${user.image_url}`} />
+                            <div className="flex flex-col">
+                              <span className="text-small">{user.name}</span>
+                            </div>
+                          </div>
+                        </SelectItem>
+                      )}
+                    </Select>
+                    {/*                     
+                    <Select
+                      items={categories}
+                      label="Assigned to"
+                      placeholder="Select a user"
+                      labelPlacement="outside"
+                      className="max-w-xs"
+                    >
+                      {(user) => (
+                        <SelectItem key={user.id} textValue={user.name}>
+                          <div className="flex gap-2 items-center">
+                          <Image
+                              alt={user.name}
+                              className="w-6 h-6"
+                              src={`http://localhost:3009${user.image_url}`}
+                            />
+                            <div className="flex flex-col">
+                              <span className="text-small">{user.name}</span>
+                            </div>
+                          </div>
+                        </SelectItem>
+                      )}
+                    </Select> */}
+                    <Select
+                      className="max-w-xs text-xs"
+                      color="warning"
+                      variant="bordered"
+                      label="Select State"
+                      value={selectedStates}
+                      onChange={(value) =>
+                        setSelectedStates(value.target.value)
+                      }
+                    >
+                      {states.map((state) => (
+                        <SelectItem
+                          key={state.id}
+                          value={state.name}
+                          className=""
+                        >
+                          {/* <div className="flex items-center gap-2">
+                            <span> */}
+                          {state.name}
+                          {/* </span>
+                          </div> */}
+                        </SelectItem>
+                      ))}
+                    </Select>{" "}
                     <Button
                       color="warning"
                       size="lg"
                       variant="ghost"
-                      className=" h-14 w-28 text-xs lg:text-lg md:text-md"
+                      className="h-14 w-28 text-xs lg:text-lg md:text-md"
+                      onClick={() => {
+                        console.log(selectedCategory);
+                        console.log(selectedStates);
+                        route.push(`/GenresSearch?categoryId=${selectedCategory}&stateId=${selectedStates}`)
+
+                        // Add any further logic or API calls here
+                      }}
                     >
                       Search
                     </Button>

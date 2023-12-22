@@ -536,8 +536,8 @@ console.log(response)
                
                 <div className=" flex gap-4 lg:flex-nowrap md:flex-wrap flex-wrap">
               
-<Input value={serviceState} onChange={(e) => setserviceState(e.target.value)}></Input>
-<Input value={serviceCategory} onChange={(e) => setserviceCategory(e.target.value)}></Input>
+<Input value={serviceState} label="State" onChange={(e) => setserviceState(e.target.value)}></Input>
+<Input value={serviceCategory} label="Category" onChange={(e) => setserviceCategory(e.target.value)}></Input>
 
                  
                 </div>

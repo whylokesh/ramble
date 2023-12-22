@@ -1,104 +1,87 @@
 "use client";
-// import React from "react";
-// import { Card, CardHeader, CardFooter, Image, Button, Slider } from "@nextui-org/react";
-// import { CardDefault } from "../Gcards/page";
 
 import React from "react";
-import { Card, CardHeader, CardBody, CardFooter, Divider, Link, Image, Button } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Link,
+  Image,
+  Button,
+} from "@nextui-org/react";
 import { Typography } from "@material-tailwind/react";
 
 
-const cardData = [
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/89699/pexels-photo-89699.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/571169/pexels-photo-571169.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/813465/pexels-photo-813465.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/931881/pexels-photo-931881.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/1089441/pexels-photo-1089441.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/802599/pexels-photo-802599.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/258205/pexels-photo-258205.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/894359/pexels-photo-894359.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/1089441/pexels-photo-1089441.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/802599/pexels-photo-802599.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/258205/pexels-photo-258205.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/894359/pexels-photo-894359.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/258205/pexels-photo-258205.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/894359/pexels-photo-894359.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/258205/pexels-photo-258205.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/894359/pexels-photo-894359.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/258205/pexels-photo-258205.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/894359/pexels-photo-894359.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-  {
-    title: "Your checklist for better sleep",
-    imageSrc: "https://images.pexels.com/photos/258205/pexels-photo-258205.jpeg?auto=compress&cs=tinysrgb&w=600",
-    iconSrc: "https://images.pexels.com/photos/894359/pexels-photo-894359.jpeg?auto=compress&cs=tinysrgb&w=600",
-    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis voluptatibus delectus dolorem quasi facilis corrupti, non maiores voluptates vel, nulla ipsum, quam quibusdam culpa voluptatum!"
-  },
-
-];
 
 const GenresCard = () => {
   const [liked, setLiked] = React.useState(false);
-  const [deviceSize, setDeviceSize] = React.useState('sm');
+  const [cardData, setCardData] = React.useState([]);
+  const [deviceSize, setDeviceSize] = React.useState("sm");
   const [displayedCards, setDisplayedCards] = React.useState(6);
   const [exploreMoreMode, setExploreMoreMode] = React.useState(true);
+
   React.useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 640) {
-        setDeviceSize('sm');
+        setDeviceSize("sm");
       } else if (window.innerWidth >= 640 && window.innerWidth < 1024) {
-        setDeviceSize('md');
+        setDeviceSize("md");
       } else {
-        setDeviceSize('lg');
+        setDeviceSize("lg");
       }
+
+      console.log("queryyss");
+
+      // const urlParams = new URLSearchParams(window.location.search);
+      // const userUUID = urlParams.get("user");
+
+      // Parse stateId and categoryId from the URL
+    
     }
 
+  
+
+
+    
     // Add the event listener
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Call it once to set the initial size
     handleResize();
 
     // Remove the event listener when the component unmounts
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
+  React.useEffect(() => {
+    // Existing code...
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const stateId = urlSearchParams.get("stateId");
+    const categoryId = urlSearchParams.get("categoryId");
+
+    // Make an API call to get data based on stateId and categoryId
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3009/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}`);
+        const data = await response.json();
+
+        if (data.success) {
+          setCardData(data.data.services);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
+    fetchData();
+
+    // Existing code...
   }, []);
   const handleExploreToggle = () => {
     if (exploreMoreMode) {
@@ -112,80 +95,81 @@ const GenresCard = () => {
   return (
     <>
       <div className="lg:px-24 md:px-20 px-3 py-5">
-
         {/* MAIN OLD CARD */}
-        <div className="flex flex-wrap justify-between  lg:px-20 md:px-6 px-12 lg:mt-0 md:mt-0 mt-3 overflow-x-hidden">
-    {cardData.slice(0, displayedCards).map((card, index) => (
-          <Card key={index} isFooterBlurred className="max-w-[350px] m-3">
-            <CardHeader className="flex flex-col gap-3">
-                 <Image
-              alt="nextui logo"
-              isZoomed
-              className="object-cove h-44"
-              src={card.imageSrc}
-              width={350}
-             
-            />
-            </CardHeader>
-         <CardBody>
-            <div className="flex flex-col">
-            <Typography variant="h1" className="text-base md:text-lg lg:text-xl mb-1">{card.title}</Typography>
-              <Typography variant="small" className="text-xs md:text-sm lg:text-base text-gray-500">{card.description}</Typography>
-            </div>
-          
-          </CardBody>
+        <div className="flex flex-wrap justify-between lg:px-20 md:px-6 px-12 lg:mt-0 md:mt-0 mt-3 overflow-x-hidden">
+          {cardData.slice(0, displayedCards).map((service, index) => (
+            <Card key={index} isFooterBlurred className="max-w-[350px] m-3">
+              <CardHeader className="flex flex-col gap-3">
+                <Image
+                  alt="service image"
+                  isZoomed
+                  className="object-cove h-44"
+                  src={`http://localhost:3009${service.image_url}`}
+                  width={350}
+                />
+              </CardHeader>
+              <CardBody>
+                <div className="flex flex-col">
+                  <Typography
+                    variant="h1"
+                    className="text-base md:text-lg lg:text-xl mb-1"
+                  >
+                    {service.name}
+                  </Typography>
+                  <Typography
+                    variant="small"
+                    className="text-xs md:text-sm lg:text-base text-gray-500"
+                  >
+                    {service.description}
+                  </Typography>
+                </div>
+              </CardBody>
               <Divider />
-          <CardFooter>
-            <Link
-              isExternal
-              showAnchorIcon
-              href="https://github.com/nextui-org/nextui"
-            >
-              Check Out
-            </Link>
-          </CardFooter>
-        </Card>
-
-       
-        ))}
-       
-      </div>
-      
+              <CardFooter>
+                {/* Adjust this link according to your data */}
+                <Link
+                  isExternal
+                  showAnchorIcon
+                  href={`#/${service.id}`}
+                >
+                  Check Out
+                </Link>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
 
         {/* HOME PAGE CARD */}
         {/* <CardDefault /> */}
 
-      
         <div className="pt-0 flex justify-center items-center">
-        <Button
-          size={deviceSize}
-          variant="ghost"
-          onClick={handleExploreToggle}
-          color="warning"
-          className="m-auto gap-2 p-7 lg:text-lg md:text-mds text-sm mt-12 text-white"
-        >
-          {exploreMoreMode ? 'Explore More' : 'View Less'}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="h-4 w-4"
+          <Button
+            size={deviceSize}
+            variant="ghost"
+            onClick={handleExploreToggle}
+            color="warning"
+            className="m-auto gap-2 p-7 lg:text-lg md:text-mds text-sm mt-12 text-white"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-            />
-          </svg>
-        </Button>
-      </div>
-       
-
+            {exploreMoreMode ? "Explore More" : "View Less"}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-4 w-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+              />
+            </svg>
+          </Button>
+        </div>
       </div>
     </>
   );
-}
+};
 
 export default GenresCard;

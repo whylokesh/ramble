@@ -10,138 +10,110 @@ import {
   Button,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
-
+import { Image } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import "./trio.css";
 
 const InputTrio = () => {
+  const [categories, setCategories] = React.useState([]);
+  const [selectedCategory, setSelectedCategory] = React.useState(null);
+  const [states, setStates] = React.useState([]);
+  const [selectedStates, setSelectedStates] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:3009/categories");
+        const data = await response.json();
+
+        if (data.success) {
+          setCategories(data.data);
+         
+        } else {
+          console.error("Failed to fetch categories:", data);
+        }
+      } catch (error) {
+        console.error("Error during category fetch:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  React.useEffect(() => {
+    const fetchStates = async () => {
+      try {
+        const response = await fetch("http://localhost:3009/states");
+        const data = await response.json();
+
+        if (data.success) {
+          setStates(data.data);
+         
+        } else {
+          console.error("Failed to fetch categories:", data);
+        }
+      } catch (error) {
+        console.error("Error during category fetch:", error);
+      }
+    };
+
+    fetchStates();
+  }, []);
+
+  const route = useRouter();
   return (
     <>
       <div className="w-full  flex justify-center lg:hidden  md:hidden rounded-xl border-orange-800 p-5 flex-nowrap overflow-x-hiddensss">
-        {/* <Card className="p-4 md:w-2/3 lg:w-10/12 max-w-[50rem] flex md:hidden lg:hidden h-fit" color="warning" shadow="sm"> */}
+        
 
         <div className="flex lg:w-full md:w-[40rem] w-auto  justify-center items-center lg:flex-wrap flex-nowrap overflow-x-hidden md:flex-nowrap  gap-5 ">
-          <Select
-            className="w-[15rem] "
-            color="warning"
-            variant="bordered"
-            label="State "
-          >
-            <SelectItem
-              key="argentina"
-              startContent={
-                <Avatar
-                  alt="Argentina"
-                  className="w-6 h-6"
-                  src="https://flagcdn.com/ar.svg"
-                />
-              }
-            >
-              Argentina
-            </SelectItem>
-            <SelectItem
-              key="venezuela"
-              startContent={
-                <Avatar
-                  alt="Venezuela"
-                  className="w-6 h-6"
-                  src="https://flagcdn.com/ve.svg"
-                />
-              }
-            >
-              Venezuela
-            </SelectItem>
-            <SelectItem
-              key="brazil"
-              startContent={
-                <Avatar
-                  alt="Brazil"
-                  className="w-6 h-6"
-                  src="https://flagcdn.com/br.svg"
-                />
-              }
-            >
-              Brazil
-            </SelectItem>
-            <SelectItem
-              key="switzerland"
-              startContent={
-                <Avatar
-                  alt="Switzerland"
-                  className="w-6 h-6"
-                  src="https://flagcdn.com/ch.svg"
-                />
-              }
-            >
-              Switzerland
-            </SelectItem>
-            <SelectItem
-              key="germany"
-              startContent={
-                <Avatar
-                  alt="Germany"
-                  className="w-6 h-6"
-                  src="https://flagcdn.com/de.svg"
-                />
-              }
-            >
-              Germany
-            </SelectItem>
-            <SelectItem
-              key="spain"
-              startContent={
-                <Avatar
-                  alt="Spain"
-                  className="w-6 h-6"
-                  src="https://flagcdn.com/es.svg"
-                />
-              }
-            >
-              Spain
-            </SelectItem>
-            <SelectItem
-              key="france"
-              startContent={
-                <Avatar
-                  alt="France"
-                  className="w-6 h-6"
-                  src="https://flagcdn.com/fr.svg"
-                />
-              }
-            >
-              France
-            </SelectItem>
-            <SelectItem
-              key="italy"
-              startContent={
-                <Avatar
-                  alt="Italy"
-                  className="w-6 h-6"
-                  src="https://flagcdn.com/it.svg"
-                />
-              }
-            >
-              Italy
-            </SelectItem>
-            <SelectItem
-              key="mexico"
-              startContent={
-                <Avatar
-                  alt="Mexico"
-                  className="w-6 h-6"
-                  src="https://flagcdn.com/mx.svg"
-                />
-              }
-            >
-              Mexico
-            </SelectItem>
-          </Select>
-          <Input
-            type="email"
-            color="warning"
-            label="Search By Name"
-            variant="underlined"
-            className="w-[16rem] text-xs h-[3rem]"
-          />
+        <Select
+        className="w-[15rem]"
+        items={categories}
+        color="warning"
+        label="Select Category"
+        value={selectedCategory}
+        onChange={(value) =>
+          setSelectedCategory(value.target.value)
+        }
+      >
+        {(user) => (
+          <SelectItem key={user.id} textValue={user.name}>
+            <div className="flex gap-2 items-center">
+           
+              <Avatar alt={user.name} className="flex-shrink-0" size="sm" src={`http://localhost:3009${user.image_url}`} />
+              <div className="flex flex-col">
+                <span className="text-small">{user.name}</span>
+              </div>
+            </div>
+          </SelectItem>
+        )}
+      </Select>
+      <Select
+         className="w-[16rem] text-xs h-[3rem]"
+         color="warning"
+                      variant="underlined"
+                      label="Select State"
+                      value={selectedStates}
+                      onChange={(value) =>
+                        setSelectedStates(value.target.value)
+                      }
+                    >
+                      {states.map((state) => (
+                        <SelectItem
+                          key={state.id}
+                          value={state.name}
+                          className=""
+                        >
+                          {/* <div className="flex items-center gap-2">
+                            <span> */}
+                          {state.name}
+                          {/* </span>
+                          </div> */}
+                        </SelectItem>
+                      ))}
+      </Select>
+           
           <div className=" rounded-2xl p-1 bg-black stroke-orange-500 fill-black">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -150,6 +122,13 @@ const InputTrio = () => {
               strokeWidth="1.5"
               stroke="currentColor"
               className="w-6 h-6 text-white "
+              onClick={() => {
+                console.log(selectedCategory);
+                console.log(selectedStates);
+                route.push(`/GenresSearch?categoryId=${selectedCategory}&stateId=${selectedStates}`)
+
+                // Add any further logic or API calls here
+              }}
             >
               <path
                 stroke-linecap="round"

@@ -27,6 +27,7 @@ const Filters =() => {
         strokeWidth = 1.5,
         width,
         height,
+  
         ...props
       }) => (
         <svg
@@ -60,7 +61,7 @@ const Filters =() => {
   return (
     <div className="flex w-full lg:p-12 md:p-8 p-6 flex-wrap justify-center items-center md:flex-wrap lg:flex-wrap gap-8">
       <Input type="Location" label="Search For Location"  endContent={
-                   <SearchIcon size={18} onClick={()=>{
+                   <SearchIcon  size={18} className= "mb-2" onClick={()=>{
                     console.log("hello")
                    }}/>
                   }  className="lg:w-1/4 md:w-2/4 px-5"/>
