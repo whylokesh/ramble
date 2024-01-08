@@ -33,66 +33,7 @@ import {
 } from "@nextui-org/react";
 import { useRouter } from 'next/navigation'
 
-const animals = [
-  {
-    label: "Cat",
-    value: "cat",
-    description: "The second most popular pet in the world",
-  },
-  {
-    label: "Dog",
-    value: "dog",
-    description: "The most popular pet in the world",
-  },
-  {
-    label: "Elephant",
-    value: "elephant",
-    description: "The largest land animal",
-  },
-  { label: "Lion", value: "lion", description: "The king of the jungle" },
-  { label: "Tiger", value: "tiger", description: "The largest cat species" },
-  {
-    label: "Giraffe",
-    value: "giraffe",
-    description: "The tallest land animal",
-  },
-  {
-    label: "Dolphin",
-    value: "dolphin",
-    description: "A widely distributed and diverse group of aquatic mammals",
-  },
-  {
-    label: "Penguin",
-    value: "penguin",
-    description: "A group of aquatic flightless birds",
-  },
-  {
-    label: "Zebra",
-    value: "zebra",
-    description: "A several species of African equids",
-  },
-  {
-    label: "Shark",
-    value: "shark",
-    description:
-      "A group of elasmobranch fish characterized by a cartilaginous skeleton",
-  },
-  {
-    label: "Whale",
-    value: "whale",
-    description: "Diverse group of fully aquatic placental marine mammals",
-  },
-  {
-    label: "Otter",
-    value: "otter",
-    description: "A carnivorous mammal in the subfamily Lutrinae",
-  },
-  {
-    label: "Crocodile",
-    value: "crocodile",
-    description: "A large semiaquatic reptile",
-  },
-];
+
 
 const AcmeLogo = () => (
   <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
@@ -110,6 +51,7 @@ const SearchIcon = ({
   strokeWidth = 1.5,
   width,
   height,
+  onClick,
   ...props
 }) => (
   <svg
@@ -120,6 +62,7 @@ const SearchIcon = ({
     role="presentation"
     viewBox="0 0 24 24"
     width={width || size}
+    onClick={onClick}
     {...props}
   >
     <path
@@ -319,18 +262,11 @@ export default function Nav() {
     }
   }, [searchTerm]);
 
-
   const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    isLoggedIn ? "Admin" : null, // Show "Admin" only when logged in
+    "Cart",
+    "Contact us",
+    isLoggedIn ? "Log Out" : "Log in", // Show "Log Out" if logged in, else "Log in"
   ];
 
 
@@ -369,9 +305,21 @@ export default function Nav() {
   };
 
   const onInputChange = (value) => {
-    setValue(value)
-    setSearchTerm(value)
+    setValue(value);
+    setSearchTerm(value);
   };
+  
+  const onSearchIconClick = () => {
+    if (selectedKey !== null && searchResults.length > 0) {
+      const selectedService = searchResults.find((item) => item.name === selectedKey);
+      if (selectedService) {
+        route.push(`/ProductMain?serviceID=${selectedService.id}`);
+      }
+    }
+  };
+  
+  
+
 
   return (
     <div className="navbar px-7">
@@ -397,56 +345,21 @@ export default function Nav() {
         </NavbarContent>
         <NavbarContent>
 
-          <Autocomplete
-            variant="flat"
-            labelPlacement="outside"
-            defaultItems={searchResults}
-            placeholder="Search..."
-            // startContent={<SearchIcon size={22} />}
-            className="max-w-sm max-h-10 md:w-full lg:w-full h-10 w-48"
-            selectorIcon={<SearchIcon size={17} />}
-            disableSelectorIconRotation
-            allowsCustomValue
-            onSelectionChange={onSelectionChange}
-            onInputChange={onInputChange}
-            // onChange={(e) => setSearchTerm(value)}
-          >
-            {(item) => <AutocompleteItem key={item.name}>{item.name}</AutocompleteItem>}
-          </Autocomplete>
-          {/* <p>Current input text: {value}</p> */}
-{/*           
-            <Input
-              classNames={{
-                base: "md:w-full lg:w-full h-10 w-48",
-                mainWrapper: "h-full",
-                input: "text-small",
-                inputWrapper:
-                  "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-              }}
-              placeholder="Type to search..."
-              startContent={<SearchIcon size={18} />}
-              type="search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-
-            {searchResults.length > 0 && (
-              <Dropdown placement="bottom-start" className="mt-2 lg:w-full w-full ">
-
-                <DropdownMenu>
-                  {searchResults.map((result) => (
-                    <DropdownItem key={result.id}>
-                      <div className="flex justify-between">
-                        <p className="font-bold">{result.name}</p>
-                        <p>{result.location}</p>
-                      </div>
-
-                    </DropdownItem>
-                  ))}
-                </DropdownMenu>
-              </Dropdown>
-            )}
-           */}
+        <Autocomplete
+  variant="flat"
+  labelPlacement="outside"
+  defaultItems={searchResults}
+  placeholder="Search..."
+  className="max-w-sm max-h-10 md:w-full lg:w-full h-10 w-48"
+  selectorIcon={<SearchIcon size={17} onClick={onSearchIconClick} />}
+  disableSelectorIconRotation
+  allowsCustomValue
+  onSelectionChange={onSelectionChange}
+  onInputChange={onInputChange}
+>
+  {(item) => <AutocompleteItem key={item.name}>{item.name}</AutocompleteItem>}
+</Autocomplete>
+    
         </NavbarContent>
 
         <NavbarContent
@@ -476,7 +389,7 @@ export default function Nav() {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-6 h-6 text-orange-800"
+                className="w-6 h-6 text-orange-800"
                 onClick={() => {
                   route.push("/Cart")
                 }}
@@ -516,6 +429,7 @@ export default function Nav() {
                   isOpen={isOpenFirstModal}
                   onOpenChange={closeFirstModal}
                   placement="top-center"
+                  className="lg:m-4 md:m-4 m-auto"
                 >
                   <ModalContent>
                     {(onClose) => (
@@ -585,64 +499,52 @@ export default function Nav() {
             )}
           </NavbarItem>
 
-          {/* <Dropdown placement="bottom-end" className="avatar">
-            <DropdownTrigger>
-              <Avatar
-                isBordered
-                as="button"
-                className="transition-transform"
-                color="secondary"
-                name="Jason Hughes"
-                size="sm"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              />
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold">zoey@example.com</p>
-              </DropdownItem>
-              <DropdownItem key="settings">My Settings</DropdownItem>
-              <DropdownItem key="team_settings">Team Settings</DropdownItem>
-              <DropdownItem key="analytics">Analytics</DropdownItem>
-              <DropdownItem key="system">System</DropdownItem>
-              <DropdownItem key="configurations">Configurations</DropdownItem>
-              <DropdownItem key="help_and_feedback">
-                Help & Feedback
-              </DropdownItem>
-              <DropdownItem key="logout" color="danger">
-                Log Out
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown> */}
+      
         </NavbarContent>
         <NavbarMenu>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              {item === "Profile" ? (
-                <button onClick={handleProfileClick}>
-                  {/* You can customize the button's appearance if needed */}
-                  <span>{item}</span>
-                </button>
-              ) : (
-                <Link
-                  className="w-full"
-                  color={
-                    index === 2
-                      ? "warning"
-                      : index === menuItems.length - 1
-                        ? "danger"
-                        : "foreground"
-                  }
-                  href="#"
-                  size="lg"
-                >
-                  {item}
-                </Link>
-              )}
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
+  {menuItems.map((item, index) => (
+
+    <NavbarMenuItem key={`${item}-${index}`}>
+      {item === "Profile" ? (
+        <button onClick={handleProfileClick}>
+          {/* You can customize the button's appearance if needed */}
+          <span>{item}</span>
+        </button>
+      ) : (
+        // Handle "Log in" directly to open the login modal
+        item === "Log in" ? (
+          <button onClick={openFirstModal}>
+            <span>{item}</span>
+          </button>
+        ) : (
+          <Link
+            className="w-full"
+            color={
+              index === 2
+                ? "warning"
+                : index === menuItems.length - 1
+                ? "danger"
+                : "foreground"
+            }
+            href="#"
+            size="lg"
+            onClick={() => {
+              // Handle other menu items here
+              if (item === "Log Out") {
+                handleLogout();
+              } else {
+                // Handle other menu items if needed
+              }
+            }}
+          >
+            {item}
+          </Link>
+        )
+      )}
+    </NavbarMenuItem>
+  ))}
+</NavbarMenu>
+
       </Navbar>
 
     </div>

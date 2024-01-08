@@ -37,7 +37,7 @@ const Genres = () => {
   return (
     <>
       <div className="flex flex-wrap justify-between lg:px-20 md:px-6 px-4 lg:mt-0 md:mt-0 mt-7 overflow-x-hidden">
-        {categories.map((category) => (
+      {categories.slice(0, 6).map((category) => (
           <Card
             key={category.id}
             isFooterBlurred

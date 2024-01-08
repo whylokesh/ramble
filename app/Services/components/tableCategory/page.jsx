@@ -1,589 +1,520 @@
-"use client";
-import React from "react";
-import { useRef } from "react";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  Input,
-  Button,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-  Chip,
-  User,
-  Pagination,
-  Textarea,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
-import { Location } from "./location.js";
+  "use client";
+  import React from "react";
+  import {
+    Table,
+    TableHeader,
+    TableColumn,
+    TableBody,
+    TableRow,
+    TableCell,
+    Pagination,
+    Input,
+    Button,
+  } from "@nextui-org/react";
+  import {
+    Modal,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+  } from "@nextui-org/react";
 
-import { PlusIcon } from "./PlusIcon";
-import { VerticalDotsIcon } from "./VerticalDotsIcon";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from "@nextui-org/react";
-import { ChevronDownIcon } from "./ChevronDownIcon";
-import { columns, users, statusOptions } from "./data";
-import { capitalize } from "./utils";
+  import { Select, SelectSection, SelectItem, Avatar } from "@nextui-org/react";
 
-const statusColorMap = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
+  const SearchIcon = ({
+    size = 24,
+    strokeWidth = 1.5,
+    width,
+    height,
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
-
-export const SearchIcon = (props) => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    focusable="false"
-    height="1em"
-    role="presentation"
-    viewBox="0 0 24 24"
-    width="1em"
-    {...props}
-  >
-    <path
-      d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-    />
-    <path
-      d="M22 22L20 20"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-    />
-  </svg>
-);
-
-export default function ServiceCategory() {
-  const [filterValue, setFilterValue] = React.useState("");
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
-  const [visibleColumns, setVisibleColumns] = React.useState(
-    new Set(INITIAL_VISIBLE_COLUMNS)
+    ...props
+  }) => (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      focusable="false"
+      height={height || size}
+      role="presentation"
+      viewBox="0 0 24 24"
+      width={width || size}
+      {...props}
+    >
+      <path
+        d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={strokeWidth}
+      />
+      <path
+        d="M22 22L20 20"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={strokeWidth}
+      />
+    </svg>
   );
-  const [statusFilter, setStatusFilter] = React.useState("all");
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [serviceTitle, setserviceTitle] = React.useState("");
-  const [servicePrice, setservicePrice] = React.useState("");
-  const [serviceLocation, setserviceLocation] = React.useState("");
-  const [serviceCategory, setserviceCategory] = React.useState("");
-  const [serviceState, setserviceState] = React.useState("");
-  const [serviceDescription, setserviceDescription] = React.useState("");
-  const [sortDescriptor, setSortDescriptor] = React.useState({
-    column: "age",
-    direction: "ascending",
-  });
-  const [page, setPage] = React.useState(1);
 
-  const [isOpenFirstModal, setOpenFirstModal] = React.useState(false);
+  export default function App() {
+    const [page, setPage] = React.useState(1);
+    const rowsPerPage = 4;
+    const [isOpenFirstModal, setOpenFirstModal] = React.useState(false);
+    const openFirstModal = () => setOpenFirstModal(true);
+    const closeFirstModal = () => {
+      setOpenFirstModal(false);
+      setSelectedImage(null);
+    };
 
-  const openFirstModal = () => setOpenFirstModal(true);
-  const closeFirstModal = () => setOpenFirstModal(false);
+    const [searchInput, setSearchInput] = React.useState(""); // New state for search input
 
-  const [image, setImage] = React.useState(null);
-  const [imageUrl, setImageUrl] = React.useState("");
-  const fileInputRef = React.useRef(null);
+    const [selectedImage, setSelectedImage] = React.useState(null);
+    const [selectedFile, setSelectedFile] = React.useState(null);
+    const [name, setName] = React.useState("");
+    const [descripiton, setdescripiton] = React.useState("");
 
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
+    const [CategoryName, setCategoryName] = React.useState("");
+    const [State, setState] = React.useState("");
+    const [Location, setLocation] = React.useState("");
+    const [Price, setPrice] = React.useState("");
+    const [code, setCode] = React.useState("");
+    const [Media, setMedia] = React.useState("");
+    const [FTF, setFtf] = React.useState("");
+    const [TotalArea, setTotalArea] = React.useState("");
+    const [size, setSize] = React.useState("");
+    const [categories, setCategories] = React.useState([]);
+    const [states, setStates] = React.useState([]);
 
-    if (selectedImage) {
-      const imageUrl = URL.createObjectURL(selectedImage);
-      setImageUrl(imageUrl);
-      setImage(selectedImage);
-    }
-  };
+    const [Services, setServices] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const handleSubmit = () => {
+      const token = localStorage.getItem("token"); // Replace with your actual token key
 
-  const handleAddService = async () => {
-    try {
-      // Perform the API call to add a new category
-      const authToken = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append("name", serviceTitle);
-      formData.append("description", serviceDescription);
-      formData.append("price",servicePrice);
-      formData.append("categoryName",serviceCategory);
-      formData.append("location",serviceLocation);
-      formData.append("stateName",serviceState);
+      formData.append("image", selectedFile);
+      formData.append("name", name);
+      formData.append("description", descripiton);
+      formData.append("price", Price);
+      formData.append("location", Location);
+      formData.append("categoryName", CategoryName);
+      formData.append("stateName", State);
 
-      formData.append("image", image);
+      formData.append("code", code);
+      formData.append("media", Media);
+      formData.append("ftf", FTF);
+      formData.append("totalArea", TotalArea);
+      formData.append("size", size);
 
-      const response = await fetch("http://localhost:3009/admin/add-service", {
+      fetch("http://localhost:3009/admin/add-service", {
         method: "POST",
         body: formData,
         headers: {
-          Authorization: authToken,
+          Authorization: token, // Include the token in the headers
+          // Add any other required headers
         },
-      });
-     
-console.log(response)
-      const data = await response.json();
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Response from server:", data);
+          closeFirstModal();
+        })
+        .catch((error) => {
+          console.error("Error posting data:", error);
+        });
+    };
 
-      if (data.success) {
-        // Handle success scenario, you can close the modal or perform additional actions
-        console.log("Service added successfully:", data);
+    React.useEffect(() => {
+      // Fetch data from the API
+      fetch("http://localhost:3009/services")
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            setServices(data.data);
+            setLoading(false);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          setLoading(false);
+        });
+    }, []);
 
-        // Close the modal
-        closeFirstModal();
-      } else {
-        // Handle failure scenario
-        console.error("Failed to add category:", data);
-      }
-    } catch (error) {
-      // Handle any errors that occurred during the API call
-      console.error("Error adding category:", error);
-    }
-  };
-
-  const handleUpload = () => {
-    console.log("Image URL:", imageUrl);
-  };
-
-  const triggerFileInput = () => {
-    fileInputRef.current.click();
-  };
-
-  const hasSearchFilter = Boolean(filterValue);
-
-  const headerColumns = React.useMemo(() => {
-    if (visibleColumns === "all") return columns;
-
-    return columns.filter((column) =>
-      Array.from(visibleColumns).includes(column.uid)
+    const filteredCategories = Services.filter((Service) =>
+      Service.name.toLowerCase().includes(searchInput.toLowerCase())
     );
-  }, [visibleColumns]);
 
-  const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...users];
+    const pages = Math.ceil(filteredCategories.length / rowsPerPage);
 
-    if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
-        user.name.toLowerCase().includes(filterValue.toLowerCase())
-      );
-    }
-    if (
-      statusFilter !== "all" &&
-      Array.from(statusFilter).length !== statusOptions.length
-    ) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.status)
-      );
-    }
+    const items = React.useMemo(() => {
+      const start = (page - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
 
-    return filteredUsers;
-  }, [users, filterValue, statusFilter]);
+      return filteredCategories.slice(start, end);
+    }, [page, filteredCategories]);
 
-  const pages = Math.ceil(filteredItems.length / rowsPerPage);
+    //service Delete code
+    const [isOpenDeleteModal, setOpenDeleteModal] = React.useState(false);
+    const [deleteItemId, setDeleteItemId] = React.useState(null);
 
-  const items = React.useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
+    const openDeleteModal = (id) => {
+      setDeleteItemId(id);
+      setOpenDeleteModal(true);
+    };
 
-    return filteredItems.slice(start, end);
-  }, [page, filteredItems, rowsPerPage]);
+    const closeDeleteModal = () => {
+      setDeleteItemId(null);
+      setOpenDeleteModal(false);
+    };
 
-  const sortedItems = React.useMemo(() => {
-    return [...items].sort((a, b) => {
-      const first = a[sortDescriptor.column];
-      const second = b[sortDescriptor.column];
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
+    const handleDelete = () => {
+      const token = localStorage.getItem("token"); // Replace with your actual token key
 
-      return sortDescriptor.direction === "descending" ? -cmp : cmp;
-    });
-  }, [sortDescriptor, items]);
+      fetch(`http://localhost:3009/admin/delete-service?id=${deleteItemId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Response from server:", data);
+          closeDeleteModal();
+          // You may want to refresh the data after deletion
+        })
+        .catch((error) => {
+          console.error("Error deleting data:", error);
+          // Handle error scenarios
+        });
+    };
 
-  const renderCell = React.useCallback((user, columnKey) => {
-    const cellValue = user[columnKey];
+    React.useEffect(() => {
+      const fetchCategories = async () => {
+        try {
+          const response = await fetch("http://localhost:3009/categories");
+          const data = await response.json();
 
-    switch (columnKey) {
-      case "name":
-        return (
-          <User
-            avatarProps={{ radius: "lg", src: user.avatar }}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {user.team}
-            </p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap[user.status]}
-            size="sm"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex justify-end items-center gap-2">
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+          if (data.success) {
+            setCategories(data.data);
+          } else {
+            console.error("Failed to fetch categories:", data);
+          }
+        } catch (error) {
+          console.error("Error during category fetch:", error);
+        }
+      };
 
-  const onNextPage = React.useCallback(() => {
-    if (page < pages) {
-      setPage(page + 1);
-    }
-  }, [page, pages]);
+      fetchCategories();
+    }, []);
 
-  const onPreviousPage = React.useCallback(() => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  }, [page]);
+    React.useEffect(() => {
+      const fetchStates = async () => {
+        try {
+          const response = await fetch("http://localhost:3009/states");
+          const data = await response.json();
 
-  const onRowsPerPageChange = React.useCallback((e) => {
-    setRowsPerPage(Number(e.target.value));
-    setPage(1);
-  }, []);
+          if (data.success) {
+            setStates(data.data);
+          } else {
+            console.error("Failed to fetch states:", data);
+          }
+        } catch (error) {
+          console.error("Error during state fetch:", error);
+        }
+      };
 
-  const onSearchChange = React.useCallback((value) => {
-    if (value) {
-      setFilterValue(value);
-      setPage(1);
-    } else {
-      setFilterValue("");
-    }
-  }, []);
+      fetchStates();
+    }, []);
 
-  const onClear = React.useCallback(() => {
-    setFilterValue("");
-    setPage(1);
-  }, []);
 
-  const topContent = React.useMemo(() => {
+    const handleSelectionChange = (e) => {
+      setState(e.target.value);
+      console.log(e.target.value)
+    };
+
+    const handleCategoryChange = (e) => {
+      setCategoryName(e.target.value);
+      console.log(e.target.value)
+    };
+
     return (
-      <div className="flex flex-col gap-4">
-        <div className="flex justify-between gap-3 items-end">
+      <div className="lg:px-16 md:px-12 px-8">
+        <h1 className="font-bold bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent text-4xl px-8 mt-6 flex justify-center items-center mb-8">
+          Add Services
+        </h1>
+        <div className="flex justify-between">
           <Input
-            isClearable
-            className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
-            startContent={<SearchIcon />}
-            value={filterValue}
-            onClear={() => onClear()}
-            onValueChange={onSearchChange}
+            type="Location"
+            label="Search For Service Name"
+            endContent={
+              <SearchIcon
+                size={18}
+                className="mb-2"
+                onClick={() => {
+                  console.log("hello");
+                }}
+              />
+            }
+            className="lg:w-[30%] md:w-[50%] w-[60%] mb-8 mt-4"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.currentTarget.value)}
           />
-          <div className="flex gap-3">
-            <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
-                <Button
-                  endContent={<ChevronDownIcon className="text-small" />}
-                  variant="flat"
-                >
-                  Status
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Columns"
-                closeOnSelect={false}
-                selectedKeys={statusFilter}
-                selectionMode="multiple"
-                onSelectionChange={setStatusFilter}
-              >
-                {statusOptions.map((status) => (
-                  <DropdownItem key={status.uid} className="capitalize">
-                    {capitalize(status.name)}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-            <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
-                <Button
-                  endContent={<ChevronDownIcon className="text-small" />}
-                  variant="flat"
-                >
-                  Columns
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Columns"
-                closeOnSelect={false}
-                selectedKeys={visibleColumns}
-                selectionMode="multiple"
-                onSelectionChange={setVisibleColumns}
-              >
-                {columns.map((column) => (
-                  <DropdownItem key={column.uid} className="capitalize">
-                    {capitalize(column.name)}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-            <Button
-              color="primary"
-              endContent={<PlusIcon />}
-              onClick={openFirstModal}
+          <Button className="mb-8 mt-5" onClick={openFirstModal} color="primary">
+            {" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
             >
-              Add New
-            </Button>
-          </div>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
-            Total {users.length} users
-          </span>
-          <label className="flex items-center text-default-400 text-small">
-            Rows per page:
-            <select
-              className="bg-transparent outline-none text-default-400 text-small"
-              onChange={onRowsPerPageChange}
-            >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-            </select>
-          </label>
-        </div>
-      </div>
-    );
-  }, [
-    filterValue,
-    statusFilter,
-    visibleColumns,
-    onRowsPerPageChange,
-    users.length,
-    onSearchChange,
-    hasSearchFilter,
-  ]);
-
-  const bottomContent = React.useMemo(() => {
-    return (
-      <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-default-400">
-          {selectedKeys === "all"
-            ? "All items selected"
-            : `${selectedKeys.size} of ${filteredItems.length} selected`}
-        </span>
-        <Pagination
-          isCompact
-          showControls
-          showShadow
-          color="primary"
-          page={page}
-          total={pages}
-          onChange={setPage}
-        />
-        <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onPreviousPage}
-          >
-            Previous
-          </Button>
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onNextPage}
-          >
-            Next
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+            Add new
           </Button>
         </div>
-      </div>
-    );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+        <Table
+          aria-label="Example table with client side pagination"
+          bottomContent={
+            <div className="flex w-full justify-center">
+              <Pagination
+                isCompact
+                showControls
+                showShadow
+                color="secondary"
+                page={page}
+                total={pages}
+                onChange={(page) => setPage(page)}
+              />
+            </div>
+          }
+          classNames={{
+            wrapper: "min-h-[222px]",
+          }}
+        >
+          <TableHeader>
+            <TableColumn key="id">ID</TableColumn>
+            <TableColumn key="avatar">AVATAR</TableColumn>
+            <TableColumn key="name">NAME</TableColumn>
+            <TableColumn key="description">DESCRIPTION</TableColumn>
 
-  return (
-    <div className="lg:p-12 md:p-12 p-8">
-      <Table
-        aria-label="Example table with custom cells, pagination and sorting"
-        isHeaderSticky
-        bottomContent={bottomContent}
-        bottomContentPlacement="outside"
-        className="bg-black"
-        classNames={{
-          wrapper: "max-h-[382px]",
-        }}
-        selectedKeys={selectedKeys}
-        selectionMode="multiple"
-        sortDescriptor={sortDescriptor}
-        topContent={topContent}
-        topContentPlacement="outside"
-        onSelectionChange={setSelectedKeys}
-        onSortChange={setSortDescriptor}
-      >
-        <TableHeader columns={headerColumns}>
-          {(column) => (
-            <TableColumn
-              key={column.uid}
-              align={column.uid === "actions" ? "center" : "start"}
-              allowsSorting={column.sortable}
-            >
-              {column.name}
-            </TableColumn>
-          )}
-        </TableHeader>
-        <TableBody emptyContent={"No users found"} items={sortedItems}>
-          {(item) => (
-            <TableRow key={item.id}>
-              {(columnKey) => (
-                <TableCell>{renderCell(item, columnKey)}</TableCell>
-              )}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-      <Modal
-        isOpen={isOpenFirstModal}
-        onOpenChange={closeFirstModal}
-        isDismissable={false}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Add Service
-              </ModalHeader>
-              <ModalBody>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  ref={fileInputRef}
-                  style={{ display: "none" }}
-                />
-
-                {/* Custom button to trigger file input */}
-                <Button onClick={triggerFileInput}>Upload Files</Button>
-
-                {imageUrl && (
-                  <div>
-                    <img
-                      src={imageUrl}
-                      alt="Uploaded"
-                      style={{ maxWidth: "100%", marginTop: "10px" }}
+            <TableColumn key="Price">Price</TableColumn>
+            <TableColumn key="location">Location</TableColumn>
+            <TableColumn key="Code">Code</TableColumn>
+            <TableColumn key="Media">Media</TableColumn>
+            <TableColumn key="ftf">FTF</TableColumn>
+            <TableColumn key="Total Area">Total Area</TableColumn>
+            <TableColumn key="delete">Delete</TableColumn>
+          </TableHeader>
+          <TableBody items={items}>
+            {(item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.id}</TableCell>
+                <TableCell>
+                  <img
+                    src={`http://localhost:3009${item.image_url}`}
+                    alt={`${item.name}'s Avatar`}
+                    className="w-8 h-8 rounded-full"
+                  />
+                </TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.description}</TableCell>
+                <TableCell>{item.price}</TableCell>
+                <TableCell>{item.location}</TableCell>
+                <TableCell>{item.code}</TableCell>
+                <TableCell>{item.media}</TableCell>
+                <TableCell>{item.ftf}</TableCell>
+                <TableCell>{item.total_area}</TableCell>
+                <TableCell>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    onClick={() => openDeleteModal(item.id)}
+                    className="w-6 h-6  text-red-700 hover:text-white hover:cursor-pointer"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
                     />
-                    <button
-                      onClick={handleUpload}
-                      className="m-auto flex justify-center items-center"
+                  </svg>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+
+        <Modal isOpen={isOpenFirstModal} onOpenChange={closeFirstModal}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">
+                  Add category
+                </ModalHeader>
+                <ModalBody>
+                  <Input
+                    type="file"
+                    onChange={(event) => {
+                      const file = event.target.files[0];
+                      if (file) {
+                        setSelectedFile(file);
+                      }
+                    }}
+                    className="mb-4"
+                  />
+                  {/* Image preview */}
+                  {selectedFile && (
+                    <img
+                      src={URL.createObjectURL(selectedFile)}
+                      alt="Selected Preview"
+                      className="w-3/5 mb-4 flex justify-center items-center m-auto"
+                    />
+                  )}
+                  <Input
+                    label="Service Name"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                  />
+                  <Input
+                    label="Description"
+                    value={descripiton}
+                    onChange={(e) => {
+                      setdescripiton(e.target.value);
+                    }}
+                  />
+
+                  <div className="flex justify-between gap-2 ">
+                    <Select
+                      label="Category Name"
+                      value={CategoryName}
+                      onChange={handleCategoryChange}
                     >
-                      Upload
-                    </button>
+                      {categories.map((category) => (
+                        <SelectItem key={category.name} value={category.name}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </Select>
+
+                <Select
+  label="State Name"
+  value={State}
+  onChange={handleSelectionChange}
+>
+  {states.map((state) => (
+    <SelectItem key={state.name} value={state.name}>
+      {state.name}
+    </SelectItem>
+  ))}
+</Select>
+
                   </div>
-                )}
-                <Input
-                  type="email"
-                  label="Title"
-                  value={serviceTitle}
-                  onChange={(e) => setserviceTitle(e.target.value)}
-                />
-                <Textarea
-                  label="Description"
-                  placeholder="Enter your description"
-                  value={serviceDescription}
-                  onChange={(e) => setserviceDescription(e.target.value)}
-                ></Textarea>
-                
+                  <Input
+                    label="Location"
+                    value={Location}
+                    onChange={(e) => {
+                      setLocation(e.target.value);
+                    }}
+                  ></Input>
+                  <div className="flex justify-between gap-2 ">
+                    <Input
+                      label="Price"
+                      value={Price}
+                      onChange={(e) => {
+                        setPrice(e.target.value);
+                      }}
+                    ></Input>
+                    <Input
+                      label="Code"
+                      value={code}
+                      onChange={(e) => {
+                        setCode(e.target.value);
+                      }}
+                    ></Input>
+                  </div>
+                  <div className="flex justify-between gap-2 ">
+                    <Input
+                      label="Media"
+                      value={Media}
+                      onChange={(e) => {
+                        setMedia(e.target.value);
+                      }}
+                    ></Input>
+                    <Input
+                      label="FTF"
+                      value={FTF}
+                      onChange={(e) => {
+                        setFtf(e.target.value);
+                      }}
+                    ></Input>
+                  </div>
+                  <div className="flex justify-between gap-2 ">
+                    <Input
+                      label="Total Area"
+                      value={TotalArea}
+                      onChange={(e) => {
+                        setTotalArea(e.target.value);
+                      }}
+                    ></Input>
 
-                <Input
-                  type="text"
-                  label="Location"
-                  value={serviceLocation}
-                  onChange={(e) => setserviceLocation(e.target.value)}
-                />
-               
-                <div className=" flex gap-4 lg:flex-nowrap md:flex-wrap flex-wrap">
-              
-<Input value={serviceState} label="State" onChange={(e) => setserviceState(e.target.value)}></Input>
-<Input value={serviceCategory} label="Category" onChange={(e) => setserviceCategory(e.target.value)}></Input>
-
-                 
-                </div>
-                <Input
-                  placeholder="0.00"
-                  labelPlacement="outside"
-                  
-                value={servicePrice}
-                onChange={(e) => setservicePrice(e.target.value)}
-                  startContent={
-                    <div className="pointer-events-none flex items-center">
-                      <span className="text-default-400 text-small">$</span>
-                    </div>
-                  }
-                  endContent={
-                    <div className="flex items-center">
-                      <label className="sr-only" htmlFor="currency">
-                        Currency
-                      </label>
-                      <select
-                        className="outline-none border-0 bg-transparent text-default-400 text-small"
-                        id="currency"
-                        name="currency"
-                      >
-                        <option>USD</option>
-                        <option>ARS</option>
-                        <option>EUR</option>
-                      </select>
-                    </div>
-                  }
-                  type="text"
-                />
-                
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={handleAddService}>
-                  Action
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </div>
-  );
-}
+                    <Input
+                      label="size"
+                      value={size}
+                      onChange={(e) => {
+                        setSize(e.target.value);
+                      }}
+                    ></Input>
+                  </div>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="danger"
+                    variant="light"
+                    onPress={closeFirstModal}
+                  >
+                    Close
+                  </Button>
+                  <Button color="primary" onPress={handleSubmit}>
+                    Action
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+        <Modal isOpen={isOpenDeleteModal} onOpenChange={closeDeleteModal}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader>Confirmation</ModalHeader>
+                <ModalBody>
+                  Are you sure you want to delete this service?
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="danger"
+                    variant="light"
+                    onPress={closeDeleteModal}
+                  >
+                    Cancel
+                  </Button>
+                  <Button color="primary" onPress={handleDelete}>
+                    Delete
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+      </div>
+    );
+  }

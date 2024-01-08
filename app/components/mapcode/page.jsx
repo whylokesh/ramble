@@ -28,7 +28,7 @@ const Mapjsx = () => {
 
   return (
     <>
-      <div class="px-6   flex flex-wrap justify-between items-center overflow-x-hidden">
+      <div className="px-6   flex flex-wrap justify-between items-center overflow-x-hidden">
         <svg
           baseprofile="tiny"
           fill="#F5A524"
@@ -335,19 +335,19 @@ const Mapjsx = () => {
           </g>
           <g id="points">
             <circle
-              class="8.270456392188589|69.64751777648942"
+              className="8.270456392188589|69.64751777648942"
               cx="50.9"
               cy="1082.7"
               id="0"
             ></circle>
             <circle
-              class="20.400061356601594|84.26020774841326"
+              className="20.400061356601594|84.26020774841326"
               cx="549.9"
               cy="654.3"
               id="1"
             ></circle>
             <circle
-              class="35.562067562117846|95.95035972595234"
+              className="35.562067562117846|95.95035972595234"
               cx="949.1"
               cy="65.3"
               id="2"

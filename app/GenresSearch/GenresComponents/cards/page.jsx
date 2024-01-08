@@ -12,7 +12,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { Typography } from "@material-tailwind/react";
-
+import { useRouter } from "next/navigation";
 
 
 const GenresCard = () => {
@@ -33,11 +33,6 @@ const GenresCard = () => {
       }
 
       console.log("queryyss");
-
-      // const urlParams = new URLSearchParams(window.location.search);
-      // const userUUID = urlParams.get("user");
-
-      // Parse stateId and categoryId from the URL
     
     }
 
@@ -56,6 +51,7 @@ const GenresCard = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const route = useRouter();
 
 
   React.useEffect(() => {
@@ -127,13 +123,11 @@ const GenresCard = () => {
               <Divider />
               <CardFooter>
                 {/* Adjust this link according to your data */}
-                <Link
-                  isExternal
-                  showAnchorIcon
-                  href={`#/${service.id}`}
-                >
+               <Button onClick={()=>{
+                route.push(`/ProductMain?serviceID=${service.id}`)
+               }}>
                   Check Out
-                </Link>
+                  </Button>
               </CardFooter>
             </Card>
           ))}
