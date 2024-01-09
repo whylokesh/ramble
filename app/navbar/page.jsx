@@ -29,8 +29,8 @@ import {
   useDisclosure,
   Checkbox,
   Input,
-  Link,
 } from "@nextui-org/react";
+import Link from 'next/link';
 import { useRouter } from 'next/navigation'
 
 
@@ -308,7 +308,7 @@ export default function Nav() {
     setValue(value);
     setSearchTerm(value);
   };
-  
+
   const onSearchIconClick = () => {
     if (selectedKey !== null && searchResults.length > 0) {
       const selectedService = searchResults.find((item) => item.name === selectedKey);
@@ -317,8 +317,8 @@ export default function Nav() {
       }
     }
   };
-  
-  
+
+
 
 
   return (
@@ -338,28 +338,30 @@ export default function Nav() {
         <NavbarContent justify="start" className="max-w-full ">
           <NavbarBrand className="mr-4 ">
             <AcmeLogo />
-            <p className="hidden sm:block font-bold text-inherit text-xl">
-              Ramble Agency
-            </p>
+            <Link href="/">
+              <p className="hidden sm:block font-bold text-inherit text-xl" >
+                Ramble Agency
+              </p>
+            </Link>
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent>
 
-        <Autocomplete
-  variant="flat"
-  labelPlacement="outside"
-  defaultItems={searchResults}
-  placeholder="Search..."
-  className="max-w-sm max-h-10 md:w-full lg:w-full h-10 w-48"
-  selectorIcon={<SearchIcon size={17} onClick={onSearchIconClick} />}
-  disableSelectorIconRotation
-  allowsCustomValue
-  onSelectionChange={onSelectionChange}
-  onInputChange={onInputChange}
->
-  {(item) => <AutocompleteItem key={item.name}>{item.name}</AutocompleteItem>}
-</Autocomplete>
-    
+          <Autocomplete
+            variant="flat"
+            labelPlacement="outside"
+            defaultItems={searchResults}
+            placeholder="Search..."
+            className="max-w-sm max-h-10 md:w-full lg:w-full h-10 w-48"
+            selectorIcon={<SearchIcon size={17} onClick={onSearchIconClick} />}
+            disableSelectorIconRotation
+            allowsCustomValue
+            onSelectionChange={onSelectionChange}
+            onInputChange={onInputChange}
+          >
+            {(item) => <AutocompleteItem key={item.name}>{item.name}</AutocompleteItem>}
+          </Autocomplete>
+
         </NavbarContent>
 
         <NavbarContent
@@ -382,23 +384,9 @@ export default function Nav() {
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link href="#" aria-current="page" color="secondary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="black"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6 text-orange-800"
-                onClick={() => {
-                  route.push("/Cart")
-                }}
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                />
+            <Link href="/Cart" aria-current="page" color="secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="orange" className="w-6 h-6">
+                <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
               </svg>
             </Link>
           </NavbarItem>
@@ -420,6 +408,7 @@ export default function Nav() {
                   d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
                 />
               </svg>
+
             ) : (
               <Link color="foreground" href="#">
                 <Button color="warning" variant="flat" onClick={openFirstModal}>
@@ -499,51 +488,51 @@ export default function Nav() {
             )}
           </NavbarItem>
 
-      
+
         </NavbarContent>
         <NavbarMenu>
-  {menuItems.map((item, index) => (
+          {menuItems.map((item, index) => (
 
-    <NavbarMenuItem key={`${item}-${index}`}>
-      {item === "Profile" ? (
-        <button onClick={handleProfileClick}>
-          {/* You can customize the button's appearance if needed */}
-          <span>{item}</span>
-        </button>
-      ) : (
-        // Handle "Log in" directly to open the login modal
-        item === "Log in" ? (
-          <button onClick={openFirstModal}>
-            <span>{item}</span>
-          </button>
-        ) : (
-          <Link
-            className="w-full"
-            color={
-              index === 2
-                ? "warning"
-                : index === menuItems.length - 1
-                ? "danger"
-                : "foreground"
-            }
-            href="#"
-            size="lg"
-            onClick={() => {
-              // Handle other menu items here
-              if (item === "Log Out") {
-                handleLogout();
-              } else {
-                // Handle other menu items if needed
-              }
-            }}
-          >
-            {item}
-          </Link>
-        )
-      )}
-    </NavbarMenuItem>
-  ))}
-</NavbarMenu>
+            <NavbarMenuItem key={`${item}-${index}`}>
+              {item === "Profile" ? (
+                <button onClick={handleProfileClick}>
+                  {/* You can customize the button's appearance if needed */}
+                  <span>{item}</span>
+                </button>
+              ) : (
+                // Handle "Log in" directly to open the login modal
+                item === "Log in" ? (
+                  <button onClick={openFirstModal}>
+                    <span>{item}</span>
+                  </button>
+                ) : (
+                  <Link
+                    className="w-full"
+                    color={
+                      index === 2
+                        ? "warning"
+                        : index === menuItems.length - 1
+                          ? "danger"
+                          : "foreground"
+                    }
+                    href="#"
+                    size="lg"
+                    onClick={() => {
+                      // Handle other menu items here
+                      if (item === "Log Out") {
+                        handleLogout();
+                      } else {
+                        // Handle other menu items if needed
+                      }
+                    }}
+                  >
+                    {item}
+                  </Link>
+                )
+              )}
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
 
       </Navbar>
 

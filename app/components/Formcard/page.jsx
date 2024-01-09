@@ -1,65 +1,33 @@
 "use client"
 import {
-    Card,
-    
-    Checkbox,
-   
-    Typography,
-  } from "@material-tailwind/react";
-  import { Input } from "@nextui-org/react";
-  import { Button } from "@nextui-org/react";
-   import { Textarea } from "@material-tailwind/react";
-  export function SimpleRegistrationForm() {
-    return (
-        <div className="lg:px-[6rem] md:px-[6rem] px-12">
-          <div className="lg:w-1/2 md:w-2/3 mx-auto ">
-            <div className="flex flex-wrap -m-2">
-              <div className="p-2 w-1/2">
-                <div className="relative">
-                 
-                  <Input type="text" variant="flat"  className="w-full    text-base  py-1 px-3 leading-8" label="Name" />
-                    
-                
-                </div>
-              </div>
-              <div className="p-2 w-1/2">
-                <div className="relative">
-                <Input type="email" variant="flat"  className="w-full    text-base  py-1 px-3 leading-8" label="Email" />
-                </div>
-              </div>
-              <div className="p-2 w-full">
-                <div className="relative flex">
-                 
-                  <Textarea
-                    id="message"
-                    name="message"
-                    className="w-full py-1 px-3 lg:h-[15rem] md:h-[15rem] h-auto leading-6 flex-wrap"
-                    style={{height: "15rem", color: "white"}}
-                    label="Message"
-                  ></Textarea>
-                </div>
-              </div>
-              <Button size="lg" variant="ghost" color="warning" className="m-auto gap-2 p-7 lg:text-lg md:text-mds text-sm mt-12 text-white">
+  Card,
+
+  Checkbox,
+
+  Typography,
+} from "@material-tailwind/react";
+import { Input } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import { Textarea } from "@material-tailwind/react";
+export function SimpleRegistrationForm() {
+  return (
+
+    <div className="container mx-auto px-4 pb-20">
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex w-full md:w-2/3 flex-wrap md:flex-nowrap gap-4 px-4">
+          <Input type="text" label="Name" className="w-full md:w-1/2" />
+          <Input type="email" label="Email" className="w-full md:w-1/2" />
+          <Button
+            size="lg"
+            variant="ghost"
+            color="warning"
+            className="m-auto py-1 p-6 lg:text-lg md:text-md text-sm text-white"
+          >
             Submit
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-4 w-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
           </Button>
-            </div>
-          </div>
-
+        </div>
       </div>
+    </div>
 
-    );
-  }
+  );
+}

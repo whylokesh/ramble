@@ -9,7 +9,7 @@ const page = () => {
   return (
     <>
       <Nav />
-  <BookingCard />
+      <BookingCard />
       <FooterWithSocialLinks />
     </>
   )
