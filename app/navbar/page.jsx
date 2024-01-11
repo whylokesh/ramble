@@ -32,7 +32,8 @@ import {
 } from "@nextui-org/react";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AcmeLogo = () => (
@@ -108,7 +109,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
       if (data.success) {
         // Registration successful, you can handle the success scenario here
         console.log("User registered successfully");
-
+        toast.success("Registration successful!");
         onClose(); // Close the modal on successful registration
       } else {
         // Handle registration failure
@@ -116,6 +117,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
       }
     } catch (error) {
       console.error("Error during registration:", error);
+      toast.error("Registration failed:", error.message);
     }
   };
 
@@ -223,12 +225,14 @@ export default function Nav() {
         setIsAdmin(data.data.admin);
         localStorage.setItem("token", data.data.token)
         console.log("User logged in successfully");
+        toast.success("Logged in Successfully")
         // onClose(); // Close the modal on successful login
       } else {
         // Handle login failure
         console.error("Login failed:", data);
       }
     } catch (error) {
+      toast.error("Login failed:", error.message);
       console.error("Error during login:", error);
     }
   };
@@ -283,7 +287,7 @@ export default function Nav() {
     if (storedToken) {
       // If the token is present, consider the user as logged in
       setIsLoggedIn(true);
-
+    
       // Optionally, you can make an API call to get user details, including admin status
       // and set the isAdmin state accordingly.
 
@@ -535,7 +539,7 @@ export default function Nav() {
         </NavbarMenu>
 
       </Navbar>
-
+      <ToastContainer />
     </div>
   );
 }

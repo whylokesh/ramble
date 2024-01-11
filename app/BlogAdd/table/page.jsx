@@ -20,6 +20,8 @@ import {
   Link,
 } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export function CardDefault() {
   const [isOpenFirstModal, setOpenFirstModal] = React.useState(false);
   const [selectedImage, setSelectedImage] = React.useState(null);
@@ -84,10 +86,13 @@ export function CardDefault() {
         closeFirstModal();
         settitle("");
         setdescripiton("");
-        toggleModal(); // Close the modal after successful submission
+        // window.location.reload();
+        // toast.success("Added Successfully")
+        // toggleModal(); // Close the modal after successful submission
       })
       .catch((error) => {
         console.error("Error posting data:", error);
+        toast.error("Error Adding Blog",error);
       });
   };
 
@@ -142,6 +147,7 @@ export function CardDefault() {
                   {/* File Input for Image Upload */}
                   <Input
                     type="file"
+                    value={null}
                     onChange={(event) => {
                       const file = event.target.files[0];
                       if (file) {
@@ -190,6 +196,7 @@ export function CardDefault() {
           )}
         </ModalContent>
       </Modal>
+      <ToastContainer />
     </div>
   );
 }

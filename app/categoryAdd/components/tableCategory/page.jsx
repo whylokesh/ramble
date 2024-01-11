@@ -19,6 +19,8 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Select, SelectSection, SelectItem, Avatar } from "@nextui-org/react";
 
 const SearchIcon = ({
@@ -107,9 +109,13 @@ export default function App() {
       .then((data) => {
         console.log("Response from server:", data);
         closeFirstModal();
+        toast.success("Category added successfully")
+        window.location.reload();
+
       })
       .catch((error) => {
         console.error("Error posting data:", error);
+        toast.error("Error Adding Category",error)
       });
   };
 
@@ -324,6 +330,7 @@ export default function App() {
               <ModalBody>
                 <Input
                   type="file"
+                  value={null}
                   onChange={(event) => {
                     const file = event.target.files[0];
                     if (file) {
@@ -395,6 +402,7 @@ export default function App() {
           )}
         </ModalContent>
       </Modal>
+      <ToastContainer />
     </div>
   );
 }
