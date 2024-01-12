@@ -9,6 +9,8 @@ import {
 } from "@material-tailwind/react";
  import "./productpage.css"
  import React from "react";
+ import { ToastContainer, toast } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 export default function HorizontalCard() {
   const [deviceSize, setDeviceSize] = React.useState('sm');
   const [serviceData, setServiceData] = React.useState({}); // Add this state for storing service data
@@ -85,6 +87,7 @@ const handleAddToCart = async () => {
 
     if (response.ok) {
       console.log("Item added to cart successfully");
+      toast.success("Added Successfully")
       // Optionally, you can show a success message or update the UI
     } else {
       console.error("Error adding item to cart");
@@ -92,6 +95,7 @@ const handleAddToCart = async () => {
     }
   } catch (error) {
     console.error("Error adding item to cart", error);
+    toast.error("Error adding Product",error)
   }
 };
 

@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { Input } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import {
   Modal,
   ModalContent,
@@ -20,8 +21,8 @@ import {
   Link,
 } from "@nextui-org/react";
 import { Image } from "@nextui-org/react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export function CardDefault() {
   const [isOpenFirstModal, setOpenFirstModal] = React.useState(false);
   const [selectedImage, setSelectedImage] = React.useState(null);
@@ -51,6 +52,7 @@ export function CardDefault() {
       reader.readAsDataURL(file);
     }
   };
+  const router = useRouter();
 
   React.useEffect(() => {
     // Make API call to fetch blogs
@@ -86,19 +88,56 @@ export function CardDefault() {
         closeFirstModal();
         settitle("");
         setdescripiton("");
-        // window.location.reload();
-        // toast.success("Added Successfully")
+        //
+        toast.success("Added Successfully");
+        window.location.reload();
         // toggleModal(); // Close the modal after successful submission
       })
       .catch((error) => {
         console.error("Error posting data:", error);
-        toast.error("Error Adding Blog",error);
+        toast.error("Error Adding Blog", error);
       });
   };
 
+  const handleView = (blogId) => {
+    router.push(`/BlogMain?id=${blogId}`);
+  };
+
+  const handleDelete = (blogId) => {
+    const token = localStorage.getItem("token");
+
+    fetch(`http://localhost:3009/admin/delete-blog?id=${blogId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Response from server:", data);
+        toast.success("Blog deleted successfully");
+        // Fetch the updated blog list after deletion
+        fetch("http://localhost:3009/all-blogs")
+          .then((response) => response.json())
+          .then((data) => {
+            setBlogs(data.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching blogs:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error deleting blog:", error);
+        toast.error("Error deleting blog", error);
+      });
+  };
   return (
     <div className="lg:px-16 md:px-12 px-8">
-      <Button color="primary" className="lg:mb-6 md:mb-6 m-auto lg:mt-10 lg:flex md:flex flex " onClick={openFirstModal}>
+      <Button
+        color="primary"
+        className="lg:mb-6 md:mb-6 m-auto lg:mt-10 lg:flex md:flex flex "
+        onClick={openFirstModal}
+      >
         {" "}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -116,21 +155,42 @@ export function CardDefault() {
         </svg>{" "}
         Add New
       </Button>
-    <div className="flex flex-wrap lg:justify-between md:justify-between justify-center items-center">  {blogs.map((blog) => (<Card className="mt-9 w-96">
-      <CardHeader color="blue-gray" className="relative h-56 mt-6">
-        <img
-          src={`http://localhost:3009${blog.image_url}`}
-          alt="card-image"
-        />
-      </CardHeader>
-      <CardBody>
-        <Typography variant="h5" color="blue-gray" className="mb-2">
-        {blog.title}
-        </Typography>
-      
-      </CardBody>
-   
-    </Card>))}</div>
+      <div className="flex flex-wrap lg:justify-between md:justify-between justify-center items-center">
+        {" "}
+        {blogs.map((blog) => (
+          <Card className="mt-9 w-96">
+            <CardHeader color="blue-gray" className="relative h-56 mt-6">
+              <img
+                src={`http://localhost:3009${blog.image_url}`}
+                alt="card-image"
+              />
+            </CardHeader>
+            <CardBody>
+              <Typography variant="h5" color="blue-gray" className="mb-2">
+                {blog.title}
+              </Typography>
+            </CardBody>
+            <CardFooter>
+              <div className="flex justify-between">
+                <Button  color="primary"
+                  onPress={() => handleView(blog.id)}>
+                  View
+                </Button>
+                <Button
+                  color="danger"
+                  onPress={() => {
+                    handleDelete(blog.id);
+                    // Close the modal after deletion
+                    closeFirstModal();
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
       <Modal
         isOpen={isOpenFirstModal}
         onOpenChange={closeFirstModal}
