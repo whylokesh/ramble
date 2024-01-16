@@ -215,14 +215,14 @@ export default function Nav() {
           password,
         }),
       });
-
+  
       const data = await response.json();
-
+  
       if (data.success) {
         // Login successful, handle success scenario
-
+  
         setIsLoggedIn(true); // Set login status to true
-        setIsAdmin(data.data.admin);
+        setIsAdmin(data.data.admin === true); // Set isAdmin based on the response
         localStorage.setItem("token", data.data.token)
         console.log("User logged in successfully");
         toast.success("Logged in Successfully")
