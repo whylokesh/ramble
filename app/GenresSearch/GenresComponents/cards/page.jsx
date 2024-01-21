@@ -55,18 +55,29 @@ const GenresCard = () => {
 
 
   React.useEffect(() => {
-    // Existing code...
-
     const urlSearchParams = new URLSearchParams(window.location.search);
+    const location = urlSearchParams.get("location");
     const stateId = urlSearchParams.get("stateId");
     const categoryId = urlSearchParams.get("categoryId");
-
-    // Make an API call to get data based on stateId and categoryId
+    const price = urlSearchParams.get("price");
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3009/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}`);
+        let apiUrl = '';
+  
+        if (location) {
+          apiUrl = `http://localhost:3009/search/search-by-location?location=${location}`;
+        } else {
+          // Check if price is present, and construct the API URL accordingly
+          if (price) {
+            apiUrl = `http://localhost:3009/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}&price=${price}`;
+          } else {
+            apiUrl = `http://localhost:3009/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}`;
+          }
+        }
+  
+        const response = await fetch(apiUrl);
         const data = await response.json();
-
+  
         if (data.success) {
           setCardData(data.data.services);
         }
@@ -74,9 +85,9 @@ const GenresCard = () => {
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchData();
-
+  
     // Existing code...
   }, []);
   const handleExploreToggle = () => {
@@ -122,10 +133,10 @@ const GenresCard = () => {
                     </Typography>
                   </div>
                 </CardBody>
-                <Divider />
+             
                 <CardFooter>
                   {/* Adjust this link according to your data */}
-                  <Button onClick={() => {
+                  <Button className="flex m-auto" color="warning" onClick={() => {
                     route.push(`/ProductMain?serviceID=${service.id}`)
                   }}>
                     Check Out
