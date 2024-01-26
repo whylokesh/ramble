@@ -3,6 +3,7 @@ import React from "react";
 import Genres from "../generesCard/page";
 import { CardBody, CardFooter, Typography } from "@material-tailwind/react";
 import { Button, Card } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 const GenresMain = () => {
   
   const [deviceSize, setDeviceSize] = React.useState('sm');
@@ -29,6 +30,9 @@ const GenresMain = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+
+const route = useRouter();
   return (
     <div className="lg:p-[6rem] md:p-[3rem] p-8 mb-0 overflow-x-hidden">
             <Card
@@ -53,26 +57,10 @@ const GenresMain = () => {
     
     </Card>
     <Genres />
-    <div className="pt-0 flex justify-center items-center">
+    <div className="pt-0 flex justify-center items-center"   >
        
-          <Button size={deviceSize} variant="ghost" color="warning" className="m-auto gap-2 p-7 lg:text-lg md:text-mds text-sm mt-12 text-white">
-            Explore More
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-4 w-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
-          </Button>
-      
+        <Button color="warning" className="lg:mt-14 md:mt-10 mt-8 " size="lg" onClick={()=>{route.push("/GenresSearch?categoryId=2&stateId=")
+        }}>Explore More</Button>
       </div>
        
     </div>
