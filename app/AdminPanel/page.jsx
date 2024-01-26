@@ -11,8 +11,7 @@ const page = () => {
     <div>
         <NavbarAdmin/>
         <DataCard />
-        <CircularData />
-        
+        <CircularData />       
         <FooterWithSocialLinks />
     </div>
   )

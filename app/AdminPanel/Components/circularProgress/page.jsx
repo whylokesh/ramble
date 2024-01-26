@@ -38,8 +38,8 @@ const statusColorMap = {
 export default function CircularData() {
   const [tableData, setTableData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-// New state for order details
-const [orderDetails, setOrderDetails] = React.useState(null);
+  // New state for order details
+  const [orderDetails, setOrderDetails] = React.useState(null);
   const [isOpenFirstModal, setOpenFirstModal] = React.useState(false);
   const openFirstModal = () => setOpenFirstModal(true);
   const closeFirstModal = () => setOpenFirstModal(false);
@@ -118,7 +118,7 @@ const [orderDetails, setOrderDetails] = React.useState(null);
           ...prevOrderDetails,
           delivered: !currentDeliveredStatus,
         }));
-        
+
         // Update the delivery status in the tableData state
         setTableData((prevTableData) =>
           prevTableData.map((order) =>
@@ -135,7 +135,7 @@ const [orderDetails, setOrderDetails] = React.useState(null);
     }
   };
 
-  
+
   const columns = [
     { name: "Order ID", uid: "orderId" },
     { name: "Total Amount", uid: "totalAmount" },
@@ -172,7 +172,7 @@ const [orderDetails, setOrderDetails] = React.useState(null);
       case "eyeIcon":
         return (
           <Tooltip content="Details">
-            <span className="text-lg text-default-400 cursor-pointer active:opacity-50"  onClick={() => handleEyeIconClick(item.orderId)}>
+            <span className="text-lg text-default-400 cursor-pointer active:opacity-50" onClick={() => handleEyeIconClick(item.orderId)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -196,16 +196,16 @@ const [orderDetails, setOrderDetails] = React.useState(null);
           </Tooltip>
         );
 
-        case "delivered":
-          return (
-            <Button
-              color={item.delivered ? "success" : "danger"}
-              
-              onClick={() => handleDeliveryStatusClick(item.orderId, item.delivered)}
-            >
-              {item.delivered ? "Delivered" : "Undelivered"}
-            </Button>
-          );
+      case "delivered":
+        return (
+          <Button
+            color={item.delivered ? "success" : "danger"}
+
+            onClick={() => handleDeliveryStatusClick(item.orderId, item.delivered)}
+          >
+            {item.delivered ? "Delivered" : "Undelivered"}
+          </Button>
+        );
       default:
         return cellValue;
     }
@@ -239,7 +239,7 @@ const [orderDetails, setOrderDetails] = React.useState(null);
           </Table>
         </div>
       )}
-         <Modal size="full" isOpen={isOpenFirstModal} onOpenChange={closeFirstModal}>
+      <Modal size="full" isOpen={isOpenFirstModal} onOpenChange={closeFirstModal}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -248,22 +248,35 @@ const [orderDetails, setOrderDetails] = React.useState(null);
                 {orderDetails && (
                   <>
                     <div>
-                      <strong>Order ID:</strong> {orderDetails.id}
+                      <div>
+                        <strong>Order ID:</strong> {orderDetails.id}
+                      </div>
+                      <div>
+                        <strong>Total Amount:</strong> {orderDetails.total_amount}
+                      </div>
+                      <div>
+                        <strong>Delivered:</strong> {orderDetails.delivered ? "Yes" : "No"}
+                      </div>
                     </div>
+                    {/* <hr /> */}
                     <div>
-                      <strong>Total Amount:</strong> {orderDetails.total_amount}
+                      <div>
+                        <strong>User ID:</strong> {orderDetails.user_id}
+                      </div>
+                      <div>
+                        <strong>Username:</strong> {orderDetails.User.full_name}
+                      </div>
+                      <div>
+                        <strong>User email:</strong> {orderDetails.User.email}
+                      </div>
                     </div>
-                    <div>
-                      <strong>User ID:</strong> {orderDetails.user_id}
-                    </div>
-                    <div>
-                      <strong>Delivered:</strong> {orderDetails.delivered ? "Yes" : "No"}
-                    </div>
+                    <hr />
                     {/* Display OrderItems */}
                     <div>
-                      <strong>Order Items:</strong>
+                      <br /> <strong>Order Items:</strong> <br />
                       {orderDetails.OrderItems.map((orderItem) => (
-                        <div key={orderItem.id}>
+                        <div key={orderItem.id} className="flex flex-col gap-1">
+                          <br />
                           <div>
                             <strong>Service ID:</strong> {orderItem.service_id}
                           </div>
@@ -281,7 +294,10 @@ const [orderDetails, setOrderDetails] = React.useState(null);
                             <strong>Service Description:</strong> {orderItem.Service.description}
                           </div>
                           {/* Add other service details as needed */}
+                          <br />
+                          <hr />
                         </div>
+
                       ))}
                     </div>
                   </>

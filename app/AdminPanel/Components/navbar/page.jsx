@@ -16,7 +16,9 @@ export default function NavbarAdmin() {
     <Navbar>
       <NavbarBrand>
         <AcmeLogo />
-        <p className="font-bold text-inherit">ACME</p>
+          <Link href="/">
+            <a className="font-bold text-inherit" style={{color: "white"}}>Ramble Group</a>
+          </Link>
       </NavbarBrand>
 
       <NavbarContent className="flex gap-4" justify="center">
