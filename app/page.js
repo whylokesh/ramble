@@ -1,4 +1,3 @@
-import React from "react";
 import Nav from "./navbar/page";
 import CarouselWithContent from "./components/videocarousel/page";
 import InputTrio from "./components/inputtrio/page";
@@ -14,6 +13,7 @@ import Contact from "./components/Form/page";
 import { FooterWithSocialLinks } from "./components/footer/page";
 
 const page = () => {
+
   return (
     <div>
       <Nav />
@@ -27,7 +27,7 @@ const page = () => {
       <WorkWus />
       <Blogmain />
       <Contact />
-     <FooterWithSocialLinks />
+      <FooterWithSocialLinks />
     </div>
   );
 };

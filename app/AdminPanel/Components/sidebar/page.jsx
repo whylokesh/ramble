@@ -13,20 +13,20 @@ import {
 } from "@material-tailwind/react";
 import { useRouter } from 'next/navigation'
 export function DrawerWithNavigation() {
-    const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(true);
   const closeDrawer = () => setOpen(false);
- 
+
   const route = useRouter();
-  const dashboard =()=>{
+  const dashboard = () => {
     route.push("/AdminPanel")
   }
   return (
     <React.Fragment>
-   
+
       <Drawer open={open} onClose={closeDrawer} className="bg-black">
         <div className="mb-2 flex items-center justify-between p-4">
           <Typography variant="h5" color="White">
-           Ramble Agency
+            Ramble Agency
           </Typography>
           <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
             <svg
@@ -63,7 +63,7 @@ export function DrawerWithNavigation() {
             </ListItemPrefix>
             Dashboard
           </ListItem>
-          <ListItem className="text-white" onClick={()=>{
+          <ListItem className="text-white" onClick={() => {
             route.push("/categoryAdd")
           }}>
             <ListItemPrefix>
@@ -90,7 +90,7 @@ export function DrawerWithNavigation() {
               />
             </ListItemSuffix>
           </ListItem>
-          <ListItem className="text-white" onClick={()=>{
+          <ListItem className="text-white" onClick={() => {
             route.push("/Services")
           }}>
             <ListItemPrefix>
@@ -109,19 +109,32 @@ export function DrawerWithNavigation() {
             </ListItemPrefix>
             Services
           </ListItem>
-          <ListItem className="text-white" onClick={()=>{
+          <ListItem className="text-white" onClick={() => {
             route.push("/BlogAdd")
           }}>
             <ListItemPrefix>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
-</svg>
-
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path fill-rule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clip-rule="evenodd" />
+                <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />
+              </svg>
             </ListItemPrefix>
-           Blogs
+            Blogs
           </ListItem>
+          <ListItem className="text-white" onClick={() => {
+            route.push("/BlogTable")
+          }}>
+
+            <ListItemPrefix>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+                <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+              </svg>
+            </ListItemPrefix>
+            Newsletter Details
+          </ListItem>
+
           <ListItem className="text-white">
-        
+
             <ListItemPrefix>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -138,9 +151,9 @@ export function DrawerWithNavigation() {
             </ListItemPrefix>
             Log Out
           </ListItem>
-        
+
         </List>
-      
+
       </Drawer>
     </React.Fragment>
   );

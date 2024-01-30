@@ -79,7 +79,7 @@ const TimelineWithIcon = () => {
       >
         <CardBody className="flex flex-col justify-center items-center overflow-y-hidden">
           <Typography
-          
+
             variant="h3"
             color="blue-gray"
             className="mb-2 lg:mt-0 md:mt-0 mt-12  text-3xl md:text-4xl lg:text-6xl bg-gradient-to-r from-[#F5A524] to-[#FF705B]  bg-clip-text text-transparent "
@@ -99,7 +99,7 @@ const TimelineWithIcon = () => {
           isFirstStep={(value) => setIsFirstStep(value)}
         >
           <Step onClick={() => setActiveStep(0)}>
-            <UserIcon className="h-5 w-5"  onClick={handleNext}/>
+            <UserIcon className="h-5 w-5" onClick={handleNext} />
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
@@ -148,7 +148,7 @@ const TimelineWithIcon = () => {
             </div>
           </Step>
           <Step onClick={() => setActiveStep(2)}>
-            <CogIcon className="h-5 w-5" onClick={handleNext}/>
+            <CogIcon className="h-5 w-5" onClick={handleNext} />
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
@@ -165,7 +165,7 @@ const TimelineWithIcon = () => {
             </div>
           </Step>
           <Step onClick={() => setActiveStep(3)}>
-            <BuildingLibraryIcon className="h-5 w-5" onClick={handleNext}/>
+            <BuildingLibraryIcon className="h-5 w-5" onClick={handleNext} />
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
@@ -184,17 +184,17 @@ const TimelineWithIcon = () => {
         </Stepper>
         <div className="mt-32 flex justify-between items-center flex-wrap">
           <Image
-           className="w-4/5 h-full lg:m-0 md:m-auto m-auto"
+            className="w-4/5 h-full lg:m-0 md:m-auto m-auto"
             alt="NextUI hero Image"
             src={imageSrc}
           />
-             <Typography
-                  variant="lead"
-                  color="white"
-                  className="mb-12 text-sm md:text-sm lg:text-xl lg:mt-0 md:mt-10 mt-8 lg:w-2/5 md:w-[29rem] overflow-y-hidden w-0 lg:h-auto md:h-auto h-0 lg:visible md:visible invisible"
-                >
-                 {stepTexts[activeStep]}
-                </Typography>
+          <Typography
+            variant="lead"
+            color="white"
+            className="mb-12 text-sm md:text-sm lg:text-xl lg:mt-0 md:mt-10 mt-8 lg:w-2/5 md:w-[29rem] overflow-y-hidden w-0 lg:h-auto md:h-auto h-0 lg:visible md:visible invisible"
+          >
+            {stepTexts[activeStep]}
+          </Typography>
         </div>
       </div>
     </>

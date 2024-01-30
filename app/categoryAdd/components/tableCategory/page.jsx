@@ -219,7 +219,7 @@ export default function App() {
 
   return (
     <div className="lg:px-16 md:px-12 px-8">
-      <h1 className="font-bold bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent text-4xl px-8 mt-6 flex justify-center items-center mb-8">
+      <h1 className="font-bold bg-gradient-to-r py-2 from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent text-3xl md:text-4xl lg:text-6xl px-8 mt-6 flex justify-center items-center mb-8">
         Add Categories
       </h1>
       <div className="flex justify-between">

@@ -15,7 +15,7 @@ export default function NavbarAdmin() {
     <div className="navbar px-7">
     <Navbar>
       <NavbarBrand>
-        <AcmeLogo />
+          <img src="favicon.ico" alt="Ramble group" className="m-1" />
           <Link href="/">
             <a className="font-bold text-inherit" style={{color: "white"}}>Ramble Group</a>
           </Link>

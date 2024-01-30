@@ -28,7 +28,7 @@ const Mapjsx = () => {
 
   return (
     <>
-      <div className="px-6   flex flex-wrap justify-between items-center overflow-x-hidden">
+      <div className="px-6 flex flex-wrap justify-between items-center overflow-x-hidden">
         <svg
           baseprofile="tiny"
           fill="#F5A524"

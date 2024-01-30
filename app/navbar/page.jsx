@@ -341,7 +341,8 @@ export default function Nav() {
 
         <NavbarContent justify="start" className="max-w-full ">
           <NavbarBrand className="mr-4 ">
-            <AcmeLogo />
+            {/* <AcmeLogo /> */}
+            <img src="favicon.ico" alt="Ramble group" className="m-1" />
             <Link href="/">
               <p className="hidden sm:block font-bold text-inherit text-xl" >
                 Ramble Agency

@@ -1,9 +1,9 @@
 "use client"
 import React from "react";
-import {Card, CardFooter, Image, Button} from "@nextui-org/react";
+import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import { Typography } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
-const ImagesCard =()=> {
+const ImagesCard = () => {
   const [blogImages, setBlogImages] = React.useState([]);
   const route = useRouter();
   React.useEffect(() => {
@@ -20,7 +20,7 @@ const ImagesCard =()=> {
       .catch((error) => console.error("API call error:", error));
   }, []);
   const handleImageClick = (id) => {
- 
+
     // Navigate to "/BlogMain?id=" with the clicked image id
     route.push(`/BlogMain?id=${id}`);
   };
@@ -30,7 +30,7 @@ const ImagesCard =()=> {
         {blogImages.map((blog) => (
           <Image
             key={blog.id}
-            className="lg:max-w-[18.5rem] md:max-w-[15rem] max-w-[9rem] h-28 cursor-pointer"
+            className="lg:max-w-[18.5rem] md:max-w-[15rem] max-w-[9rem] h-36 cursor-pointer"
             alt={`Blog Image ${blog.id}`}
             src={`http://localhost:3009${blog.image_url}`}
             onClick={() => handleImageClick(blog.id)}
