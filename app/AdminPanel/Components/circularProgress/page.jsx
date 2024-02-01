@@ -127,6 +127,7 @@ export default function CircularData() {
               : order
           )
         );
+        window.location.reload();
       } else {
         console.error("Failed to update delivery status");
       }

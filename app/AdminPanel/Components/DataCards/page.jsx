@@ -59,7 +59,7 @@ export default function DataCard() {
                     }}
                     variant="bordered"
                   >
-                    {statisticsData.numberOfUsers} Total Users
+                    {statisticsData.numberOfUsers} Users have ordered
                   </Chip>
                 </CardFooter>
               </Card>
@@ -85,7 +85,7 @@ export default function DataCard() {
                     }}
                     variant="bordered"
                   >
-                    {statisticsData.numberOfDeliveredOrders} Orders Delivered
+                    {statisticsData.numberOfDeliveredOrders} Orders have been Delivered
                   </Chip>
                 </CardFooter>
               </Card>

@@ -13,7 +13,7 @@ const Filters = () => {
   const [isOpenThirdModal, setOpenThirdModal] = React.useState(false);
   const [selected, setSelected] = React.useState(["buenos-aires", "sydney"]);
   const [locationValue, setLocationValue] = React.useState("");
-  const [priceRange, setPriceRange] = React.useState([]); // Set initial range based on your needs
+  const [priceRange, setPriceRange] = React.useState("40000"); // Set initial range based on your needs
 
   const openSecondModal = () => setOpenSecondModal(true);
   const closeSecondModal = () => setOpenSecondModal(false);
@@ -72,7 +72,7 @@ const Filters = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const categoryId = urlSearchParams.get("categoryId");
     const stateId = urlSearchParams.get("stateId");
-    const selectedValue = priceRange[1]; // Assuming you want to use the maximum value
+    const selectedValue = priceRange; // Assuming you want to use the maximum value
     router.push(`/GenresSearch?categoryId=${categoryId}&stateId=${stateId}&price=${selectedValue}`);
     setTimeout(() => {
       window.location.reload();
@@ -162,7 +162,7 @@ const Filters = () => {
                   defaultValue={40000} // Assuming 40,000 INR as the default value, adjust as needed
                   maxValue={300000} // Set the maximum value to 3 lac INR
                   className="max-w-md"
-                  onChange={(value) => setPriceRange([value, value])} // Set the price range with the selected value
+                  onChange={(value) => setPriceRange(value)} // Set the price range with the selected value
                 />
               </ModalBody>
               <ModalFooter>

@@ -121,7 +121,7 @@ export function DrawerWithNavigation() {
             Blogs
           </ListItem>
           <ListItem className="text-white" onClick={() => {
-            route.push("/BlogTable")
+            route.push("/NewsletterDetails")
           }}>
 
             <ListItemPrefix>
