@@ -19,17 +19,17 @@ import {
 } from "@nextui-org/react";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  useDisclosure,
-  Checkbox,
-  Input,
-} from "@nextui-org/react";
+  import {
+    Modal,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Button,
+    useDisclosure,
+    Checkbox,
+    Input,
+  } from "@nextui-org/react";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify';
