@@ -73,7 +73,7 @@
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [name, setName] = React.useState("");
     const [descripiton, setdescripiton] = React.useState("");
-
+    const [imageUrl, setImageUrl] = React.useState("");
     const [CategoryName, setCategoryName] = React.useState("");
     const [State, setState] = React.useState("");
     const [Location, setLocation] = React.useState("");
@@ -106,10 +106,26 @@
       formData.append("totalArea", TotalArea);
       formData.append("size", size);
 
+      const Data = JSON.stringify({
+        imageUrl: imageUrl,
+        name: name,
+        descripiton: descripiton,
+        price: Price,
+        location: Location,
+        categoryName: CategoryName,
+        stateName: State,
+        code: code,
+        media: Media,
+        ftf: FTF,
+        totalArea: TotalArea,
+        size: size
+      })
+
       fetch("http://localhost:3009/admin/add-service", {
         method: "POST",
-        body: formData,
+        body: Data,
         headers: {
+          "Content-Type": "application/json",
           Authorization: token, // Include the token in the headers
           // Add any other required headers
         },
@@ -119,7 +135,7 @@
           console.log("Response from server:", data);
           toast.success("Added Successfully")
           closeFirstModal();
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((error) => {
           console.error("Error posting data:", error);
@@ -363,25 +379,12 @@
                   Add category
                 </ModalHeader>
                 <ModalBody>
-                  <Input
-                    type="file"
-                    value={null}
-                    onChange={(event) => {
-                      const file = event.target.files[0];
-                      if (file) {
-                        setSelectedFile(file);
-                      }
-                    }}
-                    className="mb-4"
-                  />
-                  {/* Image preview */}
-                  {selectedFile && (
-                    <img
-                      src={URL.createObjectURL(selectedFile)}
-                      alt="Selected Preview"
-                      className="w-3/5 mb-4 flex justify-center items-center m-auto"
-                    />
-                  )}
+                <Input
+                  label="Image URL"
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                  className=""
+                />
                   <Input
                     label="Service Name"
                     value={name}

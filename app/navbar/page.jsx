@@ -226,6 +226,9 @@ export default function Nav() {
         localStorage.setItem("token", data.data.token)
         console.log("User logged in successfully");
         toast.success("Logged in Successfully")
+        if (data.data.admin === true) {
+          localStorage.setItem("isAdmin", "true");
+      }
         // onClose(); // Close the modal on successful login
       } else {
         // Handle login failure
@@ -281,18 +284,17 @@ export default function Nav() {
 
 
   React.useEffect(() => {
+    const AdminValue = localStorage.getItem("isAdmin")
     // Check for the presence of the token during page load
     const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
       // If the token is present, consider the user as logged in
       setIsLoggedIn(true);
-    
-      // Optionally, you can make an API call to get user details, including admin status
-      // and set the isAdmin state accordingly.
-
-      // For now, let's assume the user is an admin.
-      setIsAdmin(true);
+    }
+    const IsAdmin = localStorage.getItem("isAdmin") === "true";
+    if (IsAdmin) {
+        setIsAdmin(true);
     }
   }, []);
 

@@ -137,7 +137,7 @@ const GenresCard = () => {
                 <CardFooter>
                   {/* Adjust this link according to your data */}
                   <Button className="flex m-auto" color="warning" onClick={() => {
-                    route.push(`/ProductMain?serviceID=${service.id}`)
+                  route.push(`/ProductMain/${service.id}`)
                   }}>
                     Check Out
                   </Button>

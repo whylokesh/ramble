@@ -41,7 +41,7 @@ const Genres = () => {
           <Card
             key={category.id}
             isFooterBlurred
-            className="lg:w-[45%] md:w-[45%] w-full h-[300px] lg:mt-6 md:mt-0 mt-7"
+            className="lg:w-[45%] md:w-[45%] w-full h-[300px] lg:mt-6 md:mt-5 mt-7"
           >
             <CardHeader className="absolute z-10 top-1 flex-col items-start">
               <p className="text-tiny text-white/60 uppercase font-bold">
