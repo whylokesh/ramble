@@ -146,8 +146,7 @@ const GenresCard = () => {
             ))}
           </div>
 
-          {/* HOME PAGE CARD */}
-          {/* <CardDefault /> */}
+         
 
           <div className="pt-0 flex justify-center items-center">
             <Button

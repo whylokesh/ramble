@@ -1,7 +1,7 @@
 "use client"
 import { Typography } from "@material-tailwind/react";
 import { Button, Card, CardBody } from "@nextui-org/react";
-import WusCard from "../workwithusCard/page";
+import WusCard from "../workwithusCard/CardForWorkWithUs";
 
 
 

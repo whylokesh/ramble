@@ -2,7 +2,7 @@
 import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
 import {AcmeLogo} from "./AcmeLogo.jsx";
-import { DrawerWithNavigation } from "../sidebar/page.jsx";
+import { DrawerWithNavigation } from "../sidebar/Drawer.jsx";
 
 export default function NavbarAdmin() {
   const [isSidebarOpen, setSidebarOpen] = React.useState(true);

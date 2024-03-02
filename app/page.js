@@ -10,7 +10,7 @@ import Testimonial from "./components/testimonials/page";
 import WorkWus from "./components/workwithus/page";
 import Blogmain from "./components/Blogmain/page";
 import Contact from "./components/Form/page";
-import { FooterWithSocialLinks } from "./components/footer/page";
+import { FooterWithSocialLinks } from "./components/footer/FooterForMain";
 
 const page = () => {
 

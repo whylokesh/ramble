@@ -1,6 +1,6 @@
 import React from "react";
 import HorizontalCard from "../ProductMainComponents/MainCardDisplay/page";
-import { FooterWithSocialLinks } from "../ProductMainComponents/productFooter/page";
+import { FooterWithSocialLinks } from "../ProductMainComponents/productFooter/FooterforProduct";
 import Nav from "@/app/navbar/page";
 import Contact from "@/app/components/Form/page";
 import Blogmain from "@/app/components/Blogmain/page";

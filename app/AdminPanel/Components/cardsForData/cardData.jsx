@@ -3,7 +3,7 @@ import React from "react";
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import { CircularProgress, CardFooter, Chip } from "@nextui-org/react";
 
-export default function DataCard() {
+const CardData = () => {
   const [statisticsData, setStatisticsData] = React.useState(null);
   React.useEffect(() => {
     const fetchData = async () => {
@@ -158,3 +158,5 @@ export default function DataCard() {
     </>
   );
 }
+
+export default CardData;

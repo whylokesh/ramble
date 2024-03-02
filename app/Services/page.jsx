@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarAdmin from "../AdminPanel/Components/navbar/page";
 import TableCategory from "./components/tableCategory/page";
-import { FooterWithSocialLinks } from "../components/footer/page";
+import { FooterWithSocialLinks } from "../components/footer/FooterForMain";
 
 const page = () => {
   return (

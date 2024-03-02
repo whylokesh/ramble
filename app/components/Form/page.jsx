@@ -2,7 +2,7 @@
 import { Typography } from "@material-tailwind/react";
 import { Button, Card, CardBody } from "@nextui-org/react";
 import ImagesCard from "../BlogImageCard/page";
-import { SimpleRegistrationForm } from "../Formcard/page";
+import { SimpleRegistrationForm } from "../Formcard/CardForForm";
 
 const Contact = () => {
   return (

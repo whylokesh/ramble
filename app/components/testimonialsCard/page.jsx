@@ -8,7 +8,7 @@ import {
   Avatar,
   Button,
 } from "@nextui-org/react";
-import { HeartIcon } from "../hearticon/page";
+import { HeartIcon } from "../hearticon/IconFOrHeart";
 
 const Testimonialscard = () => {
   const [isFollowed, setIsFollowed] = React.useState(false);

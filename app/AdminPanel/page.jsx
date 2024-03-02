@@ -1,11 +1,12 @@
 "use client";
 import React from 'react';
 import NavbarAdmin from './Components/navbar/page';
-import DataCard from './Components/DataCards/page';
 import CircularData from './Components/circularProgress/page';
-import { FooterWithSocialLinks } from '../GenresSearch/GenresComponents/GenersFooter/page';
-import { EcommerceCard } from './Components/Disclaimer/page';
+import { FooterWithSocialLinks } from '../GenresSearch/GenresComponents/GenersFooter/FooterForGenres';
 import { useRouter } from 'next/navigation';
+import CardData from './Components/cardsForData/cardData';
+
+
 
 const Page = () => {
     const router = useRouter();
@@ -20,7 +21,7 @@ const Page = () => {
     return (
         <div>
             <NavbarAdmin/>
-            <DataCard />
+            <CardData />
             <CircularData />       
             <FooterWithSocialLinks />
         </div>

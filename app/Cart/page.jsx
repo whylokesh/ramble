@@ -1,8 +1,8 @@
 import React from 'react'
 import Nav from '../navbar/page'
 
-import { FooterWithSocialLinks } from '../GenresSearch/GenresComponents/GenersFooter/page'
-import { BookingCard } from './components/cartcards/page'
+import { FooterWithSocialLinks } from '../GenresSearch/GenresComponents/GenersFooter/FooterForGenres'
+import { BookingCard } from './components/cartcards/CardsForCart'
 
 
 const page = () => {
