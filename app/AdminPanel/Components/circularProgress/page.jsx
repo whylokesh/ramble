@@ -27,7 +27,7 @@ import {
 } from "@nextui-org/react";
 import { EditIcon } from "./EditIcon";
 import { DeleteIcon } from "./DeleteIcon";
-import { EyeIcon } from "./EyeIcon";
+import { EyeIcon } from "./Eyeicon";
 import { Switch } from "@nextui-org/react";
 const statusColorMap = {
   active: "success",
