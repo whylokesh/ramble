@@ -113,7 +113,7 @@ const GenresCard = () => {
                     alt="service image"
                     isZoomed
                     className="object-cove h-44"
-                    src={`http://localhost:3009${service.image_url}`}
+                    src={`${service.image_url}`}
                     width={350}
                   />
                 </CardHeader>

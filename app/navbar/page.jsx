@@ -178,6 +178,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
 };
 
 export default function Nav() {
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   // const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [isOpenFirstModal, setOpenFirstModal] = React.useState(false);
@@ -319,7 +320,7 @@ export default function Nav() {
     if (selectedKey !== null && searchResults.length > 0) {
       const selectedService = searchResults.find((item) => item.name === selectedKey);
       if (selectedService) {
-        route.push(`/ProductMain?serviceID=${selectedService.id}`);
+        route.push(`/ProductMain/${selectedService.id}`);
       }
     }
     setTimeout(() => {

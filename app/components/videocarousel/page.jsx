@@ -75,15 +75,14 @@ const CarouselWithContent = () => {
                   color="white"
                   className="mb-4 text-lg md:text-xl lg:text-4xl"
                 >
-                  The Beauty of Nature
+                  Don't Just Advertise, <br></br>Make a Ramble
                 </Typography>
                 <Typography
                   variant="lead"
                   color="white"
                   className="mb-12 opacity-80 text-sm md:text-sm lg:text-base"
                 >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Exercitationem excepturi recusandae voluptatibus deserunt
+                  Go beyond the scroll. We connect you with a network of advertising opportunities to create impactful campaigns across India. 
                 </Typography>
                 <div className="flex gap-2">
                   <Button
@@ -125,7 +124,7 @@ const CarouselWithContent = () => {
                         <SelectItem key={user.id} textValue={user.name}>
                           <div className="flex gap-2 items-center">
                          
-                            <Avatar alt={user.name} className="flex-shrink-0" size="sm" src={`http://localhost:3009${user.image_url}`} />
+                            <Avatar alt={user.name} className="flex-shrink-0" size="sm" src={`${user.image_url}`} />
                             <div className="flex flex-col">
                               <span className="text-small">{user.name}</span>
                             </div>
@@ -147,7 +146,7 @@ const CarouselWithContent = () => {
                           <Image
                               alt={user.name}
                               className="w-6 h-6"
-                              src={`http://localhost:3009${user.image_url}`}
+                              src={`${user.image_url}`}
                             />
                             <div className="flex flex-col">
                               <span className="text-small">{user.name}</span>

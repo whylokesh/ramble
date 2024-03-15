@@ -285,7 +285,7 @@ export default function App() {
               <TableCell>{item.id}</TableCell>
               <TableCell>
                 <img
-                  src={`http://localhost:3009${item.image_url}`}
+                  src={`${item.image_url}`}
                   alt={`${item.name}'s Avatar`}
                   className="w-8 h-8 rounded-full"
                 />

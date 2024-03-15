@@ -32,7 +32,7 @@ const ImagesCard =()=> {
             key={blog.id}
             className="lg:max-w-[18.5rem] md:max-w-[15rem] max-w-[9rem] h-28 cursor-pointer"
             alt={`Blog Image ${blog.id}`}
-            src={`http://localhost:3009${blog.image_url}`}
+            src={`${blog.image_url}`}
             onClick={() => handleImageClick(blog.id)}
           />
         ))}

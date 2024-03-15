@@ -173,7 +173,7 @@ export function CardDefault() {
           <Card className="mt-9 w-96">
             <CardHeader color="blue-gray" className="relative h-56 mt-6">
               <img
-                src={`http://localhost:3009${blog.image_url}`}
+                src={`${blog.image_url}`}
                 alt="card-image"
               />
             </CardHeader>

@@ -25,15 +25,7 @@ export async function generateMetadata({ params }) {
                 description: service.description,
             };
 
-        } else {
-
-            return {
-                title: "service.name",
-                description: "service.description",
-            };
-
-            throw new Error("Failed to fetch service details");
-        }
+        } 
     } catch (error) {
         console.error("Error fetching service details:", error);
     }

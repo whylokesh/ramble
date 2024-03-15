@@ -81,7 +81,7 @@ const InputTrio = () => {
           <SelectItem key={user.id} textValue={user.name}>
             <div className="flex gap-2 items-center">
            
-              <Avatar alt={user.name} className="flex-shrink-0" size="sm" src={`http://localhost:3009${user.image_url}`} />
+              <Avatar alt={user.name} className="flex-shrink-0" size="sm" src={`${user.image_url}`} />
               <div className="flex flex-col">
                 <span className="text-small">{user.name}</span>
               </div>

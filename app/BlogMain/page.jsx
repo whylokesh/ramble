@@ -50,7 +50,7 @@ const  CreateAndEarnInfoCard = () => {
         <Card className="mt-10 w-full h-full bg-black">
           <CardHeader color="blue-gray" className="relative h-fit">
             <img
-              src={`http://localhost:3009${blogData?.image_url}`}
+              src={`${blogData?.image_url}`}
               alt={blogData?.title}
               className="h-full w-full rounded-lg"
             />

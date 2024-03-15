@@ -11,7 +11,10 @@ import "./productpage.css"
 import React from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-export default function HorizontalCard() {
+
+
+export default function HorizontalCard({serviceID}) {
+
   const [deviceSize, setDeviceSize] = React.useState('sm');
   const [serviceData, setServiceData] = React.useState({}); // Add this state for storing service data
   const [quantity, setQuantity] = React.useState(1);
@@ -46,8 +49,6 @@ export default function HorizontalCard() {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const serviceID = urlSearchParams.get("serviceID");
 
         if (serviceID) {
           const response = await fetch(
@@ -110,7 +111,7 @@ export default function HorizontalCard() {
               <img
                 alt="ecommerce"
                 className="lg:w-2/5 w-full  object-cover object-center rounded "
-                src={`http://localhost:3009${serviceData.image_url}`}
+                src={`${serviceData.image_url}`}
               />
               <div className="lg:w-2/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 border-orange-500">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest mb-5">{serviceData.Category && serviceData.Category.name}</h2>

@@ -337,28 +337,26 @@ const Mapjsx = () => {
           </g>
         </svg>
         <div className="w-2/5">
+            <Typography
+            variant="lead"
+            color="white"
+            className=" mb-8 text-sm md:text-sm lg:text-3xl font-bold  bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent"
+          >
+            Click On Your state to See Our Services
+          </Typography>
+
           <Typography
             variant="lead"
             color="white"
             className="text-sm md:text-sm lg:text-base  lg:h-auto md:h-auto h-0 overflow-x-hidden lg:visible md:visible invisible"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem excepturi recusandae voluptatibus deserunt Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
-            excepturi recusandae voluptatibus deserunt Lorem ipsum dolor sit{" "}
-            <br />
-            amet consectetur adipisicing elit. Exercitationem excepturi
-            recusandae voluptatibus deserunt Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Exercitationem excepturi recusandae
-            voluptatibus deserunt
+            Explore a World of Advertising Possibilities Across India<br></br>
+
+Ramble.group is your one-stop shop for crafting impactful marketing campaigns throughout India.  Navigate our interactive map to discover a wide range of advertising opportunities within each state.  With a simple click, you'll unlock a wealth of media options tailored to your specific location and target audience.
+
+
           </Typography>
-          <Typography
-            variant="lead"
-            color="white"
-            className=" mt-8 text-sm md:text-sm lg:text-3xl font-bold  bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent"
-          >
-            Click On Your state to See Our Services
-          </Typography>
+        
         </div>
       </div>
     </>

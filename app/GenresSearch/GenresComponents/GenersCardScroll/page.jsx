@@ -49,7 +49,7 @@ const GeneresCardScrolling = () => {
             key={category.id}
             className="lg:max-w-[18.5rem] md:max-w-[15rem] max-w-[9rem] bg-gray-900 lg:h-56 md:h-48 h-32~ cursor-pointer"
             alt={category.name}
-            src={`http://localhost:3009${category.image_url}`}
+            src={`${category.image_url}`}
             isBlurred // Add this if needed
             onClick={() => handleCategoryClick(category.id)}
           />
