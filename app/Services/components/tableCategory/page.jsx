@@ -130,17 +130,20 @@
           // Add any other required headers
         },
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Response from server:", data);
-          toast.success("Added Successfully")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Response from server:", data);
+        if (!data.success) {
+          toast.error("Failed to add service");
+        } else {
+          toast.success("Service added successfully");
           closeFirstModal();
-          // window.location.reload();
-        })
-        .catch((error) => {
-          console.error("Error posting data:", error);
-          toast.error("Error adding Service",error)
-        });
+        }
+      })
+      .catch((error) => {
+        console.error("Error posting data:", error);
+        toast.error("Error adding service", error);
+      });
     };
 
     React.useEffect(() => {

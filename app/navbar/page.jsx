@@ -233,6 +233,7 @@ export default function Nav() {
         // onClose(); // Close the modal on successful login
       } else {
         // Handle login failure
+        toast.error("Logged in failed")
         console.error("Login failed:", data);
       }
     } catch (error) {
@@ -332,7 +333,7 @@ export default function Nav() {
 
 
   return (
-    <div className="navbar px-7">
+    <div className="navbar px-7 overflow-x-hidden">
       <Navbar
         isBordered
         isMenuOpen={isMenuOpen}
