@@ -13,7 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function HorizontalCard({serviceID}) {
+export default function HorizontalCard({ serviceID }) {
 
   const [deviceSize, setDeviceSize] = React.useState('sm');
   const [serviceData, setServiceData] = React.useState({}); // Add this state for storing service data
@@ -177,16 +177,16 @@ export default function HorizontalCard({serviceID}) {
                   </div>
 
                 </div>
-                <p className="leading-relaxed text-xs md:text-sm lg:text-base mt-9">{serviceData.description}</p>
-                <div className="flex">
+                {/* <p className="leading-relaxed text-xs md:text-sm lg:text-base mt-9">{serviceData.description}</p> */}
+                <div className="flex justify-evenly items-center">
                   <input
                     type="number"
                     min="1"
                     value={quantity}
                     onChange={handleQuantityChange}
-                    className="w-16 h-10 mr-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 mt-5"
+                    className="w-16 h-10 mr-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 mt-12"
                   />
-                  <Button size="sm" color="warning" className="m-auto flex justify-between gap-3 p-2 lg:text-sm md:text-mds text-sm mt-12 text-white hover:bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110  duration-300" onClick={handleAddToCart}> Add To Cart
+                  <Button size="sm" color="warning" className="m-auto flex justify-between gap-3 p-2 lg:text-sm md:text-md text-sm mt-12 text-white hover:bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110  duration-300" onClick={handleAddToCart}> Add To Cart
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                     </svg>
@@ -195,6 +195,9 @@ export default function HorizontalCard({serviceID}) {
 
                 </div>
               </div>
+            </div>
+            <div>
+              <pre className="leading-relaxed text-xs md:text-sm lg:text-base mt-9">{serviceData.description}</pre>
             </div>
           </div>
         </section>
