@@ -59,13 +59,9 @@ export function BookingCard() {
         console.error("Error fetching cart items", error);
       }
     };
-
-    // Call the fetchCartItems function when the component mounts
     fetchCartItems();
-  }, []); // The empty dependency array ensures that this effect runs only once on mount
+  }, []);
 
-
-  // Function to handle order from the cart
   const handlePlaceOrder = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -79,10 +75,8 @@ export function BookingCard() {
         method: "POST",
         headers: {
           Authorization: token,
-          "Content-Type": "application/json", // Add this header for JSON content
+          "Content-Type": "application/json",
         },
-        // You may need to send additional data in the request body if required by your API
-        // Example: body: JSON.stringify({ key: value }),
       });
 
       const data = await response.json();
@@ -114,8 +108,8 @@ export function BookingCard() {
         </Typography>
         <div className="px-12 py-4 flex flex-wrap justify-between">
           {cartItems.map((item) => (
-            <Card className="lg:w-1/4 md:w-1/3 w-full h-[33rem] shadow-lg mb-8" key={item.id}>
-              <CardHeader floated={false} color="blue-gray" className="object-contain" >
+            <Card className="lg:w-1/4 md:w-2/3 w-full h-[33rem] shadow-lg mb-8" key={item.id}>
+              <CardHeader floated={false} color="blue-gray" className="object-contain w-76 h-76" >
                 <img
 
                   src={`${item.Service.image_url}`}

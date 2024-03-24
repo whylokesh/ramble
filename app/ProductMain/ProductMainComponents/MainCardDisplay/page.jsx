@@ -167,9 +167,9 @@ export default function HorizontalCard({ serviceID }) {
                       Size
                     </span>
                   </div>
-                  <div className="flex ml-6 items-center w-18">
+                  <div className=" flex ml-6 items-center  w-72">
                     <span className="mr-3 font-bold text-xl text-white">
-                      Used For
+                      Total area
                     </span>
                   </div>
                 </div>
@@ -180,14 +180,17 @@ export default function HorizontalCard({ serviceID }) {
                   <div className="flex ml-6 items-center  w-72">
                     <span className="mr-3">{serviceData.size}</span>
                   </div>
-                  <div className="flex ml-6 items-center w-18">
-                    <span className="mr-3">{serviceData.ftf}</span>
+                  <div className="flex ml-6 w-72">
+                    <span className="mr-3">{serviceData.total_area}</span>
                   </div>
+                  {/* <div className="flex ml-6 items-center w-24">
+                    <span className="mr-3">{serviceData.ftf}</span>
+                  </div> */}
                 </div>
                 <div className="flex mt-20 items-center  mb-5">
                   <div className=" w-72">
                     <span className="mr-3 font-bold text-xl text-white">
-                      Total area
+                      Used For
                     </span>
                   </div>
                   <div className="flex ml-6 items-center  w-72">
@@ -199,7 +202,7 @@ export default function HorizontalCard({ serviceID }) {
                 </div>
                 <div className="flex mt-6 items-center ">
                   <div className="flex w-72">
-                    <span className="mr-3">{serviceData.total_area}</span>
+                    <span className="mr-3">{serviceData.ftf}</span>
                   </div>
                   <div className="flex ml-6 items-center  lg:w-80 md:w-80 w-96">
                     <span className="mr-3">{serviceData.location}</span>
