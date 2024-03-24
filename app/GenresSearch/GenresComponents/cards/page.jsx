@@ -95,12 +95,13 @@ const GenresCard = () => {
   }, []);
   const handleExploreToggle = () => {
     if (exploreMoreMode) {
-      setDisplayedCards(displayedCards + 6);
+      setDisplayedCards(cardData.length);
     } else {
       setDisplayedCards(6);
     }
     setExploreMoreMode(!exploreMoreMode);
   };
+  
 
 
   if (cardData.length > 0) {
