@@ -11,6 +11,21 @@ import {
 import { Button } from "@nextui-org/react";
 import React from "react";
 import { useRouter } from "next/navigation";
+
+function truncateDescription(description) {
+  if (description.length > 200) {
+    return `${description.slice(0, 200)}...`;
+  }
+  return description;
+}
+
+function truncatetitle(description) {
+  if (description.length > 15) {
+    return `${description.slice(0, 25)}...`;
+  }
+  return description;
+}
+
 export function BookingCard() {
   const [cartItems, setCartItems] = React.useState([]);
   const route = useRouter();
@@ -100,33 +115,35 @@ export function BookingCard() {
         <div className="px-12 py-4 flex flex-wrap justify-between">
           {cartItems.map((item) => (
             <Card className="lg:w-1/4 md:w-1/3 w-full h-[33rem] shadow-lg mb-8" key={item.id}>
-              <CardHeader floated={false} color="blue-gray" className="h-60">
+              <CardHeader floated={false} color="blue-gray" className="object-contain" >
                 <img
+
                   src={`${item.Service.image_url}`}
                   alt="ui/ux review check"
                 />
-                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <IconButton
-                  size="sm"
-                  color="red"
-                  variant="text"
-                  className="!absolute top-4 right-4 rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-6 w-6"
+                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 ">
+                  <IconButton
+                    size="sm"
+                    color="red"
+                    variant="text"
+                    className="!absolute top-4 right-4 rounded-full"
                   >
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                  </svg>
-                </IconButton>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                    </svg>
+                  </IconButton>
+                </div>
               </CardHeader>
               <CardBody className="items-end">
                 <div className="mb-3 flex items-center justify-between">
                   <Typography variant="h5" color="blue-gray" className="font-medium">
 
-                    {item.Service.name}
+                    {truncatetitle(item.Service.name)}
                   </Typography>
                   <Typography
                     color="blue-gray"
@@ -148,7 +165,7 @@ export function BookingCard() {
                   </Typography>
                 </div>
                 <Typography color="gray">
-                  {item.Service.description}
+                  {truncateDescription(item.Service.description)}
                 </Typography>
                 <div className="group mt-8 inline-flex flex-wrap items-center gap-3">
                   <Tooltip content={`Quantity-${item.quantity}`}>
@@ -197,7 +214,7 @@ export function BookingCard() {
             </Card>
           ))}
 
-        </div>
+        </div >
         <div className="flex justify-center">
           <Button
             size="lg"
