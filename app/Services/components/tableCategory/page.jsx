@@ -18,10 +18,11 @@ import {
   ModalBody,
   ModalFooter,
 } from "@nextui-org/react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Select, SelectSection, SelectItem, Avatar } from "@nextui-org/react";
-
+import { useRouter } from "next/navigation";
+import * as XLSX from "xlsx";
 function truncateDescription(description) {
   if (description.length > 100) {
     return `${description.slice(0, 100)}...`;
@@ -73,6 +74,11 @@ export default function App() {
     setOpenFirstModal(false);
     setSelectedImage(null);
   };
+  const [isOpenSecondModal, setOpenSecondModal] = React.useState(false);
+  const openSecondModal = () => setOpenSecondModal(true);
+  const closeSecondModal = () => {
+    setOpenSecondModal(false);
+  };
 
   const [searchInput, setSearchInput] = React.useState(""); // New state for search input
 
@@ -92,9 +98,39 @@ export default function App() {
   const [size, setSize] = React.useState("");
   const [categories, setCategories] = React.useState([]);
   const [states, setStates] = React.useState([]);
-
+  const router = useRouter();
   const [Services, setServices] = React.useState([]);
+  const [ServicesToAdd, setServicesToAdd] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const sheet = workbook.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+  
+      const headers = jsonData[0].map(header => header.trim());// Assuming the first row contains the headers
+      const serviceData = jsonData.slice(1).map((row) => {
+        const service = {};
+        headers.forEach((header, index) => {
+          service[header] = row[index];
+        });
+        return service;
+      });
+  
+      console.log(serviceData);
+      setServicesToAdd(serviceData);
+    
+    };
+  
+    reader.readAsArrayBuffer(file);
+ 
+  };
   const handleSubmit = () => {
     const token = localStorage.getItem("token"); // Replace with your actual token key
 
@@ -106,7 +142,6 @@ export default function App() {
     formData.append("location", Location);
     formData.append("categoryName", CategoryName);
     formData.append("stateName", State);
-
     formData.append("code", code);
     formData.append("media", Media);
     formData.append("ftf", FTF);
@@ -125,8 +160,8 @@ export default function App() {
       media: Media,
       ftf: FTF,
       totalArea: TotalArea,
-      size: size
-    })
+      size: size,
+    });
 
     fetch("http://localhost:3009/admin/add-service", {
       method: "POST",
@@ -152,6 +187,58 @@ export default function App() {
         toast.error("Error adding service", error);
       });
   };
+  const handleSubmitCSV = async () => {
+    const token = localStorage.getItem("token"); // Replace with your actual token key
+    const batchSize = 20; // Number of objects to send in each batch
+    let errorOccurred = false; // Flag to track if an error occurred
+  
+    const chunkedServices = [];
+    for (let i = 0; i < ServicesToAdd.length; i += batchSize) {
+      chunkedServices.push(ServicesToAdd.slice(i, i + batchSize));
+    }
+  
+    const postBatch = async (batch) => {
+      const data = JSON.stringify({
+        servicesToAdd: batch, // Array of services to add
+      });
+  
+      try {
+        const response = await fetch("http://localhost:3009/admin/bulk-add-services", {
+          method: "POST",
+          body: data,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        });
+        const responseData = await response.json();
+        console.log("Response from server:", responseData);
+        if (!responseData.success) {
+          errorOccurred = true; // Set the flag if an error occurred
+          console.error("Failed to add services");
+        } else {
+          console.log("Services added successfully");
+        }
+      } catch (error) {
+        errorOccurred = true; // Set the flag if an error occurred
+        console.error("Error posting data:", error);
+      }
+    };
+  
+    // Post each batch sequentially
+    for (let i = 0; i < chunkedServices.length; i++) {
+      await postBatch(chunkedServices[i]);
+    }
+  
+    if (errorOccurred) {
+      toast.error("Failed to add services");
+    } else {
+      toast.success("All services added successfully");
+    }
+  
+    closeFirstModal();
+  };
+  
 
   React.useEffect(() => {
     // Fetch data from the API
@@ -255,15 +342,14 @@ export default function App() {
     fetchStates();
   }, []);
 
-
   const handleSelectionChange = (e) => {
     setState(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
 
   const handleCategoryChange = (e) => {
     setCategoryName(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
 
   return (
@@ -271,7 +357,7 @@ export default function App() {
       <h1 className="font-bold bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent text-3xl md:text-4xl lg:text-6xl py-2 px-8 mt-6 flex justify-center items-center mb-8">
         Add Services
       </h1>
-      <div className="flex justify-between">
+      <div className="flex lg:justify-between md:justify-between justify-center flex-wrap">
         <Input
           type="Location"
           label="Search For Service Name"
@@ -284,28 +370,51 @@ export default function App() {
               }}
             />
           }
-          className="lg:w-[30%] md:w-[50%] w-[60%] mb-8 mt-4"
+          className="lg:w-[30%] md:w-[50%] w-full mb-8 mt-4"
           value={searchInput}
           onChange={(e) => setSearchInput(e.currentTarget.value)}
         />
-        <Button className="mb-8 mt-5" onClick={openFirstModal} color="primary">
-          {" "}
+        <div className="flex flex-nowrap">
+          <Button className="mb-8 mt-5 mr-2" color="warning" onClick={openSecondModal}>
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+            Upload CSV
+          </Button>
+          <Button
+            className="mb-8 mt-5"
+            onClick={openFirstModal}
+            color="primary"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 4.5v15m7.5-7.5h-15"
-            />
-          </svg>
-          Add new
-        </Button>
+            {" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+            Add new
+          </Button>
+        </div>
       </div>
       <Table
         aria-label="Example table with client side pagination"
@@ -342,11 +451,14 @@ export default function App() {
         </TableHeader>
         <TableBody items={items}>
           {(item) => (
-            <TableRow key={item.id}>
+            <TableRow
+              key={item.id}
+              onClick={() => router.push(`/ProductMain/${item.id}`)}
+            >
               <TableCell>{item.id}</TableCell>
               <TableCell>
                 <img
-                  src={`${item.image_url}`}
+                  src={`${item.image_url[0]}`}
                   alt={`${item.name}'s Avatar`}
                   className="w-8 h-8 rounded-full"
                 />
@@ -434,7 +546,6 @@ export default function App() {
                       </SelectItem>
                     ))}
                   </Select>
-
                 </div>
                 <Input
                   label="Location"
@@ -527,6 +638,34 @@ export default function App() {
                 </Button>
                 <Button color="primary" onPress={handleDelete}>
                   Delete
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+      <Modal isOpen={isOpenSecondModal} onOpenChange={closeSecondModal}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader>Upload Excel</ModalHeader>
+              <ModalBody>
+              <input type="file" onChange={handleFileUpload} />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  variant="light"
+                  onPress={closeSecondModal}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  color="success"
+                  variant="light"
+                  onPress={handleSubmitCSV}
+                >
+                  Submit
                 </Button>
               </ModalFooter>
             </>

@@ -333,7 +333,7 @@ export default function Nav() {
 
 
   return (
-    <div className="navbar px-7 overflow-x-hidden">
+    <div className="navbar lg:px-7 md:px-7 px-1 overflow-x-hidden">
       <Navbar
         isBordered
         isMenuOpen={isMenuOpen}

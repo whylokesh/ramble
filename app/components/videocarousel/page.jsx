@@ -80,7 +80,7 @@ const CarouselWithContent = () => {
                 <Typography
                   variant="lead"
                   color="white"
-                  className="mb-12 opacity-80 text-sm md:text-sm lg:text-base"
+                  className="mb-9 opacity-80 text-sm md:text-sm lg:text-base"
                 >
                   Go beyond the scroll. We connect you with a network of advertising opportunities to create impactful campaigns across India. 
                 </Typography>

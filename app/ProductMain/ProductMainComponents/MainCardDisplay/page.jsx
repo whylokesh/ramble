@@ -11,10 +11,10 @@ import "./productpage.css";
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { Carousel } from "@material-tailwind/react";
 export default function HorizontalCard({ serviceID }) {
   const [deviceSize, setDeviceSize] = React.useState("sm");
-  const [serviceData, setServiceData] = React.useState({}); // Add this state for storing service data
+  const [serviceData, setServiceData] = React.useState(null); // Add this state for storing service data
   const [quantity, setQuantity] = React.useState(1);
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value, 10);
@@ -100,49 +100,24 @@ export default function HorizontalCard({ serviceID }) {
         <section className="text-gray-600 body-font overflow-hidden">
           <div className="container ">
             <div className="lg:w-5/5 mx-auto flex flex-wrap justify-between m-auto lg:ml-9 md:ml-0 ml-0">
-              <div className="lg:w-2/5 w-full lg:h-full md:h-auto h-auto lg:mt-20 mt-auto">
-                <img
-                  alt="ecommerce"
-                  className="object-fit object-center rounded-xl  "
-                  src={`${serviceData.image_url}`}
-                />
-                <div className="flex justify-between mt-9" >
-                  <Button className="bg-green-600 w-1/5">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"
-                      />
-                    </svg>
-                  </Button>
-                  
-                  <Button className="bg-green-600 w-1/5" >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                      />
-                    </svg>
-                  </Button>
-                </div>
-              </div>
-              <div className="lg:w-2/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 border-orange-500">
+              {serviceData && (
+                <Carousel
+                  transition={{ duration: 2 }}
+                  className="rounded-xl lg:w-3/5 w-full lg:h-full md:h-auto h-auto lg:mt-20 mt-auto mb-8"
+                >
+                  {serviceData.image_url.map((image) => (
+                    <img
+                      key={image}
+                      src={image}
+                      alt="image 1"
+                      className="h-full w-full object-cover"
+                    />
+                  ))}
+                </Carousel>
+              )}
+              {serviceData && (
+              <div className="lg:w-2/5 w-full lg:pl-10 lg:py-6 mt-8 lg:mt-0 border-orange-500">
+                
                 <h2 className="text-sm title-font text-gray-500 tracking-widest mb-5">
                   {serviceData.Category && serviceData.Category.name}
                 </h2>
@@ -242,18 +217,22 @@ export default function HorizontalCard({ serviceID }) {
                   </Button>
                 </div>
               </div>
+              )}
             </div>
+            {serviceData && (
             <div>
               <h1 className="font-bold lg:text-3xl md:text-xl text-xl text-white mt-6 mb-6">
                 Descripton
               </h1>
-              <pre className="leading-relaxed text-xs md:text-sm lg:text-base mt-14">
+              <pre className="leading-relaxed text-white text-xs md:text-sm lg:text-base mt-14">
                 {serviceData.description}
               </pre>
             </div>
+            )}
           </div>
         </section>
       </div>
+      {serviceData && (
       <div className="pt-0 flex justify-center items-center text-base md:text-lg lg:text-xl font-bold">
         <span className="border-solid border-1 p-2 ">
           Price :{" "}
@@ -262,6 +241,7 @@ export default function HorizontalCard({ serviceID }) {
           </span>
         </span>
       </div>
+      )}
     </>
   );
 }

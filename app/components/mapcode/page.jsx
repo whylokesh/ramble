@@ -340,7 +340,7 @@ const Mapjsx = () => {
             <Typography
             variant="lead"
             color="white"
-            className=" mb-8 text-sm md:text-sm lg:text-3xl font-bold  bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent"
+            className=" mt-4 lg:w-auto md:w-auto w-[18rem] mb-8 text-sm md:text-sm lg:text-3xl font-bold  bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent"
           >
             Click On Your state to See Our Services
           </Typography>
