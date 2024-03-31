@@ -19,17 +19,17 @@ import {
 } from "@nextui-org/react";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 
-  import {
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Button,
-    useDisclosure,
-    Checkbox,
-    Input,
-  } from "@nextui-org/react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  Checkbox,
+  Input,
+} from "@nextui-org/react";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify';
@@ -216,12 +216,12 @@ export default function Nav() {
           password,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (data.success) {
         // Login successful, handle success scenario
-  
+
         setIsLoggedIn(true); // Set login status to true
         setIsAdmin(data.data.admin === true); // Set isAdmin based on the response
         localStorage.setItem("token", data.data.token)
@@ -229,7 +229,7 @@ export default function Nav() {
         toast.success("Logged in Successfully")
         if (data.data.admin === true) {
           localStorage.setItem("isAdmin", "true");
-      }
+        }
         // onClose(); // Close the modal on successful login
       } else {
         // Handle login failure
@@ -296,7 +296,7 @@ export default function Nav() {
     }
     const IsAdmin = localStorage.getItem("isAdmin") === "true";
     if (IsAdmin) {
-        setIsAdmin(true);
+      setIsAdmin(true);
     }
   }, []);
 
@@ -390,7 +390,7 @@ export default function Nav() {
             )}
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="#">
+            <Link color="foreground" href="/AboutUsMain">
               About us
             </Link>
           </NavbarItem>
