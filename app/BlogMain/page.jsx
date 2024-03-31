@@ -32,7 +32,7 @@ const CreateAndEarnInfoCard = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const BlogID = urlSearchParams.get("id")
     console.log(BlogID);
-    fetch(`http://localhost:3009/blog?id=${BlogID}`)
+    fetch(`http://3.7.191.31:3009/blog?id=${BlogID}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

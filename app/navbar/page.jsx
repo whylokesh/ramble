@@ -91,7 +91,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch("http://localhost:3009/user/register", {
+      const response = await fetch("http://3.7.191.31:3009/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -206,7 +206,7 @@ export default function Nav() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:3009/user/login", {
+      const response = await fetch("http://3.7.191.31:3009/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -247,7 +247,7 @@ export default function Nav() {
       try {
         setIsSearching(true);
         const response = await fetch(
-          `http://localhost:3009/search/particular-service?searchTerm=${searchTerm}`
+          `http://3.7.191.31:3009/search/particular-service?searchTerm=${searchTerm}`
         );
         const data = await response.json();
 
@@ -287,7 +287,6 @@ export default function Nav() {
 
   React.useEffect(() => {
     const AdminValue = localStorage.getItem("isAdmin")
-    // Check for the presence of the token during page load
     const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
@@ -303,6 +302,7 @@ export default function Nav() {
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("token")
+    localStorage.removeItem("isAdmin")
   }
 
   const [value, setValue] = React.useState('');

@@ -9,7 +9,7 @@ const CardData = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token"); // Replace with your actual token key
-        const response = await fetch("http://localhost:3009/admin/statistics", {
+        const response = await fetch("http://3.7.191.31:3009/admin/statistics", {
           method: "GET",
           headers: {
             Authorization: token,

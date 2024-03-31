@@ -93,7 +93,7 @@ export default function App() {
       imageUrl: imageUrl
     })
 
-    fetch("http://localhost:3009/admin/add-category", {
+    fetch("http://3.7.191.31:3009/admin/add-category", {
       method: "POST",
       body: categoryData,
       headers: {
@@ -146,7 +146,7 @@ export default function App() {
   const handleDelete = () => {
     const token = localStorage.getItem("token"); // Replace with your actual token key
 
-    fetch(`http://localhost:3009/admin/delete-category?id=${deleteItemId}`, {
+    fetch(`http://3.7.191.31:3009/admin/delete-category?id=${deleteItemId}`, {
       method: "DELETE",
       headers: {
         Authorization: token,
@@ -167,7 +167,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3009/categories");
+        const response = await fetch("http://3.7.191.31:3009/categories");
         const data = await response.json();
 
         if (data.success) {
@@ -186,7 +186,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await fetch("http://localhost:3009/states");
+        const response = await fetch("http://3.7.191.31:3009/states");
         const data = await response.json();
 
         if (data.success) {

@@ -41,7 +41,7 @@ export function BookingCard() {
           return;
         }
 
-        const response = await fetch("http://localhost:3009/cart/view-cart", {
+        const response = await fetch("http://3.7.191.31:3009/cart/view-cart", {
           method: "GET",
           headers: {
             Authorization: token,
@@ -71,7 +71,7 @@ export function BookingCard() {
         return;
       }
 
-      const response = await fetch("http://localhost:3009/order/place-order", {
+      const response = await fetch("http://3.7.191.31:3009/order/place-order", {
         method: "POST",
         headers: {
           Authorization: token,

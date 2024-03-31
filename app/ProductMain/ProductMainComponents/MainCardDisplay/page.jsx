@@ -48,7 +48,7 @@ export default function HorizontalCard({ serviceID }) {
       try {
         if (serviceID) {
           const response = await fetch(
-            `http://localhost:3009/search/service-details?serviceId=${serviceID}`
+            `http://3.7.191.31:3009/search/service-details?serviceId=${serviceID}`
           );
 
           if (response.ok) {
@@ -68,7 +68,7 @@ export default function HorizontalCard({ serviceID }) {
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3009/cart/add-to-cart", {
+      const response = await fetch("http://3.7.191.31:3009/cart/add-to-cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

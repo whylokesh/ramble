@@ -57,7 +57,7 @@ export function CardDefault() {
 
   React.useEffect(() => {
     // Make API call to fetch blogs
-    fetch("http://localhost:3009/all-blogs")
+    fetch("http://3.7.191.31:3009/all-blogs")
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data.data);
@@ -81,7 +81,7 @@ export function CardDefault() {
       imageUrl: imageurl
     })
 
-    fetch("http://localhost:3009/admin/add-blog", {
+    fetch("http://3.7.191.31:3009/admin/add-blog", {
       method: "POST",
       body: blogData,
       headers: {
@@ -118,7 +118,7 @@ export function CardDefault() {
   const handleDelete = (blogId) => {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3009/admin/delete-blog?id=${blogId}`, {
+    fetch(`http://3.7.191.31:3009/admin/delete-blog?id=${blogId}`, {
       method: "DELETE",
       headers: {
         Authorization: token,
@@ -129,7 +129,7 @@ export function CardDefault() {
         console.log("Response from server:", data);
         toast.success("Blog deleted successfully");
         // Fetch the updated blog list after deletion
-        fetch("http://localhost:3009/all-blogs")
+        fetch("http://3.7.191.31:3009/all-blogs")
           .then((response) => response.json())
           .then((data) => {
             setBlogs(data.data);

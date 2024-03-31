@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
 
     try {
         const response = await fetch(
-            `http://localhost:3009/search/service-details?serviceId=${serviceID}`
+            `http://3.7.191.31:3009/search/service-details?serviceId=${serviceID}`
         );
 
         if (response.ok) {
