@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Nav from "../navbar/page";
 import { FooterWithSocialLinks } from "../GenresSearch/GenresComponents/GenersFooter/FooterForGenres";
@@ -32,22 +32,30 @@ const page = () => {
               readymade gluten
             </h1>
             <p class="mb-8 leading-relaxed text-white">
-              Copper mug try-hard pitchfork pour-over freegan heirloom neutra
-              air plant cold-pressed tacos poke beard tote bag. Heirloom echo
-              park mlkshk tote bag selvage hot chicken authentic tumeric
-              truffaut hexagon try-hard chambray.
+              At Ramble, we are team of Advertising veterans from the last 38
+              years and worked with major Startups and Legacies like Zomato,
+              Nerolac, Bikaji, Kingfisher, List goes on and on....
             </p>
+            <ul class="text-left list-disc list-inside text-white">
+              <li>We are OOH Media Owners.</li>
+              <li>We serve pan India ooh media to our Clients.</li>
+              <li>We have vendors across Nation.</li>
+              <li>We cater to the best competitive rates.</li>
+              <li>We serve Media Buying Agencies.</li>
+            </ul>
           </div>
           <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
             <img
               class="object-cover object-center rounded"
               alt="hero"
-              src="https://dummyimage.com/720x600"
+              src="images/Untitled design (10).png"
             />
           </div>
         </div>
       </section>
-      <h1 className="font-bold text-center bg-gradient-to-r py-2 from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent mt-8 mb-8 text-5xl">Our Leadership</h1>
+      <h1 className="font-bold text-center bg-gradient-to-r py-2 from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent mt-8 mb-8 text-5xl">
+        Our Leadership
+      </h1>
       <div className="flex justify-center lg:flex-nowrap flex-wrap p-5">
         <section class="text-gray-600 body-font">
           <div class="container px-5 py-20 mx-auto">
@@ -58,17 +66,15 @@ const page = () => {
                 className="inline-block w-72 text-gray-400 mb-8"
               />
               <p class="leading-relaxed text-md">
-                Edison bulb retro cloud bread echo park, helvetica stumptown
-                taiyaki taxidermy 90's cronut +1 kinfolk. Single-origin coffee
-                ennui shaman taiyaki vape DIY tote bag drinking vinegar cronut
-                adaptogen squid fanny pack vaporware. Man bun next level
-                coloring book skateboard four loko knausgaard. Kitsch keffiyeh
+                We turn underdogs into winners. Over 38 years of experience
+                creating successful advertising campaigns - online and offline.
+                Let Ramble Agency help your business rise above the noise.
               </p>
               <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6"></span>
-              <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">
-                HOLDEN CAULFIELD
+              <h2 class="text-gray-200 font-bold title-font tracking-wider text-sm">
+                ANANT JOSHI
               </h2>
-              <p class="text-gray-500">Senior Product Designer</p>
+              <p class="text-gray-500">Founder</p>
             </div>
           </div>
         </section>
@@ -81,51 +87,69 @@ const page = () => {
                 className="inline-block w-72 text-gray-400 mb-8"
               />
               <p class="leading-relaxed text-md">
-                Edison bulb retro cloud bread echo park, helvetica stumptown
-                taiyaki taxidermy 90's cronut +1 kinfolk. Single-origin coffee
-                ennui shaman taiyaki vape DIY tote bag drinking vinegar cronut
-                adaptogen squid fanny pack vaporware. Man bun next level
-                coloring book skateboard four loko knausgaard. Kitsch keffiyeh
+                Ramle Agency crafts exceptional marketing and advertising
+                solutions, building lasting value for our clients. We take pride
+                in exceeding expectations and delivering experiences that
+                resonate with major brands.
               </p>
               <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6"></span>
-              <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">
-                HOLDEN CAULFIELD
+              <h2 class="text-gray-200 font-bold title-font tracking-wider text-sm">
+                SHIVAM JOSHI
               </h2>
-              <p class="text-gray-500">Senior Product Designer</p>
+              <p class="text-gray-500">CEO - Chief Executing Officer</p>
             </div>
           </div>
         </section>
       </div>
-      <h1 className="font-bold text-center bg-gradient-to-r py-2 from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent mt-8 mb-8  text-5xl">Our Work in Action</h1>
+      <h1 className="font-bold text-center bg-gradient-to-r py-2 from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent mt-8 mb-8  text-5xl">
+        Our Work in Action
+      </h1>
       <section class="text-gray-600 body-font p-5">
-  <div class="container px-5 py-12  mx-auto flex gap-8 flex-wrap">
-    <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
-      <div class="w-full sm:p-4 px-4 mb-6">
-        <h1 class="font-bold text-2xl mb-2 bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">Moon hashtag pop-up try-hard offal truffaut</h1>
-        <div class="leading-relaxed lg:text-lg text-md text-white">Pour-over craft beer pug drinking vinegar live-edge gastropub, keytar neutra sustainable fingerstache kickstarter.</div>
-      </div>
-      <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-        <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">2.7K</h2>
-        <p class="leading-relaxed text-white">Users</p>
-      </div>
-      <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-        <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">1.8K</h2>
-        <p class="leading-relaxed text-white">Subscribes</p>
-      </div>
-      <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-        <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">35</h2>
-        <p class="leading-relaxed text-white">Downloads</p>
-      </div>
-      <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-        <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">4</h2>
-        <p class="leading-relaxed text-white">Products</p>
-      </div>
-    </div>
-    <div class="lg:w-1/2 sm:w-1/3 h-72 w-full rounded-lg overflow-hidden mt-6 sm:mt-0">
-      <img class="object-cover object-center w-full h-full" src={images[currentImageIndex]} alt="stats" />
-    </div>
-  </div>
-</section>
+        <div class="container px-5 py-12  mx-auto flex gap-8 flex-wrap">
+          <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
+            <div class="w-full sm:p-4 px-4 mb-6">
+              <h1 class="font-bold text-2xl mb-2 bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
+                Moon hashtag pop-up try-hard offal truffaut
+              </h1>
+              <div class="leading-relaxed lg:text-lg text-md text-white">
+                Pour-over craft beer pug drinking vinegar live-edge gastropub,
+                keytar neutra sustainable fingerstache kickstarter.
+              </div>
+            </div>
+            <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+              <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
+                2.7K
+              </h2>
+              <p class="leading-relaxed text-white">Users</p>
+            </div>
+            <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+              <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
+                1.8K
+              </h2>
+              <p class="leading-relaxed text-white">Subscribes</p>
+            </div>
+            <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+              <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
+                35
+              </h2>
+              <p class="leading-relaxed text-white">Downloads</p>
+            </div>
+            <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+              <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
+                4
+              </h2>
+              <p class="leading-relaxed text-white">Products</p>
+            </div>
+          </div>
+          <div class="lg:w-1/2 sm:w-1/3 h-72 w-full rounded-lg overflow-hidden mt-6 sm:mt-0">
+            <img
+              class="object-cover object-center w-full h-full"
+              src={images[currentImageIndex]}
+              alt="stats"
+            />
+          </div>
+        </div>
+      </section>
       <FooterWithSocialLinks />
     </>
   );
