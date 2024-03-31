@@ -128,7 +128,7 @@ export default function NavbarG() {
           <NavbarBrand className="mr-4 ">
             <AcmeLogo />
             <p className="hidden sm:block font-bold text-inherit text-xl">
-              Ramble Agency
+              Ramble Group
             </p>
           </NavbarBrand>
         </NavbarContent>
@@ -187,7 +187,7 @@ export default function NavbarG() {
                               <p >{filteredAnimal}</p>
                             </CardBody>
                           </Card>
-                          
+
                         ))
                     )}
                   </ModalBody>
@@ -268,7 +268,7 @@ export default function NavbarG() {
                             Remember me
                           </Checkbox>
                           <Link color="primary" href="#" size="sm">
-                            Forgot password?
+
                           </Link>
                         </div>
                       </ModalBody>
@@ -296,8 +296,8 @@ export default function NavbarG() {
                   index === 2
                     ? "warning"
                     : index === menuItems.length - 1
-                    ? "danger"
-                    : "foreground"
+                      ? "danger"
+                      : "foreground"
                 }
                 href="#"
                 size="lg"

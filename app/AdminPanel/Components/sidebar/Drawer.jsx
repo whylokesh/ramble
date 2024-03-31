@@ -26,7 +26,7 @@ export function DrawerWithNavigation() {
       <Drawer open={open} onClose={closeDrawer} className="bg-black">
         <div className="mb-2 flex items-center justify-between p-4">
           <Typography variant="h5" color="White">
-            Ramble Agency
+            Ramble Group
           </Typography>
           <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
             <svg
@@ -81,14 +81,14 @@ export function DrawerWithNavigation() {
               </svg>
             </ListItemPrefix>
             Categories
-            <ListItemSuffix>
+            {/* <ListItemSuffix>
               <Chip
                 value="5"
                 size="sm"
                 color="green"
                 className="rounded-full"
               />
-            </ListItemSuffix>
+            </ListItemSuffix> */}
           </ListItem>
           <ListItem className="text-white" onClick={() => {
             route.push("/Services")

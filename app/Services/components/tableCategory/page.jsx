@@ -113,7 +113,7 @@ export default function App() {
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-  
+
       const headers = jsonData[0].map(header => header.trim());// Assuming the first row contains the headers
       const serviceData = jsonData.slice(1).map((row) => {
         const service = {};
@@ -122,14 +122,14 @@ export default function App() {
         });
         return service;
       });
-  
+
       console.log(serviceData);
       setServicesToAdd(serviceData);
-    
+
     };
-  
+
     reader.readAsArrayBuffer(file);
- 
+
   };
   const handleSubmit = () => {
     const token = localStorage.getItem("token"); // Replace with your actual token key
@@ -191,17 +191,17 @@ export default function App() {
     const token = localStorage.getItem("token"); // Replace with your actual token key
     const batchSize = 20; // Number of objects to send in each batch
     let errorOccurred = false; // Flag to track if an error occurred
-  
+
     const chunkedServices = [];
     for (let i = 0; i < ServicesToAdd.length; i += batchSize) {
       chunkedServices.push(ServicesToAdd.slice(i, i + batchSize));
     }
-  
+
     const postBatch = async (batch) => {
       const data = JSON.stringify({
         servicesToAdd: batch, // Array of services to add
       });
-  
+
       try {
         const response = await fetch("http://localhost:3009/admin/bulk-add-services", {
           method: "POST",
@@ -224,21 +224,21 @@ export default function App() {
         console.error("Error posting data:", error);
       }
     };
-  
+
     // Post each batch sequentially
     for (let i = 0; i < chunkedServices.length; i++) {
       await postBatch(chunkedServices[i]);
     }
-  
+
     if (errorOccurred) {
       toast.error("Failed to add services");
     } else {
       toast.success("All services added successfully");
     }
-  
+
     closeFirstModal();
   };
-  
+
 
   React.useEffect(() => {
     // Fetch data from the API
@@ -376,7 +376,7 @@ export default function App() {
         />
         <div className="flex flex-nowrap">
           <Button className="mb-8 mt-5 mr-2" color="warning" onClick={openSecondModal}>
-          <svg
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -498,7 +498,7 @@ export default function App() {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Add category
+                Add Service
               </ModalHeader>
               <ModalBody>
                 <Input
@@ -650,7 +650,7 @@ export default function App() {
             <>
               <ModalHeader>Upload Excel</ModalHeader>
               <ModalBody>
-              <input type="file" onChange={handleFileUpload} />
+                <input type="file" onChange={handleFileUpload} />
               </ModalBody>
               <ModalFooter>
                 <Button

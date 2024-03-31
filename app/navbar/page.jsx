@@ -351,7 +351,7 @@ export default function Nav() {
             <img src="./logomain.png" alt="Ramble group" className="m-1 w-12 h-12" />
             <Link href="/">
               <p className="hidden sm:block font-bold text-inherit text-xl" >
-                Ramble Agency
+                Ramble Group
               </p>
             </Link>
           </NavbarBrand>
@@ -444,7 +444,7 @@ export default function Nav() {
                           />
                           <div className="flex py-2 px-1 justify-between">
                             <Link color="primary" href="#" size="sm">
-                              Forgot password?
+
                             </Link>
                             <Link
                               color="primary"

@@ -1,6 +1,6 @@
 "use client"
 import { Typography } from "@material-tailwind/react";
- import React from "react";
+import React from "react";
 const LINKS = [
   {
     title: "Product",
@@ -15,16 +15,16 @@ const LINKS = [
     items: ["Blog", "Newsletter", "Events", "Help center"],
   },
 ];
- 
+
 const currentYear = new Date().getFullYear();
- 
+
 export function FooterWithSocialLinks() {
   return (
     <footer className="relative w-full mt-12  bg-gray-900">
       <div className="mx-auto w-full py-6 px-8">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
           <Typography variant="h4" className="mb-6">
-            Ramble Agency
+            Ramble Group
           </Typography>
           <div className="grid grid-cols-3 justify-between gap-4">
             {LINKS.map(({ title, items }) => (

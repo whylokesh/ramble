@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Ramble Group",
-  description: `Welcome to Ramble Agency - where advertising meets creativity! With over 38 years of experience, we are a team of advertising veterans who have worked with major startups and legacies like Zomato, Nerolac, Bikiaji, Kingfisher, and many more.
+  description: `Welcome to Ramble Group - where advertising meets creativity! With over 38 years of experience, we are a team of advertising veterans who have worked with major startups and legacies like Zomato, Nerolac, Bikiaji, Kingfisher, and many more.
 
 Now, let's dive into our services. Firstly, we are proud to be OOH media owners, offering pan-India coverage to our clients. Our extensive network of vendors across the nation enables us to cater to the best competitive rates in the market. We are committed to providing our clients with the most effective and innovative OOH solutions that meet their business goals.
 

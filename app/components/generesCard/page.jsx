@@ -37,7 +37,7 @@ const Genres = () => {
   return (
     <>
       <div className="flex flex-wrap justify-between lg:px-20 md:px-6 px-4 lg:mt-0 md:mt-0 mt-7 overflow-x-hidden">
-      {categories.slice(0, 6).map((category) => (
+        {categories.slice(0, 6).map((category) => (
           <Card
             key={category.id}
             isFooterBlurred
@@ -45,7 +45,7 @@ const Genres = () => {
           >
             <CardHeader className="absolute z-10 top-1 flex-col items-start">
               <p className="text-tiny text-white/60 uppercase font-bold">
-                Ramble Agency
+                Ramble Group
               </p>
               <h4 className="text-white/90 font-medium text-xl">
                 {category.name}
