@@ -2,7 +2,7 @@
 import { Typography } from "@material-tailwind/react";
 import { Button, Card, CardBody } from "@nextui-org/react";
 import ImagesCard from "../BlogImageCard/page";
-import { SimpleRegistrationForm } from "../Formcard/page";
+import { SimpleRegistrationForm } from "../Formcard/CardForForm";
 
 const Contact = () => {
   return (
@@ -22,7 +22,7 @@ const Contact = () => {
             Subscribe to our Newsletter!
           </Typography>
           <Typography className="text-xs md:text-sm lg:text-base text-white px-2 ">
-            Go High !! Show Yourself to the Whole world that you are the only existing Competitor
+            Stay updated with the latest news, tips, and exclusive offers by subscribing to our newsletter.
           </Typography>
 
         </CardBody>

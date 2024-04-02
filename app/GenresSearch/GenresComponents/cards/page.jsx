@@ -14,6 +14,13 @@ import {
 import { Typography } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 
+function truncateDescription(description) {
+  if (description.length > 200) {
+    return `${description.slice(0, 200)}...`;
+  }
+  return description;
+}
+
 
 const GenresCard = () => {
   const [liked, setLiked] = React.useState(false);
@@ -35,10 +42,6 @@ const GenresCard = () => {
       console.log("queryyss");
 
     }
-
-
-
-
 
     // Add the event listener
     window.addEventListener("resize", handleResize);
@@ -63,21 +66,21 @@ const GenresCard = () => {
     const fetchData = async () => {
       try {
         let apiUrl = '';
-  
+
         if (location) {
-          apiUrl = `http://localhost:3009/search/search-by-location?location=${location}`;
+          apiUrl = `http://3.7.191.31:3009/search/search-by-location?location=${location}`;
         } else {
           // Check if price is present, and construct the API URL accordingly
           if (price) {
-            apiUrl = `http://localhost:3009/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}&price=${price}`;
+            apiUrl = `http://3.7.191.31:3009/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}&price=${price}`;
           } else {
-            apiUrl = `http://localhost:3009/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}`;
+            apiUrl = `http://3.7.191.31:3009/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}`;
           }
         }
-  
+
         const response = await fetch(apiUrl);
         const data = await response.json();
-  
+
         if (data.success) {
           setCardData(data.data.services);
         }
@@ -85,19 +88,20 @@ const GenresCard = () => {
         console.error('Error fetching data:', error);
       }
     };
-  
+
     fetchData();
-  
+
     // Existing code...
   }, []);
   const handleExploreToggle = () => {
     if (exploreMoreMode) {
-      setDisplayedCards(displayedCards + 6);
+      setDisplayedCards(cardData.length);
     } else {
       setDisplayedCards(6);
     }
     setExploreMoreMode(!exploreMoreMode);
   };
+  
 
 
   if (cardData.length > 0) {
@@ -105,7 +109,7 @@ const GenresCard = () => {
       <>
         <div className="lg:px-24 md:px-20 px-3 py-5">
           {/* MAIN OLD CARD */}
-          <div className="flex flex-wrap justify-between lg:px-20 md:px-6 px-12 lg:mt-0 md:mt-0 mt-3 overflow-x-hidden">
+          <div className="flex flex-wrap justify-evenly lg:px-20 md:px-6 px-4 lg:mt-0 md:mt-0 mt-3 overflow-x-hidden">
             {cardData.slice(0, displayedCards).map((service, index) => (
               <Card key={index} isFooterBlurred className="max-w-[350px] m-3">
                 <CardHeader className="flex flex-col gap-3">
@@ -113,7 +117,7 @@ const GenresCard = () => {
                     alt="service image"
                     isZoomed
                     className="object-cove h-44"
-                    src={`http://localhost:3009${service.image_url}`}
+                    src={`${service.image_url[0]}`}
                     width={350}
                   />
                 </CardHeader>
@@ -129,15 +133,15 @@ const GenresCard = () => {
                       variant="small"
                       className="text-xs md:text-sm lg:text-base text-gray-500"
                     >
-                      {service.description}
+                      {truncateDescription(service.description)}
                     </Typography>
                   </div>
                 </CardBody>
-             
+
                 <CardFooter>
                   {/* Adjust this link according to your data */}
                   <Button className="flex m-auto" color="warning" onClick={() => {
-                    route.push(`/ProductMain?serviceID=${service.id}`)
+                    route.push(`/ProductMain/${service.id}`)
                   }}>
                     Check Out
                   </Button>
@@ -146,8 +150,7 @@ const GenresCard = () => {
             ))}
           </div>
 
-          {/* HOME PAGE CARD */}
-          {/* <CardDefault /> */}
+
 
           <div className="pt-0 flex justify-center items-center">
             <Button

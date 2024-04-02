@@ -8,7 +8,7 @@ const ImagesCard =()=> {
   const route = useRouter();
   React.useEffect(() => {
     // Make API call when the component mounts
-    fetch("http://localhost:3009/all-blogs")
+    fetch("http://3.7.191.31:3009/latest-blogs")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -32,7 +32,7 @@ const ImagesCard =()=> {
             key={blog.id}
             className="lg:max-w-[18.5rem] md:max-w-[15rem] max-w-[9rem] h-28 cursor-pointer"
             alt={`Blog Image ${blog.id}`}
-            src={`http://localhost:3009${blog.image_url}`}
+            src={`${blog.image_url}`}
             onClick={() => handleImageClick(blog.id)}
           />
         ))}

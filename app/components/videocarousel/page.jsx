@@ -21,7 +21,7 @@ const CarouselWithContent = () => {
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3009/categories");
+        const response = await fetch("http://3.7.191.31:3009/categories");
         const data = await response.json();
 
         if (data.success) {
@@ -40,7 +40,7 @@ const CarouselWithContent = () => {
   React.useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await fetch("http://localhost:3009/states");
+        const response = await fetch("http://3.7.191.31:3009/states");
         const data = await response.json();
 
         if (data.success) {
@@ -63,27 +63,26 @@ const CarouselWithContent = () => {
       <div className=" overflow-x-hidden">
         <div className="relative lg:h-[45rem] md:h-[28rem] h-15 w-full">
           <img
-            src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+            src="images/rambleHeroImage2.png"
             alt="image 2"
             className="h-full w-full object-cover"
           />
           <div>
             <div className="absolute inset-0 grid h-full w-full items-center bg-black/75">
-              <div className=" w-2/3 pl-12 md:w-2/4 md:pl-20 lg:pl-32">
+              <div className=" w-2/3 pl-5 md:w-2/4 md:pl-20 lg:pl-32 lg:pt-0 md:pt-0 pt-5">
                 <Typography
                   variant="h1"
                   color="white"
                   className="mb-4 text-lg md:text-xl lg:text-4xl"
                 >
-                  The Beauty of Nature
+                  Don't Just Advertise, <br></br>Make a Ramble
                 </Typography>
                 <Typography
                   variant="lead"
                   color="white"
-                  className="mb-12 opacity-80 text-sm md:text-sm lg:text-base"
+                  className="mb-9 opacity-80 text-sm md:text-sm lg:text-base lg:block md:block hidden"
                 >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Exercitationem excepturi recusandae voluptatibus deserunt
+                  Go beyond the scroll. We connect you with a <br></br>network of advertising opportunities to <br />create impactful campaigns across India.
                 </Typography>
                 <div className="flex gap-2">
                   <Button
@@ -124,8 +123,8 @@ const CarouselWithContent = () => {
                       {(user) => (
                         <SelectItem key={user.id} textValue={user.name}>
                           <div className="flex gap-2 items-center">
-                         
-                            <Avatar alt={user.name} className="flex-shrink-0" size="sm" src={`http://localhost:3009${user.image_url}`} />
+
+                            <Avatar alt={user.name} className="flex-shrink-0" size="sm" src={`${user.image_url}`} />
                             <div className="flex flex-col">
                               <span className="text-small">{user.name}</span>
                             </div>
@@ -147,7 +146,7 @@ const CarouselWithContent = () => {
                           <Image
                               alt={user.name}
                               className="w-6 h-6"
-                              src={`http://localhost:3009${user.image_url}`}
+                              src={`${user.image_url}`}
                             />
                             <div className="flex flex-col">
                               <span className="text-small">{user.name}</span>
@@ -206,3 +205,4 @@ const CarouselWithContent = () => {
   );
 };
 export default CarouselWithContent;
+
