@@ -2,8 +2,12 @@
 import { CardBody, CardFooter, Typography } from "@material-tailwind/react";
 import { Button, Card } from "@nextui-org/react";
 import React from 'react';
+import { useRouter } from "next/navigation";
+
 
 const CardSecond = () => {
+
+  const router = useRouter();
 
   const [deviceSize, setDeviceSize] = React.useState('sm');
 
@@ -59,27 +63,28 @@ const CardSecond = () => {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0 flex justify-center items-center">
-          <a href="#" className="inline-block">
-            <Button 
+
+          <Button
             size={deviceSize}
-              variant="ghost" className="m-auto gap-2 text-black">
-              Learn More
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="h-4 w-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                />
-              </svg>
-            </Button>
-          </a>
+            onClick={() => { router.push(`/BlogMain?id=1`); }}
+            variant="ghost" className="m-auto gap-2 text-black">
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-4 w-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+              />
+            </svg>
+          </Button>
+
         </CardFooter>
       </Card>
     </div>

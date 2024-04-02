@@ -11,6 +11,21 @@ import {
 import { Button } from "@nextui-org/react";
 import React from "react";
 import { useRouter } from "next/navigation";
+
+function truncateDescription(description) {
+  if (description.length > 200) {
+    return `${description.slice(0, 200)}...`;
+  }
+  return description;
+}
+
+function truncatetitle(description) {
+  if (description.length > 15) {
+    return `${description.slice(0, 25)}...`;
+  }
+  return description;
+}
+
 export function BookingCard() {
   const [cartItems, setCartItems] = React.useState([]);
   const route = useRouter();
@@ -26,7 +41,7 @@ export function BookingCard() {
           return;
         }
 
-        const response = await fetch("http://localhost:3009/cart/view-cart", {
+        const response = await fetch("http://3.7.191.31:3009/cart/view-cart", {
           method: "GET",
           headers: {
             Authorization: token,
@@ -44,13 +59,9 @@ export function BookingCard() {
         console.error("Error fetching cart items", error);
       }
     };
-
-    // Call the fetchCartItems function when the component mounts
     fetchCartItems();
-  }, []); // The empty dependency array ensures that this effect runs only once on mount
+  }, []);
 
-
-  // Function to handle order from the cart
   const handlePlaceOrder = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -60,14 +71,12 @@ export function BookingCard() {
         return;
       }
 
-      const response = await fetch("http://localhost:3009/order/place-order", {
+      const response = await fetch("http://3.7.191.31:3009/order/place-order", {
         method: "POST",
         headers: {
           Authorization: token,
-          "Content-Type": "application/json", // Add this header for JSON content
+          "Content-Type": "application/json",
         },
-        // You may need to send additional data in the request body if required by your API
-        // Example: body: JSON.stringify({ key: value }),
       });
 
       const data = await response.json();
@@ -99,34 +108,36 @@ export function BookingCard() {
         </Typography>
         <div className="px-12 py-4 flex flex-wrap justify-between">
           {cartItems.map((item) => (
-            <Card className="lg:w-1/4 md:w-1/3 w-full h-[33rem] shadow-lg mb-8" key={item.id}>
-              <CardHeader floated={false} color="blue-gray" className="h-60">
+            <Card className="lg:w-1/4 md:w-2/3 w-full h-[33rem] shadow-lg mb-8" key={item.id}>
+              <CardHeader floated={false} color="blue-gray" className="object-contain w-76 h-76" >
                 <img
-                  src={`http://localhost:3009${item.Service.image_url}`}
+
+                  src={`${item.Service.image_url}`}
                   alt="ui/ux review check"
                 />
-                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <IconButton
-                  size="sm"
-                  color="red"
-                  variant="text"
-                  className="!absolute top-4 right-4 rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-6 w-6"
+                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 ">
+                  <IconButton
+                    size="sm"
+                    color="red"
+                    variant="text"
+                    className="!absolute top-4 right-4 rounded-full"
                   >
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                  </svg>
-                </IconButton>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                    </svg>
+                  </IconButton>
+                </div>
               </CardHeader>
               <CardBody className="items-end">
                 <div className="mb-3 flex items-center justify-between">
                   <Typography variant="h5" color="blue-gray" className="font-medium">
 
-                    {item.Service.name}
+                    {truncatetitle(item.Service.name)}
                   </Typography>
                   <Typography
                     color="blue-gray"
@@ -148,7 +159,7 @@ export function BookingCard() {
                   </Typography>
                 </div>
                 <Typography color="gray">
-                  {item.Service.description}
+                  {truncateDescription(item.Service.description)}
                 </Typography>
                 <div className="group mt-8 inline-flex flex-wrap items-center gap-3">
                   <Tooltip content={`Quantity-${item.quantity}`}>
@@ -170,7 +181,7 @@ export function BookingCard() {
                   <Tooltip content="View Service">
                     <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 hover:text-white text-gray-900 transition-colors hover:border-gray-900/10  hover:bg-blue-500 hover:!opacity-100 group-hover:opacity-70">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" onClick={() => {
-                        route.push(`/ProductMain?serviceID=${item.Service.id}`)
+                        route.push(`/ProductMain/${item.Service.id}`)
                       }}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -197,7 +208,7 @@ export function BookingCard() {
             </Card>
           ))}
 
-        </div>
+        </div >
         <div className="flex justify-center">
           <Button
             size="lg"

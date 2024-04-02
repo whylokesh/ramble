@@ -24,7 +24,7 @@ const TimelineWithIcon = () => {
   const [isLastStep, setIsLastStep] = React.useState(false);
   const [isFirstStep, setIsFirstStep] = React.useState(false);
   const [imageSrc, setImageSrc] = React.useState(
-    "https://images.pexels.com/photos/1486222/pexels-photo-1486222.jpeg?auto=compress&cs=tinysrgb&w=600"
+    "images/1.png"
   );
   const handleNext = () => {
     if (!isLastStep) {
@@ -32,25 +32,25 @@ const TimelineWithIcon = () => {
       setIsFirstStep(false);
       setImageSrc(
         [
-          "https://images.pexels.com/photos/1486222/pexels-photo-1486222.jpeg?auto=compress&cs=tinysrgb&w=600",
-          "https://images.pexels.com/photos/947177/pexels-photo-947177.jpeg?auto=compress&cs=tinysrgb&w=600",
-          "https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg?auto=compress&cs=tinysrgb&w=600",
-          "https://images.pexels.com/photos/258447/pexels-photo-258447.jpeg?auto=compress&cs=tinysrgb&w=600"
+          "images/1.png",
+          "images/2.png",
+          "images/3.png",
+          "images/4.png",
         ][activeStep + 1]
       );
     }
   };
   const stepTexts = [
-    "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem",
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur."
+    "Tell Us Your Vision : clients share their target audience, desired locations, and any preferences they have for their advertising campaign.",
+    "We Find Your Perfect Spot : Our team uses your input to research and identify the best advertising locations within your targeted areas.",
+    "Your Approval & Permissions Secured : Once you've chosen the ideal locations, we obtain necessary approvals from both you and the relevant authorities.",
+    "Ramble Comes to Life! We take care of the entire production process, including printing, installation, and ensuring your ad makes a Ramble!"
   ];
   const stepImages = [
-    "https://images.pexels.com/photos/1486222/pexels-photo-1486222.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/947177/pexels-photo-947177.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/430207/pexels-photo-430207.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/258447/pexels-photo-258447.jpeg?auto=compress&cs=tinysrgb&w=600"
+    "images/1.png",
+    "images/2.png",
+    "images/3.png",
+    "images/4.png",
   ];
   useEffect(() => {
     const interval = setInterval(() => {
@@ -79,7 +79,7 @@ const TimelineWithIcon = () => {
       >
         <CardBody className="flex flex-col justify-center items-center overflow-y-hidden">
           <Typography
-          
+
             variant="h3"
             color="blue-gray"
             className="mb-2 lg:mt-0 md:mt-0 mt-12  text-3xl md:text-4xl lg:text-6xl bg-gradient-to-r from-[#F5A524] to-[#FF705B]  bg-clip-text text-transparent "
@@ -99,7 +99,7 @@ const TimelineWithIcon = () => {
           isFirstStep={(value) => setIsFirstStep(value)}
         >
           <Step onClick={() => setActiveStep(0)}>
-            <UserIcon className="h-5 w-5"  onClick={handleNext}/>
+            <UserIcon className="h-5 w-5" onClick={handleNext} />
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
@@ -148,7 +148,7 @@ const TimelineWithIcon = () => {
             </div>
           </Step>
           <Step onClick={() => setActiveStep(2)}>
-            <CogIcon className="h-5 w-5" onClick={handleNext}/>
+            <CogIcon className="h-5 w-5" onClick={handleNext} />
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
@@ -165,7 +165,7 @@ const TimelineWithIcon = () => {
             </div>
           </Step>
           <Step onClick={() => setActiveStep(3)}>
-            <BuildingLibraryIcon className="h-5 w-5" onClick={handleNext}/>
+            <BuildingLibraryIcon className="h-5 w-5" onClick={handleNext} />
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
@@ -182,19 +182,19 @@ const TimelineWithIcon = () => {
             </div>
           </Step>
         </Stepper>
-        <div className="mt-32 flex justify-between items-center flex-wrap">
+        <div className="mt-32 flex justify-between items-center lg:flex-nowrap flex-wrap">
           <Image
-           className="w-4/5 h-full lg:m-0 md:m-auto m-auto"
+            className="w-3/5 h-full lg:m-0 md:m-auto m-auto"
             alt="NextUI hero Image"
             src={imageSrc}
           />
-             <Typography
-                  variant="lead"
-                  color="white"
-                  className="mb-12 text-sm md:text-sm lg:text-xl lg:mt-0 md:mt-10 mt-8 lg:w-2/5 md:w-[29rem] overflow-y-hidden w-0 lg:h-auto md:h-auto h-0 lg:visible md:visible invisible"
-                >
-                 {stepTexts[activeStep]}
-                </Typography>
+          <Typography
+            variant="lead"
+            color="white"
+            className="mb-12 text-sm md:text-sm lg:text-xl lg:mt-0 md:mt-10 mt-8 lg:w-2/5 md:w-[29rem] overflow-y-hidden w-0 lg:h-auto md:h-auto h-0 lg:visible md:visible invisible"
+          >
+            {stepTexts[activeStep]}
+          </Typography>
         </div>
       </div>
     </>

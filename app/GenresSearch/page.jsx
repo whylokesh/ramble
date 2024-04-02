@@ -6,7 +6,7 @@ import Filters from "./GenresComponents/SearchFilters/page";
 import GenresCard from "./GenresComponents/cards/page";
 import AboutCard from "./GenresComponents/AboutUsCard/page";
 import BlogmainSection from "./GenresComponents/BlogSectionMain/page";
-import { FooterWithSocialLinks } from "../components/footer/page";
+import { FooterWithSocialLinks } from "../components/footer/FooterForMain";
 import Nav from "../navbar/page";
 const GenresMain = () => {
   return (

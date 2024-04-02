@@ -30,13 +30,14 @@ export function CardDefault() {
 
   const [descripiton, setdescripiton] = React.useState("");
   const [title, settitle] = React.useState("");
+  const [imageurl, setimageurl] = React.useState("");
   const [blogs, setBlogs] = React.useState([]);
 
   const { toggle: toggleModal } = useDisclosure();
   const openFirstModal = () => setOpenFirstModal(true);
   const closeFirstModal = () => {
     setOpenFirstModal(false);
-    setSelectedImage(null); // Clear selected image on modal close
+    setSelectedImage(null);
   };
 
   const handleImageChange = (e) => {
@@ -56,7 +57,7 @@ export function CardDefault() {
 
   React.useEffect(() => {
     // Make API call to fetch blogs
-    fetch("http://localhost:3009/all-blogs")
+    fetch("http://3.7.191.31:3009/all-blogs")
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data.data);
@@ -70,20 +71,28 @@ export function CardDefault() {
     const token = localStorage.getItem("token"); // Replace with your actual token key
 
     const formData = new FormData();
-    formData.append("image", selectedFile);
+    formData.append("imageUrl", imageurl);
     formData.append("title", title);
     formData.append("description", descripiton);
 
-    fetch("http://localhost:3009/admin/add-blog", {
+    const blogData = JSON.stringify({
+      title: title,
+      description: descripiton,
+      imageUrl: imageurl
+    })
+
+    fetch("http://3.7.191.31:3009/admin/add-blog", {
       method: "POST",
-      body: formData,
+      body: blogData,
       headers: {
+        "Content-Type": "application/json",
         Authorization: token, // Include the token in the headers
         // Add any other required headers
       },
     })
       .then((response) => response.json())
       .then((data) => {
+        if(data.success === true){
         console.log("Response from server:", data);
         closeFirstModal();
         settitle("");
@@ -91,7 +100,10 @@ export function CardDefault() {
         //
         toast.success("Added Successfully");
         window.location.reload();
-        // toggleModal(); // Close the modal after successful submission
+        }
+        else{
+          toast.error(data.message)
+        }
       })
       .catch((error) => {
         console.error("Error posting data:", error);
@@ -106,7 +118,7 @@ export function CardDefault() {
   const handleDelete = (blogId) => {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3009/admin/delete-blog?id=${blogId}`, {
+    fetch(`http://3.7.191.31:3009/admin/delete-blog?id=${blogId}`, {
       method: "DELETE",
       headers: {
         Authorization: token,
@@ -117,7 +129,7 @@ export function CardDefault() {
         console.log("Response from server:", data);
         toast.success("Blog deleted successfully");
         // Fetch the updated blog list after deletion
-        fetch("http://localhost:3009/all-blogs")
+        fetch("http://3.7.191.31:3009/all-blogs")
           .then((response) => response.json())
           .then((data) => {
             setBlogs(data.data);
@@ -161,7 +173,7 @@ export function CardDefault() {
           <Card className="mt-9 w-96">
             <CardHeader color="blue-gray" className="relative h-56 mt-6">
               <img
-                src={`http://localhost:3009${blog.image_url}`}
+                src={`${blog.image_url}`}
                 alt="card-image"
               />
             </CardHeader>
@@ -203,28 +215,12 @@ export function CardDefault() {
                 Location Filters
               </ModalHeader>
               <ModalBody>
-                <div className="flex flex-col gap-3">
-                  {/* File Input for Image Upload */}
                   <Input
-                    type="file"
-                    value={null}
-                    onChange={(event) => {
-                      const file = event.target.files[0];
-                      if (file) {
-                        setSelectedFile(file);
-                      }
-                    }}
-                    className="mb-4"
+                  value={imageurl}
+                  label="Enter image URL"
+                  onChange={(e)=> {setimageurl(e.target.value)}}
                   />
-                  {/* Image preview */}
-                  {selectedFile && (
-                    <img
-                      src={URL.createObjectURL(selectedFile)}
-                      alt="Selected Preview"
-                      className="w-3/5 mb-4 flex justify-center items-center m-auto"
-                    />
-                  )}
-                </div>
+               
                 <Input
                   label="Blog Name"
                   value={title}

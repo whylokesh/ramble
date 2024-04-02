@@ -91,7 +91,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch("http://localhost:3009/user/register", {
+      const response = await fetch("http://3.7.191.31:3009/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -178,6 +178,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
 };
 
 export default function Nav() {
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   // const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [isOpenFirstModal, setOpenFirstModal] = React.useState(false);
@@ -205,7 +206,7 @@ export default function Nav() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:3009/user/login", {
+      const response = await fetch("http://3.7.191.31:3009/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -215,20 +216,24 @@ export default function Nav() {
           password,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (data.success) {
         // Login successful, handle success scenario
-  
+
         setIsLoggedIn(true); // Set login status to true
         setIsAdmin(data.data.admin === true); // Set isAdmin based on the response
         localStorage.setItem("token", data.data.token)
         console.log("User logged in successfully");
         toast.success("Logged in Successfully")
+        if (data.data.admin === true) {
+          localStorage.setItem("isAdmin", "true");
+        }
         // onClose(); // Close the modal on successful login
       } else {
         // Handle login failure
+        toast.error("Logged in failed")
         console.error("Login failed:", data);
       }
     } catch (error) {
@@ -242,7 +247,7 @@ export default function Nav() {
       try {
         setIsSearching(true);
         const response = await fetch(
-          `http://localhost:3009/search/particular-service?searchTerm=${searchTerm}`
+          `http://3.7.191.31:3009/search/particular-service?searchTerm=${searchTerm}`
         );
         const data = await response.json();
 
@@ -281,17 +286,15 @@ export default function Nav() {
 
 
   React.useEffect(() => {
-    // Check for the presence of the token during page load
+    const AdminValue = localStorage.getItem("isAdmin")
     const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
       // If the token is present, consider the user as logged in
       setIsLoggedIn(true);
-    
-      // Optionally, you can make an API call to get user details, including admin status
-      // and set the isAdmin state accordingly.
-
-      // For now, let's assume the user is an admin.
+    }
+    const IsAdmin = localStorage.getItem("isAdmin") === "true";
+    if (IsAdmin) {
       setIsAdmin(true);
     }
   }, []);
@@ -299,6 +302,7 @@ export default function Nav() {
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("token")
+    localStorage.removeItem("isAdmin")
   }
 
   const [value, setValue] = React.useState('');
@@ -317,16 +321,19 @@ export default function Nav() {
     if (selectedKey !== null && searchResults.length > 0) {
       const selectedService = searchResults.find((item) => item.name === selectedKey);
       if (selectedService) {
-        route.push(`/ProductMain?serviceID=${selectedService.id}`);
+        route.push(`/ProductMain/${selectedService.id}`);
       }
     }
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   };
 
 
 
 
   return (
-    <div className="navbar px-7">
+    <div className="navbar lg:px-7 md:px-7 px-1 overflow-x-hidden">
       <Navbar
         isBordered
         isMenuOpen={isMenuOpen}
@@ -341,10 +348,10 @@ export default function Nav() {
 
         <NavbarContent justify="start" className="max-w-full ">
           <NavbarBrand className="mr-4 ">
-            <AcmeLogo />
+            <img src="./logomain.png" alt="Ramble group" className="m-1 w-12 h-12" />
             <Link href="/">
               <p className="hidden sm:block font-bold text-inherit text-xl" >
-                Ramble Agency
+                Ramble Group
               </p>
             </Link>
           </NavbarBrand>
@@ -383,7 +390,7 @@ export default function Nav() {
             )}
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="#">
+            <Link color="foreground" href="/AboutUsMain">
               About us
             </Link>
           </NavbarItem>
@@ -397,21 +404,9 @@ export default function Nav() {
           <NavbarItem>
             {isLoggedIn ? (
               // Render the SVG when logged in
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="black"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 "
-                onClick={handleLogout}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                />
-              </svg>
+              <Button color="warning" variant="flat" onClick={handleLogout}>
+                Logout
+              </Button>
 
             ) : (
               <Link color="foreground" href="#">
@@ -449,7 +444,7 @@ export default function Nav() {
                           />
                           <div className="flex py-2 px-1 justify-between">
                             <Link color="primary" href="#" size="sm">
-                              Forgot password?
+
                             </Link>
                             <Link
                               color="primary"

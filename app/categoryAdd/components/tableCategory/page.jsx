@@ -19,8 +19,8 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Select, SelectSection, SelectItem, Avatar } from "@nextui-org/react";
 
 const SearchIcon = ({
@@ -65,42 +65,39 @@ export default function App() {
   const openFirstModal = () => setOpenFirstModal(true);
   const closeFirstModal = () => {
     setOpenFirstModal(false);
-    setSelectedImage(null);
+    
   };
 
   const [searchInput, setSearchInput] = React.useState(""); // New state for search input
+  const [imageUrl, setImageUrl] = React.useState(""); // New state for image URL
 
-  const [selectedImage, setSelectedImage] = React.useState(null);
-  const [selectedFile, setSelectedFile] = React.useState(null);
   const [name, setName] = React.useState("");
   const [descripiton, setdescripiton] = React.useState("");
 
   const [CategoryName, setCategoryName] = React.useState("");
   const [State, setState] = React.useState("");
-  const [Location, setLocation] = React.useState("");
-  const [Price, setPrice] = React.useState("");
-  const [code, setCode] = React.useState("");
-  const [Media, setMedia] = React.useState("");
-  const [FTF, setFtf] = React.useState("");
-  const [TotalArea, setTotalArea] = React.useState("");
-  const [size, setSize] = React.useState("");
+
   const [categories, setCategories] = React.useState([]);
   const [states, setStates] = React.useState([]);
-
-  const [Services, setServices] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
   const handleSubmit = () => {
     const token = localStorage.getItem("token"); // Replace with your actual token key
 
     const formData = new FormData();
-    formData.append("image", selectedFile);
     formData.append("name", name);
     formData.append("description", descripiton);
+    formData.append("imageUrl", imageUrl);
 
-    fetch("http://localhost:3009/admin/add-category", {
+    const categoryData = JSON.stringify({
+      name: name,
+      descripiton: descripiton,
+      imageUrl: imageUrl
+    })
+
+    fetch("http://3.7.191.31:3009/admin/add-category", {
       method: "POST",
-      body: formData,
+      body: categoryData,
       headers: {
+        "Content-Type": "application/json",
         Authorization: token, // Include the token in the headers
         // Add any other required headers
       },
@@ -109,16 +106,15 @@ export default function App() {
       .then((data) => {
         console.log("Response from server:", data);
         closeFirstModal();
-        toast.success("Category added successfully")
-        window.location.reload();
-
+        if (data.success) {
+          toast.success("Category added successfully");
+        }
       })
       .catch((error) => {
         console.error("Error posting data:", error);
-        toast.error("Error Adding Category",error)
+        toast.error("Error Adding Category", error);
       });
   };
-
 
   const filteredCategories = categories.filter((categories) =>
     categories.name.toLowerCase().includes(searchInput.toLowerCase())
@@ -150,7 +146,7 @@ export default function App() {
   const handleDelete = () => {
     const token = localStorage.getItem("token"); // Replace with your actual token key
 
-    fetch(`http://localhost:3009/admin/delete-category?id=${deleteItemId}`, {
+    fetch(`http://3.7.191.31:3009/admin/delete-category?id=${deleteItemId}`, {
       method: "DELETE",
       headers: {
         Authorization: token,
@@ -171,7 +167,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3009/categories");
+        const response = await fetch("http://3.7.191.31:3009/categories");
         const data = await response.json();
 
         if (data.success) {
@@ -190,7 +186,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await fetch("http://localhost:3009/states");
+        const response = await fetch("http://3.7.191.31:3009/states");
         const data = await response.json();
 
         if (data.success) {
@@ -206,26 +202,25 @@ export default function App() {
     fetchStates();
   }, []);
 
-
   const handleSelectionChange = (e) => {
     setState(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
 
   const handleCategoryChange = (e) => {
     setCategoryName(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
 
   return (
     <div className="lg:px-16 md:px-12 px-8">
-      <h1 className="font-bold bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent text-4xl px-8 mt-6 flex justify-center items-center mb-8">
+      <h1 className="font-bold bg-gradient-to-r py-2 from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent text-3xl md:text-4xl lg:text-6xl px-8 mt-6 flex justify-center items-center mb-8">
         Add Categories
       </h1>
       <div className="flex justify-between">
         <Input
           type="Location"
-          label="Search For Service Name"
+          label="Search For Category Name"
           endContent={
             <SearchIcon
               size={18}
@@ -290,14 +285,14 @@ export default function App() {
               <TableCell>{item.id}</TableCell>
               <TableCell>
                 <img
-                  src={`http://localhost:3009${item.image_url}`}
+                  src={`${item.image_url}`}
                   alt={`${item.name}'s Avatar`}
                   className="w-8 h-8 rounded-full"
                 />
               </TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.description}</TableCell>
-           
+
               <TableCell>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -329,24 +324,11 @@ export default function App() {
               </ModalHeader>
               <ModalBody>
                 <Input
-                  type="file"
-                  value={null}
-                  onChange={(event) => {
-                    const file = event.target.files[0];
-                    if (file) {
-                      setSelectedFile(file);
-                    }
-                  }}
-                  className="mb-4"
+                  label="Image URL"
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                  className=""
                 />
-                {/* Image preview */}
-                {selectedFile && (
-                  <img
-                    src={URL.createObjectURL(selectedFile)}
-                    alt="Selected Preview"
-                    className="w-3/5 mb-4 flex justify-center items-center m-auto"
-                  />
-                )}
                 <Input
                   label="Category Name"
                   value={name}
