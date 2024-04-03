@@ -18,7 +18,7 @@ export async function GET() {
         return NextResponse.json({
             success: true,
             data: states,
-        });
+        }, { status: 200 });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ error: 'Database error' }, { status: 500 });
