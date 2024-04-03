@@ -10,10 +10,12 @@ const db = mysql.createPool({
 
 export async function GET() {
     try {
-        const [states] = await db.query('SELECT * FROM States');
+        // Retrieve all blogs
+        const [blogs] = await db.query('SELECT id, image_url, title FROM Blogs');
+
         return NextResponse.json({
             success: true,
-            data: states,
+            data: blogs,
         }, { status: 200 });
     } catch (error) {
         console.error(error);

@@ -10,10 +10,17 @@ const db = mysql.createPool({
 
 export async function GET() {
     try {
-        const [states] = await db.query('SELECT * FROM States');
+        // Retrieve the latest 20 blogs with specific fields
+        const [blogs] = await db.query(`
+            SELECT id, image_url, title
+            FROM Blogs
+            ORDER BY createdAt DESC
+            LIMIT 20
+        `);
+
         return NextResponse.json({
             success: true,
-            data: states,
+            data: blogs,
         }, { status: 200 });
     } catch (error) {
         console.error(error);

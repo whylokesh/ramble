@@ -10,10 +10,17 @@ const db = mysql.createPool({
 
 export async function GET() {
     try {
-        const [states] = await db.query('SELECT * FROM States');
+        const [categories] = await db.query('SELECT * FROM Categories');
+
+        // Construct image URLs
+        const categoriesWithImageUrls = categories.map((category) => ({
+            ...category,
+            image_url: category.image_url.includes(',') ? category.image_url.split(',') : [category.image_url],
+        }));
+
         return NextResponse.json({
             success: true,
-            data: states,
+            data: categoriesWithImageUrls,
         }, { status: 200 });
     } catch (error) {
         console.error(error);
