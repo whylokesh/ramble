@@ -10,7 +10,7 @@ const db = mysql.createPool({
 
 export async function GET() {
     try {
-        const [rows] = await db.query('SELECT * FROM states');
+        const [rows] = await db.query('SELECT * FROM States');
         return NextResponse.json(rows);
     } catch (error) {
         console.error(error);
