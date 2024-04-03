@@ -40,7 +40,7 @@ const CarouselWithContent = () => {
   React.useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await fetch("http://3.7.191.31:3009/states");
+        const response = await fetch("api/states");
         const data = await response.json();
 
         if (data.success) {
