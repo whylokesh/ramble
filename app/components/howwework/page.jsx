@@ -87,7 +87,7 @@ const TimelineWithIcon = () => {
             How We Work ?
           </Typography>
           <Typography className="p-4 text-base md:text-lg lg:text-xl font-bold mt-2 text-white">
-            Exactly we Provide is in Front Of Yours Try Out and Enjoy Our Work
+            We offer exactly what you see in front of you. Give it a try and enjoy our work!
           </Typography>
         </CardBody>
       </Card>

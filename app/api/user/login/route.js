@@ -39,7 +39,7 @@ export async function POST(request) {
 
         // Generate a JWT token
         const jwtSecretKey = process.env.JWT_SECRET_KEY;
-        const token = jwt.sign({ userId: user.id }, jwtSecretKey);
+        const token = jwt.sign({ userId: user[0].id }, jwtSecretKey);
 
         // Respond with the user data and token
         return NextResponse.json({
