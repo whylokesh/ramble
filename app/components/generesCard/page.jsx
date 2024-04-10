@@ -12,7 +12,7 @@ const Genres = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://3.7.191.31:3009/categories");
+        const response = await fetch("api/categories");
         const data = await response.json();
 
         if (data.success) {

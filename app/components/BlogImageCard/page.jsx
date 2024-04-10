@@ -1,14 +1,14 @@
 "use client"
 import React from "react";
-import {Card, CardFooter, Image, Button} from "@nextui-org/react";
+import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import { Typography } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
-const ImagesCard =()=> {
+const ImagesCard = () => {
   const [blogImages, setBlogImages] = React.useState([]);
   const route = useRouter();
   React.useEffect(() => {
     // Make API call when the component mounts
-    fetch("http://3.7.191.31:3009/latest-blogs")
+    fetch("api/latest-blogs")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -20,7 +20,7 @@ const ImagesCard =()=> {
       .catch((error) => console.error("API call error:", error));
   }, []);
   const handleImageClick = (id) => {
- 
+
     // Navigate to "/BlogMain?id=" with the clicked image id
     route.push(`/BlogMain?id=${id}`);
   };

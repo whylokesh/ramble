@@ -45,9 +45,9 @@ export async function POST(request) {
         return NextResponse.json({
             success: true,
             data: {
-                userId: user.id,
-                fullName: user.full_name,
-                admin: user.is_admin,
+                userId: user[0].id,
+                fullName: user[0].full_name,
+                admin: user[0].is_admin,
                 token: token,
             },
         }, { status: 200 });

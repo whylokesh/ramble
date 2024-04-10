@@ -11,7 +11,7 @@ const GeneresCardScrolling = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://3.7.191.31:3009/categories");
+        const response = await fetch("api/categories");
         const data = await response.json();
 
         if (data.success) {
@@ -27,12 +27,12 @@ const GeneresCardScrolling = () => {
 
   const handleCategoryClick = (categoryId) => {
     // Construct the new URL with the updated category ID
-    
+
     const newUrl = `/GenresSearch?categoryId=${categoryId}&stateId=`;
 
     // Use the `push` method to update the URL and navigate
     router.push(newUrl);
-    
+
     setTimeout(() => {
       window.location.reload();
     }, 500);

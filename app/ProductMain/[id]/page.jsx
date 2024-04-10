@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
 
     try {
         const response = await fetch(
-            `http://3.7.191.31:3009/search/service-details?serviceId=${serviceID}`
+            `api/search/service-details?serviceId=${serviceID}`
         );
 
         if (response.ok) {
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
                 description: service.description,
             };
 
-        } 
+        }
     } catch (error) {
         console.error("Error fetching service details:", error);
     }

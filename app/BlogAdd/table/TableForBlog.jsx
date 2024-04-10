@@ -57,7 +57,7 @@ export function CardDefault() {
 
   React.useEffect(() => {
     // Make API call to fetch blogs
-    fetch("http://3.7.191.31:3009/all-blogs")
+    fetch("api/all-blogs")
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data.data);
@@ -81,7 +81,7 @@ export function CardDefault() {
       imageUrl: imageurl
     })
 
-    fetch("http://3.7.191.31:3009/admin/add-blog", {
+    fetch("api/admin/add-blog", {
       method: "POST",
       body: blogData,
       headers: {
@@ -92,16 +92,16 @@ export function CardDefault() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if(data.success === true){
-        console.log("Response from server:", data);
-        closeFirstModal();
-        settitle("");
-        setdescripiton("");
-        //
-        toast.success("Added Successfully");
-        window.location.reload();
+        if (data.success === true) {
+          console.log("Response from server:", data);
+          closeFirstModal();
+          settitle("");
+          setdescripiton("");
+          //
+          toast.success("Added Successfully");
+          window.location.reload();
         }
-        else{
+        else {
           toast.error(data.message)
         }
       })
@@ -118,7 +118,7 @@ export function CardDefault() {
   const handleDelete = (blogId) => {
     const token = localStorage.getItem("token");
 
-    fetch(`http://3.7.191.31:3009/admin/delete-blog?id=${blogId}`, {
+    fetch(`api/admin/delete-blog?id=${blogId}`, {
       method: "DELETE",
       headers: {
         Authorization: token,
@@ -129,7 +129,7 @@ export function CardDefault() {
         console.log("Response from server:", data);
         toast.success("Blog deleted successfully");
         // Fetch the updated blog list after deletion
-        fetch("http://3.7.191.31:3009/all-blogs")
+        fetch("api/all-blogs")
           .then((response) => response.json())
           .then((data) => {
             setBlogs(data.data);
@@ -184,7 +184,7 @@ export function CardDefault() {
             </CardBody>
             <CardFooter>
               <div className="flex justify-between">
-                <Button  color="primary"
+                <Button color="primary"
                   onPress={() => handleView(blog.id)}>
                   View
                 </Button>
@@ -215,12 +215,12 @@ export function CardDefault() {
                 Location Filters
               </ModalHeader>
               <ModalBody>
-                  <Input
+                <Input
                   value={imageurl}
                   label="Enter image URL"
-                  onChange={(e)=> {setimageurl(e.target.value)}}
-                  />
-               
+                  onChange={(e) => { setimageurl(e.target.value) }}
+                />
+
                 <Input
                   label="Blog Name"
                   value={title}

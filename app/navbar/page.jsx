@@ -91,7 +91,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch("http://3.7.191.31:3009/user/register", {
+      const response = await fetch("api/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -206,7 +206,7 @@ export default function Nav() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://3.7.191.31:3009/user/login", {
+      const response = await fetch("api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -227,7 +227,7 @@ export default function Nav() {
         localStorage.setItem("token", data.data.token)
         console.log("User logged in successfully");
         toast.success("Logged in Successfully")
-        if (data.data.admin === true) {
+        if (data.data.admin === 1) {
           localStorage.setItem("isAdmin", "true");
         }
         // onClose(); // Close the modal on successful login
@@ -247,7 +247,7 @@ export default function Nav() {
       try {
         setIsSearching(true);
         const response = await fetch(
-          `http://3.7.191.31:3009/search/particular-service?searchTerm=${searchTerm}`
+          `api/search/particular-service?searchTerm=${searchTerm}`
         );
         const data = await response.json();
 

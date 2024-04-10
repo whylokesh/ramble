@@ -163,7 +163,7 @@ export default function App() {
       size: size,
     });
 
-    fetch("http://3.7.191.31:3009/admin/add-service", {
+    fetch("api/admin/add-service", {
       method: "POST",
       body: Data,
       headers: {
@@ -203,7 +203,7 @@ export default function App() {
       });
 
       try {
-        const response = await fetch("http://3.7.191.31:3009/admin/bulk-add-services", {
+        const response = await fetch("api/admin/bulk-add-services", {
           method: "POST",
           body: data,
           headers: {
@@ -242,7 +242,7 @@ export default function App() {
 
   React.useEffect(() => {
     // Fetch data from the API
-    fetch("http://3.7.191.31:3009/services")
+    fetch("api/services")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -286,7 +286,7 @@ export default function App() {
   const handleDelete = () => {
     const token = localStorage.getItem("token"); // Replace with your actual token key
 
-    fetch(`http://3.7.191.31:3009/admin/delete-service?id=${deleteItemId}`, {
+    fetch(`api/admin/delete-service?id=${deleteItemId}`, {
       method: "DELETE",
       headers: {
         Authorization: token,
@@ -307,7 +307,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://3.7.191.31:3009/categories");
+        const response = await fetch("api/categories");
         const data = await response.json();
 
         if (data.success) {
@@ -326,7 +326,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await fetch("http://3.7.191.31:3009/states");
+        const response = await fetch("api/states");
         const data = await response.json();
 
         if (data.success) {

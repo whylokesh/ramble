@@ -38,7 +38,7 @@ export function SimpleRegistrationForm() {
     try {
 
       // Make POST request to the new API URL with authorization header
-      const response = await fetch("http://3.7.191.31:3009/add-user-to-newsletter", {
+      const response = await fetch("api/add-user-to-newsletter", {
         method: "POST",
         body: JSON.stringify({ name, email }),
         headers: {

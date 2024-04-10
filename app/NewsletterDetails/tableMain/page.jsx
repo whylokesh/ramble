@@ -18,7 +18,7 @@ export default function TableMain() {
             try {
                 const token = localStorage.getItem("token"); // Replace with your actual token key
                 const response = await fetch(
-                    "http://3.7.191.31:3009/admin/get-all-users-from-newsletter",
+                    "api/admin/get-all-users-from-newsletter",
                     {
                         headers: {
                             Authorization: token,
@@ -42,22 +42,22 @@ export default function TableMain() {
     return (
         <>
             <h1 className="font-bold bg-gradient-to-r from-[#F5A524] pt-4 to-[#FF705B] to-danger to-[#FF6890]  bg-clip-text text-transparent text-3xl md:text-4xl lg:text-6xl px-8 mt-6 flex justify-center items-center mb-8">
-               NewsLetter Details
+                NewsLetter Details
             </h1>
-        <Table isStriped aria-label="Example static collection table" className="lg:px-12 md:px-6 px-4 py-16">
-            <TableHeader>
-                <TableColumn>NAME</TableColumn>
-                <TableColumn>EMAIL</TableColumn>
-            </TableHeader>
-            <TableBody>
-                {userData.map((user, index) => (
-                    <TableRow key={index}>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.email}</TableCell>
-                    </TableRow>
-                ))}
-            </TableBody>
-        </Table>
+            <Table isStriped aria-label="Example static collection table" className="lg:px-12 md:px-6 px-4 py-16">
+                <TableHeader>
+                    <TableColumn>NAME</TableColumn>
+                    <TableColumn>EMAIL</TableColumn>
+                </TableHeader>
+                <TableBody>
+                    {userData.map((user, index) => (
+                        <TableRow key={index}>
+                            <TableCell>{user.name}</TableCell>
+                            <TableCell>{user.email}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
         </>
     );
 }

@@ -24,7 +24,7 @@ export async function GET(request) {
         // Construct the SQL query to retrieve service details by ID with associated models
         const query = `
             SELECT 
-                s.*, c.*, st.*
+                s.*, c.name AS category_name, st.name AS state_name
             FROM 
                 Services s
             LEFT JOIN 
@@ -62,3 +62,4 @@ export async function GET(request) {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
+

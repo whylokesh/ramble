@@ -42,7 +42,7 @@ const AboutCard = () => {
     // Make an API call to get data based on stateId and categoryId
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://3.7.191.31:3009/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}`);
+        const response = await fetch(`api/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}`);
         const data = await response.json();
 
         if (data.success) {
