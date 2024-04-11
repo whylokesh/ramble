@@ -71,6 +71,11 @@ export default function HorizontalCard({ serviceID }) {
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("Please login first");
+        return;
+      }
+  
       const response = await fetch("/api/cart/add-to-cart", {
         method: "POST",
         headers: {
@@ -82,7 +87,7 @@ export default function HorizontalCard({ serviceID }) {
           quantity: quantity,
         }),
       });
-
+  
       if (response.ok) {
         console.log("Item added to cart successfully");
         toast.success("Added Successfully");
@@ -96,6 +101,7 @@ export default function HorizontalCard({ serviceID }) {
       toast.error("Error adding Product", error);
     }
   };
+  
 
   return (
     <>
