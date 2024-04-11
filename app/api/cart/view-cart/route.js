@@ -20,7 +20,7 @@ export async function GET(request) {
 
         // Retrieve cart items for the user
         const [cartItems] = await db.query(`
-            SELECT CartItems.*, Services.image_url
+            SELECT CartItems.*, Services.name, Services.image_url, Services.description, Services.price
             FROM CartItems
             INNER JOIN Services ON CartItems.service_id = Services.id
             WHERE CartItems.user_id = ?
