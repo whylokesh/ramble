@@ -15,7 +15,7 @@ export async function GET(request) {
         const searchTerm = searchParams.get('searchTerm')
 
         // Search services by name or location using raw SQL query
-        const [services] = await db.query('SELECT * FROM Services WHERE name LIKE ? OR location LIKE ?', [`%${searchTerm}%`, `%${searchTerm}%`]);
+        const [services] = await db.query('SELECT * FROM Services WHERE name LIKE ? OR location LIKE ? LIMIT 5', [`%${searchTerm}%`, `%${searchTerm}%`]);
 
         if (services.length === 0) {
             return NextResponse.json({
