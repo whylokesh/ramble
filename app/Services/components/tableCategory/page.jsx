@@ -114,7 +114,7 @@ export default function App() {
       const sheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-      const headers = jsonData[0].map(header => header.trim());// Assuming the first row contains the headers
+      const headers = jsonData[0].map(header => header.trim());
       const serviceData = jsonData.slice(1).map((row) => {
         const service = {};
         headers.forEach((header, index) => {

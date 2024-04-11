@@ -53,9 +53,6 @@ export default function HorizontalCard({ serviceID }) {
 
           if (response.ok) {
             const data = await response.json();
-            console.log('====================================');
-            console.log(data);
-            console.log('====================================');
             setServiceData(data.data.service);
           } else {
             console.error("Error fetching service details");

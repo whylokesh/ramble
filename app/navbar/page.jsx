@@ -309,7 +309,8 @@ export default function Nav() {
   const [selectedKey, setSelectedKey] = React.useState(null);
 
   const onSelectionChange = (id) => {
-    setSelectedKey(id);
+ route.push(`/ProductMain/${id}`);
+
   };
 
   const onInputChange = (value) => {
@@ -324,10 +325,8 @@ export default function Nav() {
         route.push(`/ProductMain/${selectedService.id}`);
       }
     }
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
   };
+  
 
 
 
@@ -348,7 +347,7 @@ export default function Nav() {
 
         <NavbarContent justify="start" className="max-w-full ">
           <NavbarBrand className="mr-4 ">
-            <img src="./logomain.png" alt="Ramble group" className="m-1 w-12 h-12" />
+            {/* <img src="./logomain.png" alt="Ramble group" className="m-1 w-12 h-12" /> */}
             <Link href="/">
               <p className="hidden sm:block font-bold text-inherit text-xl" >
                 Ramble Group
@@ -370,7 +369,7 @@ export default function Nav() {
             onSelectionChange={onSelectionChange}
             onInputChange={onInputChange}
           >
-            {(item) => <AutocompleteItem key={item.name}>{item.name}</AutocompleteItem>}
+            {(item) => <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>}
           </Autocomplete>
 
         </NavbarContent>
