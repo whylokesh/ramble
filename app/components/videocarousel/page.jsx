@@ -21,7 +21,7 @@ const CarouselWithContent = () => {
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("api/categories");
+        const response = await fetch("/api/categories");
         const data = await response.json();
 
         if (data.success) {
@@ -40,7 +40,7 @@ const CarouselWithContent = () => {
   React.useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await fetch("api/states");
+        const response = await fetch("/api/states");
         const data = await response.json();
 
         if (data.success) {

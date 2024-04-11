@@ -47,11 +47,8 @@ export default function HorizontalCard({ serviceID }) {
     async function fetchData() {
       try {
         if (serviceID) {
-          console.log('====================================');
-          console.log(serviceID);
-          console.log('====================================');
           const response = await fetch(
-            `api/search/service-details?serviceId=${serviceID}`
+            `/api/search/service-details?serviceId=${serviceID}`
           );
 
           if (response.ok) {
@@ -74,7 +71,7 @@ export default function HorizontalCard({ serviceID }) {
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("api/cart/add-to-cart", {
+      const response = await fetch("/api/cart/add-to-cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -8,7 +8,7 @@ const ImagesCard = () => {
   const route = useRouter();
   React.useEffect(() => {
     // Make API call when the component mounts
-    fetch("api/latest-blogs")
+    fetch("/api/latest-blogs")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

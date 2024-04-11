@@ -48,7 +48,7 @@ export default function CircularData() {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("token"); // Replace with your actual token key
-        const response = await fetch("api/admin/orders", {
+        const response = await fetch("/api/admin/orders", {
           method: "GET",
           headers: {
             Authorization: token,
@@ -75,7 +75,7 @@ export default function CircularData() {
   const handleEyeIconClick = async (orderId) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`api/admin/order-details?id=${orderId}`, {
+      const response = await fetch(`/api/admin/order-details?id=${orderId}`, {
         method: "GET",
         headers: {
           Authorization: token,
@@ -98,7 +98,7 @@ export default function CircularData() {
   const handleDeliveryStatusClick = async (orderId, currentDeliveredStatus) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("api/admin/order-delivered", {
+      const response = await fetch("/api/admin/order-delivered", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

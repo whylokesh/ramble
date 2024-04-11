@@ -18,7 +18,7 @@ export default function TableMain() {
             try {
                 const token = localStorage.getItem("token"); // Replace with your actual token key
                 const response = await fetch(
-                    "api/admin/get-all-users-from-newsletter",
+                    "/api/admin/get-all-users-from-newsletter",
                     {
                         headers: {
                             Authorization: token,

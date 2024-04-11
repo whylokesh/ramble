@@ -68,13 +68,13 @@ const GenresCard = () => {
         let apiUrl = '';
 
         if (location) {
-          apiUrl = `api/search/search-by-location?location=${location}`;
+          apiUrl = `/api/search/search-by-location?location=${location}`;
         } else {
           // Check if price is present, and construct the API URL accordingly
           if (price) {
-            apiUrl = `api/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}&price=${price}`;
+            apiUrl = `/api/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}&price=${price}`;
           } else {
-            apiUrl = `api/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}`;
+            apiUrl = `/api/search/state-category-services?stateId=${stateId}&categoryId=${categoryId}`;
           }
         }
 
