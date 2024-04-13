@@ -11,6 +11,7 @@ import {
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import Link from 'next/link';
 
 const CarouselWithContent = () => {
   const [categories, setCategories] = React.useState([]);
@@ -85,14 +86,16 @@ const CarouselWithContent = () => {
                   Go beyond the scroll. We connect you with a <br></br>network of advertising opportunities to <br />create impactful campaigns across India.
                 </Typography>
                 <div className="flex gap-2">
-                  <Button
-                    size="lg"
-                    color="warning"
-                    variant="ghost"
-                    className="text-sm px-4 py-2 md:px-6 md:py-3 lg:px-6 lg:text-lg md:text-md  lg:py-3"
-                  >
-                    Explore
-                  </Button>
+                  <Link href="/GenresSearch?categoryId=&stateId=21">
+                    <Button
+                      size="lg"
+                      color="warning"
+                      variant="ghost"
+                      className="text-sm px-4 py-2 md:px-6 md:py-3 lg:px-6 lg:text-lg md:text-md  lg:py-3"
+                    >
+                      Explore
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div className="w-full flex justify-center flex-wrap">
