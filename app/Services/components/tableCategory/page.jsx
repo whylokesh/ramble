@@ -180,6 +180,9 @@ export default function App() {
         } else {
           toast.success("Service added successfully");
           closeFirstModal();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         }
       })
       .catch((error) => {
@@ -236,7 +239,7 @@ export default function App() {
       toast.success("All services added successfully");
     }
 
-    closeFirstModal();
+    closeSecondModal();
   };
 
 
