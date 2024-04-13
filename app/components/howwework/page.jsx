@@ -135,12 +135,12 @@ const TimelineWithIcon = () => {
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
-                color={activeStep === 0 ? "blue-gray" : "gray"}
+                color={activeStep === 1 ? "blue-gray" : "gray"}
               >
                 Step 2
               </Typography>
               <Typography
-                color={activeStep === 0 ? "blue-gray" : "gray"}
+                color={activeStep === 1 ? "blue-gray" : "gray"}
                 className="font-normal invisible"
               >
                 Details about yout account.
@@ -152,12 +152,12 @@ const TimelineWithIcon = () => {
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
-                color={activeStep === 1 ? "blue-gray" : "gray"}
+                color={activeStep === 2 ? "blue-gray" : "gray"}
               >
-                Step 2
+                Step 3
               </Typography>
               <Typography
-                color={activeStep === 1 ? "blue-gray" : "gray"}
+                color={activeStep === 2 ? "blue-gray" : "gray"}
                 className="font-normal invisible"
               >
                 Details about yout account.
@@ -169,12 +169,12 @@ const TimelineWithIcon = () => {
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
-                color={activeStep === 2 ? "blue-gray" : "gray"}
+                color={activeStep === 3 ? "blue-gray" : "gray"}
               >
-                Step 3
+                Step 4
               </Typography>
               <Typography
-                color={activeStep === 2 ? "blue-gray" : "gray"}
+                color={activeStep === 3 ? "blue-gray" : "gray"}
                 className="font-normal invisible"
               >
                 Details about yout account.
