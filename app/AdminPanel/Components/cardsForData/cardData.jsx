@@ -59,7 +59,7 @@ const CardData = () => {
                     }}
                     variant="bordered"
                   >
-                    {statisticsData.numberOfUsers} Users have ordered
+                    {statisticsData.numberOfOrders} Users have ordered
                   </Chip>
                 </CardFooter>
               </Card>
