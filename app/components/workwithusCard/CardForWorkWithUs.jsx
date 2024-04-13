@@ -85,11 +85,11 @@ const WusCard = () => {
               width="100%"
               alt="Banana"
               className="w-full object-cover h-[140px]"
-              src="images/podar.jpg"
+              src="images/poddar11.png"
             />
           </CardBody>
           <CardFooter className="text-small justify-between">
-            <b>Podar</b>
+            <b>Poddar</b>
 
           </CardFooter>
         </Card>
