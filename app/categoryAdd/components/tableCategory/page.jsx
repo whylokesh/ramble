@@ -170,7 +170,6 @@ export default function App() {
       })
       .catch((error) => {
         console.error("Error deleting data:", error);
-        // Handle error scenarios
       });
   };
 

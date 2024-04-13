@@ -137,7 +137,7 @@ const TimelineWithIcon = () => {
                 variant="h6"
                 color={activeStep === 0 ? "blue-gray" : "gray"}
               >
-                Step 1
+                Step 2
               </Typography>
               <Typography
                 color={activeStep === 0 ? "blue-gray" : "gray"}
