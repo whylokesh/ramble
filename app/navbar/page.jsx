@@ -309,7 +309,7 @@ export default function Nav() {
   const [selectedKey, setSelectedKey] = React.useState(null);
 
   const onSelectionChange = (id) => {
- route.push(`/ProductMain/${id}`);
+    route.push(`/ProductMain/${id}`);
 
   };
 
@@ -326,7 +326,7 @@ export default function Nav() {
       }
     }
   };
-  
+
 
 
 
@@ -347,7 +347,7 @@ export default function Nav() {
 
         <NavbarContent justify="start" className="max-w-full ">
           <NavbarBrand className="mr-4 ">
-            {/* <img src="./logomain.png" alt="Ramble group" className="m-1 w-12 h-12" /> */}
+            <img src="https://ramble-webapp-vgepcz7hxughzyrjyaiooiovh5gvvcmla8wjry-shivam.s3.ap-south-1.amazonaws.com/admin-uploads/logomain.png" alt="Ramble group" className="m-1 w-12 h-12" />
             <Link href="/">
               <p className="hidden sm:block font-bold text-inherit text-xl" >
                 Ramble Group

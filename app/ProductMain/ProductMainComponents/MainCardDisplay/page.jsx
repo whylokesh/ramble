@@ -72,7 +72,7 @@ export default function HorizontalCard({ serviceID }) {
         toast.error("Please login first");
         return;
       }
-  
+
       const response = await fetch("/api/cart/add-to-cart", {
         method: "POST",
         headers: {
@@ -84,7 +84,7 @@ export default function HorizontalCard({ serviceID }) {
           quantity: quantity,
         }),
       });
-  
+
       if (response.ok) {
         console.log("Item added to cart successfully");
         toast.success("Added Successfully");
@@ -98,7 +98,7 @@ export default function HorizontalCard({ serviceID }) {
       toast.error("Error adding Product", error);
     }
   };
-  
+
 
   return (
     <>
@@ -241,7 +241,7 @@ export default function HorizontalCard({ serviceID }) {
       {serviceData && (
         <div className="pt-0 flex justify-center items-center text-base md:text-lg lg:text-xl font-bold">
           <span className="border-solid border-1 p-2 ">
-            Price :{" "}
+            Daily spend :{" "}
             <span className="bg-gradient-to-r from-[#F5A524] to-[#FF705B] to-danger bg-clip-text text-transparent">
               ₹{serviceData.price}
             </span>

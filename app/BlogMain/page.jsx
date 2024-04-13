@@ -36,7 +36,7 @@ const CreateAndEarnInfoCard = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setBlogData(data.data);
+          setBlogData(data.data[0]);
         } else {
           console.error("API call failed:", data.message);
         }
