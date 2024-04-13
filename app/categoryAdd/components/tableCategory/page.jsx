@@ -108,6 +108,9 @@ export default function App() {
         closeFirstModal();
         if (data.success) {
           toast.success("Category added successfully");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         }
       })
       .catch((error) => {
@@ -155,8 +158,15 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Response from server:", data);
-        closeDeleteModal();
-        // You may want to refresh the data after deletion
+  if (!data.error) {
+          toast.success("Category deleted successfully!");
+          closeDeleteModal();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          toast.error("Error deleting category! Please try again.");
+        }
       })
       .catch((error) => {
         console.error("Error deleting data:", error);

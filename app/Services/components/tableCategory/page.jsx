@@ -295,8 +295,15 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Response from server:", data);
-        closeDeleteModal();
-        // You may want to refresh the data after deletion
+        if (!data.error) {
+          toast.success("Service deleted successfully!");
+          closeDeleteModal();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          toast.error("Error deleting Service! Please try again.");
+        }
       })
       .catch((error) => {
         console.error("Error deleting data:", error);
