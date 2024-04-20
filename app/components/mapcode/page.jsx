@@ -23,7 +23,7 @@ const Mapjsx = () => {
           className="lg:w-3/5 md:w-auto w-auto lg:h-auto md:h-auto h-[21rem]"
           height="700"
           stroke="black"
-          stroke-linecap="round"
+          strokeLinecap="round"
           stroke-linejoin="round"
           strokeWidth=".5"
           version="1.2"

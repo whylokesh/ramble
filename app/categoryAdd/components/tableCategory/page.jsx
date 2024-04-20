@@ -79,6 +79,10 @@ export default function App() {
 
   const [categories, setCategories] = React.useState([]);
   const [states, setStates] = React.useState([]);
+  React.useEffect(() => {
+    setOpenFirstModal(false);
+    setOpenDeleteModal(false);
+  }, []);
   const handleSubmit = () => {
     const token = localStorage.getItem("token"); // Replace with your actual token key
 
@@ -118,6 +122,7 @@ export default function App() {
         toast.error("Error Adding Category", error);
       });
   };
+
 
   const filteredCategories = categories.filter((categories) =>
     categories.name.toLowerCase().includes(searchInput.toLowerCase())
@@ -254,7 +259,7 @@ export default function App() {
             className="w-6 h-6"
           >
             <path
-              stroke-linecap="round"
+              strokeLinecap="round"
               stroke-linejoin="round"
               d="M12 4.5v15m7.5-7.5h-15"
             />
