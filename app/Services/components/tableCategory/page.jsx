@@ -85,7 +85,7 @@ export default function App() {
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [selectedFile, setSelectedFile] = React.useState(null);
   const [name, setName] = React.useState("");
-  const [descripiton, setdescripiton] = React.useState("");
+  const [description, setdescription] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
   const [CategoryName, setCategoryName] = React.useState("");
   const [State, setState] = React.useState("");
@@ -137,7 +137,7 @@ export default function App() {
     const formData = new FormData();
     formData.append("image", selectedFile);
     formData.append("name", name);
-    formData.append("description", descripiton);
+    formData.append("description", description);
     formData.append("price", Price);
     formData.append("location", Location);
     formData.append("categoryName", CategoryName);
@@ -151,7 +151,7 @@ export default function App() {
     const Data = JSON.stringify({
       imageUrl: imageUrl,
       name: name,
-      descripiton: descripiton,
+      description: description,
       price: Price,
       location: Location,
       categoryName: CategoryName,
@@ -526,9 +526,9 @@ export default function App() {
                 />
                 <Input
                   label="Description"
-                  value={descripiton}
+                  value={description}
                   onChange={(e) => {
-                    setdescripiton(e.target.value);
+                    setdescription(e.target.value);
                   }}
                 />
 
