@@ -237,6 +237,7 @@ export default function App() {
       toast.error("Failed to add services");
     } else {
       toast.success("All services added successfully");
+      window.location.reload();
     }
 
     closeSecondModal();
@@ -463,7 +464,6 @@ export default function App() {
           {(item) => (
             <TableRow
               key={item.id}
-              onClick={() => router.push(`/ProductMain/${item.id}`)}
             >
               <TableCell>{item.id}</TableCell>
               <TableCell>
@@ -473,14 +473,14 @@ export default function App() {
                   className="w-8 h-8 rounded-full"
                 />
               </TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{truncateDescription(item.description)}</TableCell>
-              <TableCell>{item.price}</TableCell>
-              <TableCell>{item.location}</TableCell>
-              <TableCell>{item.code}</TableCell>
-              <TableCell>{item.media}</TableCell>
-              <TableCell>{item.ftf}</TableCell>
-              <TableCell>{item.total_area}</TableCell>
+              <TableCell onClick={() => router.push(`/ProductMain/${item.id}`)} className=" cursor-pointer">{item.name}</TableCell>
+              <TableCell onClick={() => router.push(`/ProductMain/${item.id}`)} className=" cursor-pointer">{truncateDescription(item.description)}</TableCell>
+              <TableCell onClick={() => router.push(`/ProductMain/${item.id}`)} className=" cursor-pointer">{item.price}</TableCell>
+              <TableCell onClick={() => router.push(`/ProductMain/${item.id}`)} className=" cursor-pointer">{item.location}</TableCell>
+              <TableCell onClick={() => router.push(`/ProductMain/${item.id}`)} className=" cursor-pointer">{item.code}</TableCell>
+              <TableCell onClick={() => router.push(`/ProductMain/${item.id}`)} className=" cursor-pointer">{item.media}</TableCell>
+              <TableCell onClick={() => router.push(`/ProductMain/${item.id}`)} className=" cursor-pointer">{item.ftf}</TableCell>
+              <TableCell onClick={() => router.push(`/ProductMain/${item.id}`)} className=" cursor-pointer">{item.total_area}</TableCell>
               <TableCell>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
