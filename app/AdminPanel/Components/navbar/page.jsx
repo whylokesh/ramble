@@ -16,7 +16,7 @@ export default function NavbarAdmin() {
       <Navbar>
         <NavbarBrand>
           <img src="favicon.ico" alt="Ramble group" className="m-1" />
-            <Link className="font-bold text-inherit lg:text-lg md:text-medium text-sm" style={{ color: "white" }} href="/">Ramble Group</Link> 
+            <Link className="font-bold text-inherit lg:text-lg md:text-medium text-sm lg:block md:block hidden" style={{ color: "white" }} href="/">Ramble Group</Link> 
         </NavbarBrand>
 
         <NavbarContent className="flex gap-4" justify="center">

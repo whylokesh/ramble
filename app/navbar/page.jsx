@@ -274,7 +274,6 @@ export default function Nav() {
   const menuItems = [
     isLoggedIn ? "Admin" : null, // Show "Admin" only when logged in
     "Cart",
-    "Contact us",
     isLoggedIn ? "Log Out" : "Log in", // Show "Log Out" if logged in, else "Log in"
   ];
 
@@ -489,48 +488,53 @@ export default function Nav() {
 
         </NavbarContent>
         <NavbarMenu>
-          {menuItems.map((item, index) => (
-
-            <NavbarMenuItem key={`${item}-${index}`}>
-              {item === "Profile" ? (
-                <button onClick={handleProfileClick}>
-                  {/* You can customize the button's appearance if needed */}
-                  <span>{item}</span>
-                </button>
-              ) : (
-                // Handle "Log in" directly to open the login modal
-                item === "Log in" ? (
-                  <button onClick={openFirstModal}>
-                    <span>{item}</span>
-                  </button>
-                ) : (
-                  <Link
-                    className="w-full"
-                    color={
-                      index === 2
-                        ? "warning"
-                        : index === menuItems.length - 1
-                          ? "danger"
-                          : "foreground"
-                    }
-                    href="#"
-                    size="lg"
-                    onClick={() => {
-                      // Handle other menu items here
-                      if (item === "Log Out") {
-                        handleLogout();
-                      } else {
-                        // Handle other menu items if needed
-                      }
-                    }}
-                  >
-                    {item}
-                  </Link>
-                )
-              )}
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
+  {menuItems.map((item, index) => (
+    <NavbarMenuItem key={`${item}-${index}`}>
+      {item === "Profile" ? (
+        <button onClick={handleProfileClick}>
+          {/* You can customize the button's appearance if needed */}
+          <span>{item}</span>
+        </button>
+      ) : (
+        // Handle "Log in" directly to open the login modal
+        item === "Log in" ? (
+          <button onClick={openFirstModal}>
+            <span>{item}</span>
+          </button>
+        ) : (
+          item === "Cart" ? (
+            <button onClick={() => route.push("/Cart")}>
+              {item}
+            </button>
+          ) : (
+            <Link
+              className="w-full"
+              color={
+                index === 2
+                  ? "warning"
+                  : index === menuItems.length - 1
+                  ? "danger"
+                  : "foreground"
+              }
+              href="#"
+              size="lg"
+              onClick={() => {
+                // Handle other menu items here
+                if (item === "Log Out") {
+                  handleLogout();
+                } else {
+                  // Handle other menu items if needed
+                }
+              }}
+            >
+              {item}
+            </Link>
+          )
+        )
+      )}
+    </NavbarMenuItem>
+  ))}
+</NavbarMenu>
 
       </Navbar>
       <ToastContainer />
