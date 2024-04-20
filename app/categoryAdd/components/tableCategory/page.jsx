@@ -72,7 +72,7 @@ export default function App() {
   const [imageUrl, setImageUrl] = React.useState(""); // New state for image URL
 
   const [name, setName] = React.useState("");
-  const [descripiton, setdescripiton] = React.useState("");
+  const [description, setdescription] = React.useState("");
 
   const [CategoryName, setCategoryName] = React.useState("");
   const [State, setState] = React.useState("");
@@ -88,12 +88,12 @@ export default function App() {
 
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("description", descripiton);
+    formData.append("description", description);
     formData.append("imageUrl", imageUrl);
 
     const categoryData = JSON.stringify({
       name: name,
-      descripiton: descripiton,
+      description: description,
       imageUrl: imageUrl
     })
 
@@ -352,9 +352,9 @@ export default function App() {
                 />
                 <Input
                   label="Description"
-                  value={descripiton}
+                  value={description}
                   onChange={(e) => {
-                    setdescripiton(e.target.value);
+                    setdescription(e.target.value);
                   }}
                 />
               </ModalBody>
