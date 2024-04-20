@@ -102,18 +102,19 @@ const page = () => {
         </section>
       </div>
       <h1 className="font-bold text-center bg-gradient-to-r py-2 from-[#F5A524] to-[#FF705B] to-danger to-[#FF6890] bg-clip-text text-transparent mt-8 mb-8  text-5xl">
-        Our Work in Action
+        Contact Us
       </h1>
       <section class="text-gray-600 body-font p-5">
         <div class="container px-5 py-12  mx-auto flex gap-8 flex-wrap">
           <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
             <div class="w-full sm:p-4 px-4 mb-6">
               <h1 class="font-bold text-2xl mb-2 bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
-                Moon hashtag pop-up try-hard offal truffaut
+                335, 1st Floor, Vrindavan Appartments, Tagore
+                Nagar, Ajmer Road,
+                Jaipur ,302021.
               </h1>
               <div class="leading-relaxed lg:text-lg text-md text-white">
-                Pour-over craft beer pug drinking vinegar live-edge gastropub,
-                keytar neutra sustainable fingerstache kickstarter.
+                +91 9529180867
               </div>
             </div>
             <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
