@@ -107,47 +107,45 @@ const page = () => {
       <section class="text-gray-600 body-font p-5">
         <div class="container px-5 py-12  mx-auto flex gap-8 flex-wrap">
           <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
-            <div class="w-full sm:p-4 px-4 mb-6">
-              <h1 class="font-bold text-2xl mb-2 bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
-                335, 1st Floor, Vrindavan Appartments, Tagore
-                Nagar, Ajmer Road,
+            <div class=" w-full sm:p-4 px-4 mb-6">
+              <h1 className="font-bold text-3xl mb-3 text-white">
+                Head Office
+              </h1>
+              <h1 class="font-bold text-xl mb-2 mt-5 bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
+                335, 1st Floor, Vrindavan Appartments, Tagore Nagar, Ajmer Road,
                 Jaipur ,302021.
               </h1>
-              <div class="leading-relaxed lg:text-lg text-md text-white">
-                +91 9529180867
+              <div class=" mt-5 leading-relaxed lg:text-lg text-md text-white">
+                <p className="flex gap-2 font-bold">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 text-green-400 hover:text-white cursor-pointer"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14.25 9.75v-4.5m0 4.5h4.5m-4.5 0 6-6m-3 18c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z"
+                    />
+                  </svg>
+                  Book An Appointment
+                </p>
               </div>
-            </div>
-            <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-              <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
-                2.7K
-              </h2>
-              <p class="leading-relaxed text-white">Users</p>
-            </div>
-            <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-              <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
-                1.8K
-              </h2>
-              <p class="leading-relaxed text-white">Subscribes</p>
-            </div>
-            <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-              <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
-                35
-              </h2>
-              <p class="leading-relaxed text-white">Downloads</p>
-            </div>
-            <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-              <h2 class="title-font font-bold text-3xl bg-gradient-to-r from-[#ffff] to-[#f2f2f2] to-[#d3d3d3] to-[#ff7f7f] bg-clip-text text-transparent">
-                4
-              </h2>
-              <p class="leading-relaxed text-white">Products</p>
+              <p className="mt-3 font-semibold text-white">+91 9529180867</p>
             </div>
           </div>
           <div class="lg:w-1/2 sm:w-1/3 h-72 w-full rounded-lg overflow-hidden mt-6 sm:mt-0">
-            <img
-              class="object-cover object-center w-full h-full"
-              src={images[currentImageIndex]}
-              alt="stats"
-            />
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.3719831422854!2d75.7380742!3d26.8916872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db5cc29e5e949%3A0x6ed6399d5e866ac9!2sRamble%20Agency!5e0!3m2!1sen!2sin!4v1713636581862!5m2!1sen!2sin"
+              width="600"
+              height="450"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       </section>
