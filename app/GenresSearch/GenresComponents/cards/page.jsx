@@ -10,6 +10,7 @@ import {
   Link,
   Image,
   Button,
+  Spinner
 } from "@nextui-org/react";
 import { Typography } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
@@ -28,7 +29,7 @@ const GenresCard = () => {
   const [deviceSize, setDeviceSize] = React.useState("sm");
   const [displayedCards, setDisplayedCards] = React.useState(6);
   const [exploreMoreMode, setExploreMoreMode] = React.useState(true);
-
+  const [showSpinner, setShowSpinner] = React.useState(true);
   React.useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 640) {
@@ -83,6 +84,7 @@ const GenresCard = () => {
 
         if (data.success) {
           setCardData(data.data.services);
+          setShowSpinner(false)
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -141,7 +143,7 @@ const GenresCard = () => {
                 <CardFooter>
                   {/* Adjust this link according to your data */}
                   <Button className="flex m-auto" color="warning" onClick={() => {
-                    route.push(`/ProductMain/${service.id}`)
+                    route.push(`/ProductMain/${service.id}?q=${service.name}`)
                   }}>
                     Check Out
                   </Button>
@@ -178,6 +180,7 @@ const GenresCard = () => {
             </Button>
           </div>
         </div>
+        
       </>
     );
   } else {

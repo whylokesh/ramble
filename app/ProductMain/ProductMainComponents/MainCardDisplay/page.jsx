@@ -12,10 +12,12 @@ import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Carousel } from "@material-tailwind/react";
+import { Spinner } from "@nextui-org/react";
 export default function HorizontalCard({ serviceID }) {
   const [deviceSize, setDeviceSize] = React.useState("sm");
   const [serviceData, setServiceData] = React.useState(null); // Add this state for storing service data
   const [quantity, setQuantity] = React.useState(1);
+  const [showSpinner, setShowSpinner] = React.useState(true);
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value, 10);
     setQuantity(newQuantity);
@@ -54,6 +56,7 @@ export default function HorizontalCard({ serviceID }) {
           if (response.ok) {
             const data = await response.json();
             setServiceData(data.data.service);
+            setShowSpinner(false);
           } else {
             console.error("Error fetching service details");
           }
@@ -246,6 +249,11 @@ export default function HorizontalCard({ serviceID }) {
               ₹{serviceData.price}
             </span>
           </span>
+        </div>
+      )}
+        {showSpinner && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+          <Spinner color="white" />
         </div>
       )}
     </>
