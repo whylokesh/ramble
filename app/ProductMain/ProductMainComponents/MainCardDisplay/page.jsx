@@ -107,7 +107,7 @@ export default function HorizontalCard({ serviceID }) {
     <>
       <div className="lg:p-14 md:p-16 p-11">
         <section className="text-gray-600 body-font overflow-hidden">
-          <div className="container ">
+          <div className="">
             <div className="lg:w-5/5 mx-auto flex flex-wrap justify-between m-auto lg:ml-9 md:ml-0 ml-0">
               {serviceData && (
                 <Carousel
@@ -230,12 +230,16 @@ export default function HorizontalCard({ serviceID }) {
             </div>
             {serviceData && (
               <div>
-                <h1 className="font-bold lg:text-3xl md:text-xl text-xl text-white mt-6 mb-6">
-                  Descripton
-                </h1>
-                <pre className="leading-relaxed text-white text-xs md:text-sm lg:text-base mt-14">
-                  {serviceData.description}
-                </pre>
+                <div >
+                  <h1 className="font-bold lg:text-3xl md:text-xl text-xl text-white mt-6 mb-6">
+                    Description
+                  </h1>
+                  <div className="flex flex-wrap w-full">
+                    <pre className="w-full overflow-x-auto break-all whitespace-pre-wrap text-white font-sans flex items-center">
+                      {serviceData?.description}
+                    </pre>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -251,7 +255,7 @@ export default function HorizontalCard({ serviceID }) {
           </span>
         </div>
       )}
-        {showSpinner && (
+      {showSpinner && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
           <Spinner color="white" />
         </div>

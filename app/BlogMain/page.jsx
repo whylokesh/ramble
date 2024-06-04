@@ -48,14 +48,18 @@ const CreateAndEarnInfoCard = () => {
     <>
       <Nav />
       <section class="text-gray-400 bg-black body-font" >
-        <div class="container mx-auto flex px-5 lg:py-20 md:py-15 py-10 md:flex-row flex-col items-center">
-          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0 mb-10 select-none">
-            <img class="object-cover object-center rounded-lg" alt="hero" src={blogData?.image_url} />
+        <div class="container mx-auto flex px-5 py-10 flex-col items-center">
+          <div class="w-full mb-10 select-none">
+            <img class="object-cover w-full object-center rounded-lg" alt="hero" src={blogData?.image_url} />
           </div>
-          <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-            <Typography variant="h4" color="white">{blogData?.title}
+          <div class="w-full flex flex-col flex-wrap">
+            <Typography variant="h2" className="mb-5" color="white">{blogData?.title}
             </Typography>
-            <Typography color="white" className="font-normal text-justify">{blogData?.description}</Typography>
+            <div className="flex flex-wrap w-full">
+              <pre className="w-full overflow-x-auto break-all whitespace-pre-wrap text-white font-sans flex items-center">
+                {blogData?.description}
+              </pre>
+            </div>
           </div>
         </div>
       </section >

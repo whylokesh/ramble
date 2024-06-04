@@ -143,7 +143,7 @@ const GenresCard = () => {
                 <CardFooter>
                   {/* Adjust this link according to your data */}
                   <Button className="flex m-auto" color="warning" onClick={() => {
-                    route.push(`/ProductMain/${service.id}?q=${service.name}`)
+                    route.push(`/ProductMain/${service.id}?q=${service.name.replaceAll(' ', '-')}`)
                   }}>
                     Check Out
                   </Button>
@@ -180,7 +180,7 @@ const GenresCard = () => {
             </Button>
           </div>
         </div>
-        
+
       </>
     );
   } else {
