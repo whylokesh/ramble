@@ -52,13 +52,15 @@ export async function GET(request) {
         const { searchParams } = new URL(request.url);
         const orderId = searchParams.get('id')
 
-        // Get order details with services and quantities
+        // Get order details with services, quantities, and user information
         const [order] = await db.query(`
             SELECT Orders.id AS orderId, Orders.total_amount AS totalAmount, Orders.delivered,
-                   OrderItems.quantity, Services.id AS serviceId, Services.name AS serviceName
+                   OrderItems.quantity, Services.id AS serviceId, Services.name AS serviceName,
+                   Users.email, Users.full_name
             FROM Orders
             INNER JOIN OrderItems ON Orders.id = OrderItems.order_id
             INNER JOIN Services ON OrderItems.service_id = Services.id
+            INNER JOIN Users ON Orders.user_id = Users.id
             WHERE Orders.id = ?
         `, [orderId]);
 
@@ -71,14 +73,20 @@ export async function GET(request) {
 
         // Format the response
         const orderDetails = {
-            orderId: order[0].orderId,
+            id: order[0].orderId,
             totalAmount: order[0].totalAmount,
             delivered: order[0].delivered,
-            items: order.map(item => ({
-                serviceId: item.serviceId,
-                serviceName: item.serviceName,
+            User: {
+                email: order[0].email,
+                full_name: order[0].full_name
+            },
+            OrderItems: order.map(item => ({
                 quantity: item.quantity,
-            })),
+                Service: {
+                    id: item.serviceId,
+                    name: item.serviceName
+                }
+            }))
         };
 
         return NextResponse.json({
