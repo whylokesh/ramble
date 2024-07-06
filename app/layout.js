@@ -19,6 +19,9 @@ We believe that every business deserves to be heard, and we are here to help you
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script src="https://p.usestyle.ai" defer></script>
+      </head>
       <body className={`dark text-foreground bg-background ${inter.className}`}>
         {children}
         <Toaster position="bottom-center" />
