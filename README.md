@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# 🛍️ Ramble Advertising E-Commerce Platform
 
-First, run the development server:
+Ramble is a full-stack e-commerce platform built using **Next.js**. It provides digital advertising services and includes both a **user-facing application** and a comprehensive **admin dashboard** for content and service management.
+
+---
+
+## ▶️ Video Tutorials
+
+- 📹 **User Application Demo**  
+  _Coming Soon: A complete walkthrough video of the user-facing side of the application._
+
+- 📹 **Admin Panel Demo**  
+  _Coming Soon: A detailed tutorial on how to use and manage the admin panel._
+
+---
+
+## 🚀 Features
+
+### 👤 User Application
+- Browse a variety of advertising services
+- Filter services by categories and genres
+- View blog posts and testimonials
+- Add services to the cart and checkout
+- Subscribe to newsletters
+
+### 🛠️ Admin Panel
+- Manage blogs, categories, and service listings
+- Access and export newsletter subscriptions
+- Oversee orders and manage client data
+
+---
+
+## 🧰 Tech Stack
+
+- **Frontend Framework:** Next.js (React 18)
+- **Styling:** Tailwind CSS, Material Tailwind, Framer Motion
+- **Icons & UI:** HeroIcons, NextUI
+- **Backend:** Next.js API routes
+- **Database:** Sequelize ORM with MySQL
+- **Authentication:** JWT, bcrypt
+- **Utilities:** dotenv, xlsx, react-toastify
+
+---
+
+## 📁 Folder Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+ramble/
+├── app/                   # Main application code
+│   ├── AdminPanel/        # Admin dashboard pages
+│   ├── Cart/, Services/   # User pages
+│   ├── api/               # Backend API routes
+│   └── components/        # Shared UI components
+├── database/              # Sequelize setup
+│   ├── config/            # DB config
+│   ├── migrations/        # DB schema
+│   ├── models/            # DB models
+│   └── seeders/           # Dummy data
+├── public/                # Static files (images, icons, etc.)
+├── package.json           # Project metadata and dependencies
+└── tailwind.config.js     # Tailwind customization
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🧪 Getting Started Locally
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Follow these steps to set up the project on your local machine:
 
-## Learn More
+### 1. Clone the Repository
+```bash
+git clone <repo-url>
+cd ramble
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Install Dependencies
+```bash
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Configure Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Create a `.env.local` file in the root and add the following:
+```env
+DB_NAME=your_database_name
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_HOST=localhost
+JWT_SECRET=your_secret_key
+```
 
-## Deploy on Vercel
+### 4. Setup the Database
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run migrations and seeders:
+```bash
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 5. Start the Development Server
+```bash
+npm run dev
+```
+
+Visit: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 📬 Contact
+
+For any issues, suggestions, or support, feel free to contact the developer or open an issue in the repository.
+
+---
+
+© 2025 Ramble Agency. All rights reserved.
