@@ -9,7 +9,6 @@ Ramble is a full-stack e-commerce platform built using **Next.js**. It provides 
 
 - 📹 **User Application Demo**  
 [![User App Demo](./assets/user-demo.png)](https://vimeo.com/1089472252)
-[![Admin Panel Demo](./assets/admin-demo.png)](https://vimeo.com/1089472292)
 
 - 📹 **Admin Panel Demo**  
 [![Admin Panel Demo](./assets/admin-demo.png)](https://vimeo.com/1089472292)
