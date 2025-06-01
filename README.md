@@ -8,10 +8,10 @@ Ramble is a full-stack e-commerce platform built using **Next.js**. It provides 
 ## ▶️ Video Tutorials
 
 - 📹 **User Application Demo**  
-  _Coming Soon: A complete walkthrough video of the user-facing side of the application._
+  <div style="padding:75% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1089472252?h=3b2b33bbeb&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Ramble user app - Made with Clipchamp"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 - 📹 **Admin Panel Demo**  
-  _Coming Soon: A detailed tutorial on how to use and manage the admin panel._
+  <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1089472292?h=df59f007d7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Ramble admin app - Made with Clipchamp"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
 ---
 
