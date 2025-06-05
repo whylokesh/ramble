@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "jnMuGuSJY1kbRfw6Z7rK",
+    "password": "@MYSQL_9",
     "database": "ramble",
     "host": "127.0.0.1",
     "dialect": "mysql"
