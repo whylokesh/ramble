@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "mysql",
-    "password": "fgyXDmWRGB74KgcqK5hzpuaXOR0f9tces5i7XQSaYAhTHeYOfJEzFXXJPbBBrSc0",
-    "database": "default",
-    "host": "kw0o0cggoo84og848cgg8gww",
+    "username": "root",
+    "password": "@MYSQL_9",
+    "database": "ramble",
+    "host": "127.0.0.1",
     "port": 3306,
     "dialect": "mysql"
   },
