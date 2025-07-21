@@ -2,8 +2,9 @@
   "development": {
     "username": "mysql",
     "password": "fgyXDmWRGB74KgcqK5hzpuaXOR0f9tces5i7XQSaYAhTHeYOfJEzFXXJPbBBrSc0",
-    "database": "ramble",
+    "database": "default",
     "host": "mysql-database-ramble",
+    "port": 3306,
     "dialect": "mysql"
   },
   "test": {
@@ -16,8 +17,9 @@
   "production": {
     "username": "mysql",
     "password": "fgyXDmWRGB74KgcqK5hzpuaXOR0f9tces5i7XQSaYAhTHeYOfJEzFXXJPbBBrSc0",
-    "database": "ramble",
+    "database": "default",
     "host": "mysql-database-ramble",
+    "port": 3306,
     "dialect": "mysql"
   }
 }
