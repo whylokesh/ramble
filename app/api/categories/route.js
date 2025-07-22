@@ -12,11 +12,15 @@ export async function GET() {
     try {
         const [categories] = await db.query('SELECT * FROM Categories');
 
+        console.log('Fetched categories from DB:', categories);
+
         // Construct image URLs
         const categoriesWithImageUrls = categories.map((category) => ({
             ...category,
             image_url: category.image_url.includes(',') ? category.image_url.split(',') : [category.image_url],
         }));
+
+        console.log('Categories with image URLs:', categoriesWithImageUrls);
 
         return NextResponse.json({
             success: true,
