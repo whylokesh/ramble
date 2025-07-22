@@ -71,12 +71,16 @@ export async function GET(request) {
             };
         });
 
-        return NextResponse.json({
+        const response = NextResponse.json({
             success: true,
             data: formattedOrders,
         }, { status: 200 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+        const response = NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     }
 }

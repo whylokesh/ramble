@@ -18,12 +18,16 @@ export async function GET() {
             image_url: service.image_url.includes(',') ? service.image_url.split(',') : [service.image_url],
         }));
 
-        return NextResponse.json({
+        const response = NextResponse.json({
             success: true,
             data: servicesWithImageUrls,
         }, { status: 200 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'Database error' }, { status: 500 });
+        const response = NextResponse.json({ error: 'Database error' }, { status: 500 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     }
 }

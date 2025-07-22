@@ -31,13 +31,17 @@ export async function GET(request) {
             }, { status: 404 });
         }
 
-        return NextResponse.json({
+        const response = NextResponse.json({
             success: true,
             data: blog,
         }, { status: 200 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'Database error' }, { status: 500 });
+        const response = NextResponse.json({ error: 'Database error' }, { status: 500 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     }
 }
 

@@ -181,7 +181,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("/api/categories");
+        const response = await fetch("/api/categories", { cache: 'no-store' });
         const data = await response.json();
 
         if (data.success) {
@@ -200,7 +200,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await fetch("/api/states");
+        const response = await fetch("/api/states", { cache: 'no-store' });
         const data = await response.json();
 
         if (data.success) {

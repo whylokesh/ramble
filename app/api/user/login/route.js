@@ -22,19 +22,23 @@ export async function POST(request) {
 
         // Check if the user exists
         if (user.length == 0) {
-            return NextResponse.json({
+            const response = NextResponse.json({
                 success: false,
                 error: 'Invalid credentials',
             }, { status: 401 });
+            response.headers.set('Cache-Control', 'no-store');
+            return response;
         }
 
         // Check if the password is correct
         const isPasswordValid = await bcrypt.compare(password, user[0].password);
         if (!isPasswordValid) {
-            return NextResponse.json({
+            const response = NextResponse.json({
                 success: false,
                 error: 'Invalid password',
             }, { status: 401 });
+            response.headers.set('Cache-Control', 'no-store');
+            return response;
         }
 
         // Generate a JWT token
@@ -42,7 +46,7 @@ export async function POST(request) {
         const token = jwt.sign({ userId: user[0].id }, jwtSecretKey);
 
         // Respond with the user data and token
-        return NextResponse.json({
+        const response = NextResponse.json({
             success: true,
             data: {
                 userId: user[0].id,
@@ -51,8 +55,12 @@ export async function POST(request) {
                 token: token,
             },
         }, { status: 200 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        const response = NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     }
 }

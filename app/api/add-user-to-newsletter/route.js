@@ -30,15 +30,19 @@ export async function POST(request) {
 
 
         // Respond with the created user
-        return NextResponse.json({
+        const response = NextResponse.json({
             success: true,
             data: {
                 userId: newUser.insertId,
             },
         }, { status: 201 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'Database error' }, { status: 500 });
+        const response = NextResponse.json({ error: 'Database error' }, { status: 500 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     }
 }
 

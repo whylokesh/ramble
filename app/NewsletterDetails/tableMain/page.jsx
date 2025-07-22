@@ -23,6 +23,7 @@ export default function TableMain() {
                         headers: {
                             Authorization: token,
                         },
+                        cache: 'no-store',
                     }
                 );
                 const data = await response.json();

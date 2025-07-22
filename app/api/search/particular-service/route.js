@@ -25,14 +25,18 @@ export async function GET(request) {
         }
 
         // Respond with the list of services
-        return NextResponse.json({
+        const response = NextResponse.json({
             success: true,
             data: {
                 services,
             },
         }, { status: 200 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        const response = NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     }
 }

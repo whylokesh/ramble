@@ -32,7 +32,7 @@ const CreateAndEarnInfoCard = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const BlogID = urlSearchParams.get("id")
     console.log(BlogID);
-    fetch(`/api/blog?id=${BlogID}`)
+    fetch(`/api/blog?id=${BlogID}`, { cache: 'no-store' })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

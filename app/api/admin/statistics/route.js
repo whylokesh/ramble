@@ -62,7 +62,7 @@ export async function GET(request) {
         const percentageOfUsersWithOrders = (usersWithOrders[0].usersWithOrders / totalUsers[0].totalUsers) * 100;
         const percentageOfDeliveredOrders = (deliveredOrders[0].deliveredOrders / totalOrders[0].totalOrders) * 100;
 
-        return NextResponse.json({
+        const response = NextResponse.json({
             success: true,
             data: {
                 numberOfUsers: totalUsers[0].totalUsers,
@@ -74,8 +74,12 @@ export async function GET(request) {
                 percentageOfDeliveredOrders,
             },
         }, { status: 200 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+        const response = NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+        response.headers.set('Cache-Control', 'no-store');
+        return response;
     }
 }
