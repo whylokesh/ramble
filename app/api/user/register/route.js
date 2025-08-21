@@ -32,15 +32,20 @@ export async function POST(request) {
         // Create a new user
         const [newUser] = await db.query('INSERT INTO Users (email, password, full_name, phone_number,createdAt, updatedAt) VALUES (?, ?, ?, ?,?,?)', [email, hashedPassword, fullName, phoneNumber, now, now]);
 
-        // Respond with the created user
-        const response = NextResponse.json({
+        // Fetch the complete user data (excluding password)
+        const [createdUser] = await db.query('SELECT id, email, full_name, phone_number, createdAt, updatedAt FROM Users WHERE id = ?', [newUser.insertId]);
+
+        return NextResponse.json({
             success: true,
-            data: {
-                userId: newUser.insertId,
-            },
-        }, { status: 201 });
-        response.headers.set('Cache-Control', 'no-store');
-        return response;
+            data: createdUser[0]
+        }, {
+            status: 201,
+            headers: {
+                "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        });
     } catch (error) {
         console.error(error);
         const response = NextResponse.json({ error: 'Database error' }, { status: 500 });

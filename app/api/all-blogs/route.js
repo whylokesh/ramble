@@ -13,12 +13,17 @@ export async function GET() {
         // Retrieve all blogs
         const [blogs] = await db.query('SELECT id, image_url, title FROM Blogs');
 
-        const response = NextResponse.json({
+        return NextResponse.json({
             success: true,
             data: blogs,
-        }, { status: 200 });
-        response.headers.set('Cache-Control', 'no-store');
-        return response;
+        }, {
+            status: 200,
+            headers: {
+                "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        });
     } catch (error) {
         console.error(error);
         const response = NextResponse.json({ error: 'Database error' }, { status: 500 });

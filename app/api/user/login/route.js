@@ -46,7 +46,7 @@ export async function POST(request) {
         const token = jwt.sign({ userId: user[0].id }, jwtSecretKey);
 
         // Respond with the user data and token
-        const response = NextResponse.json({
+        return NextResponse.json({
             success: true,
             data: {
                 userId: user[0].id,
@@ -54,9 +54,14 @@ export async function POST(request) {
                 admin: user[0].is_admin,
                 token: token,
             },
-        }, { status: 200 });
-        response.headers.set('Cache-Control', 'no-store');
-        return response;
+        }, {
+            status: 200,
+            headers: {
+                "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        });
     } catch (error) {
         console.error(error);
         const response = NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

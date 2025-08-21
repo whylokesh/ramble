@@ -35,19 +35,37 @@ export async function POST(request) {
         const [existingCartItem] = await db.query('SELECT * FROM CartItems WHERE user_id = ? AND service_id = ?', [userId, serviceId]);
         const now = new Date();
 
+        let cartItemId;
         if (existingCartItem.length > 0) {
             // Update quantity if the item is already in the cart
             const updatedQuantity = existingCartItem[0].quantity + quantity;
             await db.query('UPDATE CartItems SET quantity = ?, updatedAt = ? WHERE id = ?', [updatedQuantity, now, existingCartItem[0].id]);
+            cartItemId = existingCartItem[0].id;
         } else {
             // Create a new cart item
-            await db.query('INSERT INTO CartItems (user_id, service_id, quantity, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?)', [userId, serviceId, quantity, now, now]);
+            const [newCartItem] = await db.query('INSERT INTO CartItems (user_id, service_id, quantity, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?)', [userId, serviceId, quantity, now, now]);
+            cartItemId = newCartItem.insertId;
         }
+
+        // Fetch the complete cart item data with service details
+        const [cartItem] = await db.query(`
+            SELECT CartItems.*, Services.name, Services.image_url, Services.description, Services.price
+            FROM CartItems
+            INNER JOIN Services ON CartItems.service_id = Services.id
+            WHERE CartItems.id = ?
+        `, [cartItemId]);
 
         return NextResponse.json({
             success: true,
-            message: "Item added to the cart successfully.",
-        }, { status: 201 });
+            data: cartItem[0]
+        }, {
+            status: 201,
+            headers: {
+                "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

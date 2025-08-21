@@ -97,12 +97,20 @@ export async function POST(request) {
         // Create a new service
         const [newService] = await db.query('INSERT INTO Services (name, description, price, location, category_id, state_id, image_url, code, media, ftf, size, total_area, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)', [name, description, price, location, category[0].id, state[0].id, imageUrl, code, media, ftf, size, totalArea, now, now]);
 
+        // Fetch the complete service data
+        const [createdService] = await db.query('SELECT * FROM Services WHERE id = ?', [newService.insertId]);
+
         return NextResponse.json({
             success: true,
-            data: {
-                serviceId: newService.insertId,
-            },
-        }, { status: 201 });
+            data: createdService[0]
+        }, {
+            status: 201,
+            headers: {
+                "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });

@@ -66,15 +66,33 @@ export async function POST(request) {
         // Create a new category
         const [newCategory] = await db.query('INSERT INTO Categories (name, description, image_url,createdAt, updatedAt) VALUES (?, ?, ?, ?, ?)', [name, description, imageUrl, now, now]);
 
-        // Respond with the created category
+        // Fetch the complete category data
+        const [createdCategory] = await db.query('SELECT * FROM Categories WHERE id = ?', [newCategory.insertId]);
+
+        // Respond with the complete category data
         return NextResponse.json({
             success: true,
-            data: {
-                categoryId: newCategory.insertId,
-            },
-        }, { status: 201 });
+            data: createdCategory[0]
+        }, {
+            status: 201,
+            headers: {
+                "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        });
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+        return NextResponse.json({ 
+            success: false, 
+            error: error.message 
+        }, {
+            status: 500,
+            headers: {
+                "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        });
     }
 }
